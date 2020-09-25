@@ -1,0 +1,717 @@
+#include "lcd_screen_data.h"
+#include "lcd_string_en.h"
+#include "lcd_string_zh.h"
+
+/* 自动测量画面 */
+Stringinfo_t Menu_AutoMeasure[] =
+{
+	{88, 0, STR_EN, (uint8_t*)str_en_0},
+	{96, 0, STR_EN, (uint8_t*)str_en_dot},
+	{104, 0, STR_EN, (uint8_t*)str_en_0},
+	{112, 0, STR_EN, (uint8_t*)str_en_0},
+	{120, 0, STR_EN, (uint8_t*)str_en_0},
+	{128, 0, STR_EN, (uint8_t*)str_en_0},
+	{8, 2, STR_ZH, (uint8_t*)str_pic_alerticon},
+	{32, 2, STR_EN, (uint8_t*)str_en_S},
+	{40, 2, STR_EN, (uint8_t*)str_en_Y},
+	{48, 2, STR_EN, (uint8_t*)str_en_S},
+	{104, 2, STR_ZH, (uint8_t*)str_pic_unit},
+	{120, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{128, 2, STR_EN, (uint8_t*)str_en_h},
+	{8, 6, STR_ZH, (uint8_t*)str_pic_flowicon},
+	{88, 6, STR_EN, (uint8_t*)str_en_0},
+	{96, 6, STR_EN, (uint8_t*)str_en_dot},
+	{104, 6, STR_EN, (uint8_t*)str_en_0},
+	{112, 6, STR_EN, (uint8_t*)str_en_0},
+	{120, 6, STR_ZH, (uint8_t*)str_pic_unit}
+};
+
+/* 参数设置 */
+Stringinfo_t Menu_ParamSet_zh[] =
+{
+	{32, 2, STR_ZH, (uint8_t*)str_zh_can},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_she},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_zhi_1}
+};
+
+/* 总量清零 */
+Stringinfo_t Menu_TotalClr_zh[] =
+{
+	{32, 2, STR_ZH, (uint8_t*)str_zh_zong},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_qing},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_ling}
+};
+
+/* 01_语言 */
+Stringinfo_t Menu_ParamSet_01_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_yu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_yan}
+};
+
+/* 01_Language */
+Stringinfo_t Menu_ParamSet_01_en[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{32, 2, STR_EN, (uint8_t*)str_en_L},
+	{40, 2, STR_EN, (uint8_t*)str_en_a},
+	{48, 2, STR_EN, (uint8_t*)str_en_n},
+	{56, 2, STR_EN, (uint8_t*)str_en_g},
+	{64, 2, STR_EN, (uint8_t*)str_en_u},
+	{72, 2, STR_EN, (uint8_t*)str_en_a},
+	{80, 2, STR_EN, (uint8_t*)str_en_g},
+	{88, 2, STR_EN, (uint8_t*)str_en_e},
+};
+
+/* 02_仪表通讯地址 */
+Stringinfo_t Menu_ParamSet_02_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_yi},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_biao},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_tong},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xun},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_di},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zhi_2}
+};
+
+/* 03_仪表通讯速度 */
+Stringinfo_t Menu_ParamSet_03_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_yi},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_biao},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_tong},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xun},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_su},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_du}
+};
+
+/* 04_测量管道口径 */
+Stringinfo_t Menu_ParamSet_04_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_ce},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_guan},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_dao},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_kou},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_jing}
+};
+
+/* 05_流量单位 */
+Stringinfo_t Menu_ParamSet_05_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_5},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_dan},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_wei}
+};
+
+/* 06_仪表量程设置 */
+Stringinfo_t Menu_ParamSet_06_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_6},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_yi},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_biao},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_cheng},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_she},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zhi_1}
+};
+
+/* 07_测量阻尼时间 */
+Stringinfo_t Menu_ParamSet_07_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_7},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_ce},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ni},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shi},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_jian}
+};
+
+/* 08_流量方向择项 */
+Stringinfo_t Menu_ParamSet_08_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_8},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_fang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xiang},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_ze},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xiang_1}
+};
+
+/* 09_流量零点修正 */
+Stringinfo_t Menu_ParamSet_09_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_9},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_ling},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_dian},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zheng}
+};
+
+/* 10_小信号切除点 */
+Stringinfo_t Menu_ParamSet_10_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_0},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_xiao},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xin},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_hao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_qie},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_chu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_dian}
+};
+
+/* 11_允许切除显示 */
+Stringinfo_t Menu_ParamSet_11_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_1},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_yun},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_qie},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_chu},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_xian},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_shi_1}
+};
+
+/* 12_流量积算单位 */
+Stringinfo_t Menu_ParamSet_12_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_2},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_ji},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_suan},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_dan},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_wei}
+};
+
+/* 13_反向输出允许 */
+Stringinfo_t Menu_ParamSet_13_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_3},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_fan},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_shu_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_chu_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_yun},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xu}
+};
+
+/* 14_电流输出类型 */
+Stringinfo_t Menu_ParamSet_14_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_4},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_dian_1},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_shu_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_chu_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_lei},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xing}
+};
+
+/* 15_脉冲输出方式 */
+Stringinfo_t Menu_ParamSet_15_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_5},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_mai},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_chong},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_shu_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_chu_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_fang},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_shi_2}
+};
+
+/* 16_脉冲单位当量 */
+Stringinfo_t Menu_ParamSet_16_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_6},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_mai},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_chong},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_dan},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_wei},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_dang},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_liang}
+};
+
+/* 17_频率输出范围 */
+Stringinfo_t Menu_ParamSet_17_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_7},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_pin},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_lv},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_shu_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_chu_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_fan_1},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_wei_1}
+};
+
+/* 18_空管报警允许 */
+Stringinfo_t Menu_ParamSet_18_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_8},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_kong},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_guan},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_yun},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xu}
+};
+
+/* 19_空管报警阈值 */
+Stringinfo_t Menu_ParamSet_19_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_1},
+	{8, 0, STR_EN, (uint8_t*)str_en_9},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_kong},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_guan},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_yu_1},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zhi}
+};
+
+/* 20_上限报警允许 */
+Stringinfo_t Menu_ParamSet_20_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_0},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_shang},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xian_1},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_yun},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xu}
+};
+
+/* 21_上限报警数值 */
+Stringinfo_t Menu_ParamSet_21_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_1},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_shang},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xian_1},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zhi}
+};
+
+/* 22_下限报警允许 */
+Stringinfo_t Menu_ParamSet_22_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_2},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_xia},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xian_1},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_yun},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xu}
+};
+
+/* 23_下限报警数值 */
+Stringinfo_t Menu_ParamSet_23_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_3},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_xia},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xian_1},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zhi}
+};
+
+/* 24_励磁报警允许 */
+Stringinfo_t Menu_ParamSet_24_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_4},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_li},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_ci},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_bao},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_jing_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_yun},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_xu}
+};
+
+/* 25_总量清零密码 */
+Stringinfo_t Menu_ParamSet_25_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_5},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_zong},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_qing},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ling},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_mi},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_ma}
+};
+
+/* 26_传感器编码1 */
+Stringinfo_t Menu_ParamSet_26_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_6},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_chuan},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_gan},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_qi},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_bian},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_ma},
+	{96, 2, STR_EN, (uint8_t*)str_en_1}
+};
+
+
+/* 27_传感器编码2 */
+Stringinfo_t Menu_ParamSet_27_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_7},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_chuan},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_gan},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_qi},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_bian},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_ma},
+	{96, 2, STR_EN, (uint8_t*)str_en_2}
+};
+
+/* 28_励磁方式选择 */
+Stringinfo_t Menu_ParamSet_28_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_8},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_li},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_ci},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_fang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_shi_2},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_xuan},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_ze}
+};
+
+/* 29_传感器系数值 */
+Stringinfo_t Menu_ParamSet_29_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_2},
+	{8, 0, STR_EN, (uint8_t*)str_en_9},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_chuan},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_gan},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_qi},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zhi}
+};
+
+/* 30_修正系数0 */
+Stringinfo_t Menu_ParamSet_30_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_0},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_EN, (uint8_t*)str_en_0}
+};
+
+/* 31_流量修正点0 */
+Stringinfo_t Menu_ParamSet_31_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_1},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_dian},
+	{96, 2, STR_EN, (uint8_t*)str_en_0}
+};
+
+/* 32_修正系数1 */
+Stringinfo_t Menu_ParamSet_32_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_2},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_EN, (uint8_t*)str_en_1}
+};
+
+/* 33_流量修正点1 */
+Stringinfo_t Menu_ParamSet_33_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_3},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_dian},
+	{96, 2, STR_EN, (uint8_t*)str_en_1}
+};
+
+/* 34_修正系数2 */
+Stringinfo_t Menu_ParamSet_34_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_4},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_EN, (uint8_t*)str_en_2}
+};
+
+/* 35_流量修正点2 */
+Stringinfo_t Menu_ParamSet_35_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_5},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_dian},
+	{96, 2, STR_EN, (uint8_t*)str_en_2}
+};
+
+/* 36_修正系数3 */
+Stringinfo_t Menu_ParamSet_36_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_6},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_EN, (uint8_t*)str_en_3}
+};
+
+/* 37_流量修正点3 */
+Stringinfo_t Menu_ParamSet_37_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_7},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_dian},
+	{96, 2, STR_EN, (uint8_t*)str_en_3}
+};
+
+/* 38_修正系数4 */
+Stringinfo_t Menu_ParamSet_38_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_8},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shu},
+	{96, 2, STR_EN, (uint8_t*)str_en_4}
+};
+
+/* 39_正向累计设定 */
+Stringinfo_t Menu_ParamSet_39_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_3},
+	{8, 0, STR_EN, (uint8_t*)str_en_9},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_lei_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ji_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_she},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_ding}
+};
+
+/* 40_反向累计设定 */
+Stringinfo_t Menu_ParamSet_40_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{8, 0, STR_EN, (uint8_t*)str_en_0},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_fan},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_xiang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_lei_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ji_1},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_she},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_ding}
+};
+
+/* 41_电流零点修正 */
+Stringinfo_t Menu_ParamSet_41_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{8, 0, STR_EN, (uint8_t*)str_en_1},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_dian_1},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_ling},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_dian},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zheng}
+};
+
+/* 42_电流满度修正 */
+Stringinfo_t Menu_ParamSet_42_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{8, 0, STR_EN, (uint8_t*)str_en_2},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_dian_1},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_man},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_du},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_xiu},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_zheng}
+};
+
+/* 43_出厂标定系数 */
+Stringinfo_t Menu_ParamSet_43_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{8, 0, STR_EN, (uint8_t*)str_en_3},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_chu_1},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_chang},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_biao_1},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ding},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_xi},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_shu}
+};
+
+/* 44_设定密度 */
+Stringinfo_t Menu_ParamSet_44_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{8, 0, STR_EN, (uint8_t*)str_en_4},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_she},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_ding},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_mi},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_du}
+};
+
+/* 45_远传间隔时间 */
+Stringinfo_t Menu_ParamSet_45_zh[] =
+{
+	{0, 0, STR_EN, (uint8_t*)str_en_4},
+	{8, 0, STR_EN, (uint8_t*)str_en_5},
+	{16, 2, STR_ZH, (uint8_t*)str_zh_yuan},
+	{32, 2, STR_ZH, (uint8_t*)str_zh_chuan},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_jian},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ge},
+	{80, 2, STR_ZH, (uint8_t*)str_zh_shi},
+	{96, 2, STR_ZH, (uint8_t*)str_zh_jian}
+};
+
+/* 中文 */
+Stringinfo_t Menu_L3_00_zh[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zhong},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_wen}
+};
+
+/* English */
+Stringinfo_t Menu_L3_01_en[] =
+{
+	{32, 2, STR_EN, (uint8_t*)str_en_E},
+	{40, 2, STR_EN, (uint8_t*)str_en_n},
+	{48, 2, STR_EN, (uint8_t*)str_en_g},
+	{56, 2, STR_EN, (uint8_t*)str_en_l},
+	{64, 2, STR_EN, (uint8_t*)str_en_i},
+	{72, 2, STR_EN, (uint8_t*)str_en_s},
+	{80, 2, STR_EN, (uint8_t*)str_en_h},
+};
+
+/* 001 */
+Stringinfo_t Menu_L3_02_en[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_0},
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
+{
+	{19, Menu_AutoMeasure},	/* 自动测量画面 */
+};
+
+MenuList_t Menu_level1_list_zh[MENU_L1_MAX] =
+{
+	{4, Menu_ParamSet_zh},	/* 参数设置 */
+	{4, Menu_TotalClr_zh},	/* 总量清零 */
+};
+
+MenuList_t Menu_level2_list_zh[MENU_L2_MAX] =
+{
+	{3, Menu_ParamSet_01_zh},	/* 语言 */
+	{7, Menu_ParamSet_02_zh},	/* 仪表通讯地址 */
+	{7, Menu_ParamSet_03_zh},	/* 仪表通讯速度 */
+	{7, Menu_ParamSet_04_zh},	/* 测量管道口径 */
+	{5, Menu_ParamSet_05_zh},	/* 流量单位 */
+	{7, Menu_ParamSet_06_zh},	/* 仪表量程设置 */
+	{7, Menu_ParamSet_07_zh},	/* 测量阻尼时间 */
+	{7, Menu_ParamSet_08_zh},	/* 流量方向择项 */
+	{7, Menu_ParamSet_09_zh},	/* 流量零点修正 */
+	{8, Menu_ParamSet_10_zh},	/* 小信号切除点 */
+	{8, Menu_ParamSet_11_zh},	/* 允许切除显示 */
+	{8, Menu_ParamSet_12_zh},	/* 流量积算单位 */
+	{8, Menu_ParamSet_13_zh},	/* 反向输出允许 */
+	{8, Menu_ParamSet_14_zh},	/* 电流输出类型 */
+	{8, Menu_ParamSet_15_zh},	/* 脉冲输出方式 */
+	{8, Menu_ParamSet_16_zh},	/* 脉冲单位当量 */
+	{8, Menu_ParamSet_17_zh},	/* 频率输出范围 */
+	{8, Menu_ParamSet_18_zh},	/* 空管报警允许 */
+	{8, Menu_ParamSet_19_zh},	/* 空管报警阈值 */
+	{8, Menu_ParamSet_20_zh},	/* 上限报警允许 */
+	{8, Menu_ParamSet_21_zh},	/* 上限报警数值 */
+	{8, Menu_ParamSet_22_zh},	/* 下限报警允许 */
+	{8, Menu_ParamSet_23_zh},	/* 下限报警数值 */
+	{8, Menu_ParamSet_24_zh},	/* 励磁报警允许 */
+	{8, Menu_ParamSet_25_zh},	/* 总量清零密码 */
+	{8, Menu_ParamSet_26_zh},	/* 传感器编码1 */
+	{8, Menu_ParamSet_27_zh},	/* 传感器编码2 */
+	{8, Menu_ParamSet_28_zh},	/* 励磁方式选择 */
+	{8, Menu_ParamSet_29_zh},	/* 传感器系数值 */
+	{7, Menu_ParamSet_30_zh},	/* 修正系数0 */
+	{8, Menu_ParamSet_31_zh},	/* 流量修正点0 */
+	{7, Menu_ParamSet_32_zh},	/* 修正系数1 */
+	{8, Menu_ParamSet_33_zh},	/* 流量修正点1 */
+	{7, Menu_ParamSet_34_zh},	/* 修正系数2 */
+	{8, Menu_ParamSet_35_zh},	/* 流量修正点2 */
+	{7, Menu_ParamSet_36_zh},	/* 修正系数3 */
+	{8, Menu_ParamSet_37_zh},	/* 流量修正点3 */
+	{7, Menu_ParamSet_38_zh},	/* 修正系数4 */
+	{8, Menu_ParamSet_39_zh},	/* 正向累计设定 */
+	{8, Menu_ParamSet_40_zh},	/* 反向累计设定 */
+	{8, Menu_ParamSet_41_zh},	/* 电流零点修正 */
+	{8, Menu_ParamSet_42_zh},	/* 电流满度修正 */
+	{8, Menu_ParamSet_43_zh},	/* 出厂标定系数 */
+	{6, Menu_ParamSet_44_zh},	/* 设定密度 */
+	{8, Menu_ParamSet_45_zh},	/* 远传间隔时间 */
+};
+
+MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
+{
+	{2, Menu_L3_00_zh},	/* 中文 */
+	{7, Menu_L3_01_en},	/* English */
+	{3, Menu_L3_02_en},	/* 仪表通讯地址 */
+};
