@@ -1,29 +1,17 @@
+#include "common.h"
 #include "lcd_control.h"
+#include "timer.h"
 #include "lcd_menu.h"
+#include "lcd_draw.h"
+#include "lcd_screen_data.h"
+#include "key_control.h"
 
-uint8_t lcd_draw_req = 1;
+static uint8_t lcd_draw_req = 0;
 static void Lcd_Mst_Init(void);
 static void LCD_Drawreq_Clear(void);
 static void LCD_Drawreq_Set(void);
-static void LCD_P8x16Str(uint8_t x, uint8_t y, uint8_t* pstr);
-static void LCD_P16x16Str(uint8_t x, uint8_t y, uint8_t* pstr);
-static void Setadd(uint8_t xl,uint8_t yl);
-static void write_com(uint8_t para);
-static void write_data(uint8_t para);
-static void clealddram(void);
-extern void delay(int t);
-extern void delay_us(int t);
 
-static void Lcd_Mst_Init(void)
-{
-	GPIO_Init(RES, 1, 0, 0, 0);	//初始化LCDIO
-	GPIO_Init(CS1, 1, 0, 0, 0);	//初始化LCDIO
-	GPIO_Init(A0, 1, 0, 0, 0);	//初始化LCDIO
-	GPIO_Init(SCL, 1, 0, 0, 0);	//初始化LCDIO
-	GPIO_Init(SDA, 1, 0, 0, 0);	//初始化LCDIO
-}
-
-void LCD_init()
+void LCD_init(void)
 {
 	Lcd_Mst_Init();
     GPIO_SetBit(RES);//RES=1;
@@ -50,6 +38,44 @@ void LCD_init()
 	delay(5);
  	write_com(0xaf);        //Lcd Disply ON
 	delay(5);
+
+	LCD_Menu_SetLevel(MENU_LEVEL_0);
+	LCD_Menu_SetID(MENU_L0_INIT);
+	LCD_TimeOut_Init();
+	Timer_Setup(TIMER_ID_INIT);
+	LCD_Drawreq_Set();
+}
+
+void LCD_TimeOut_Init(void)
+{
+	static uint8_t count = 0;
+
+	if(count < 4){
+		LCD_Menu_InitDisplay(count);
+		count++;
+	}
+	else{
+		LCD_Menu_SetLevel(MENU_LEVEL_0);
+		LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
+		Timer_Clear(TIMER_ID_INIT);
+		Key_StatusSet(KEY_VALID);
+	}
+
+	LCD_Drawreq_Set();
+}
+
+void LCD_TimeOut_Alert(void)
+{
+	static BOOL display_flag = FALSE;
+
+	if(TRUE == display_flag){
+		LCD_Menu_AlertDisplay(DISPLAY_ON);
+	}
+	else{
+		LCD_Menu_AlertDisplay(DISPLAY_OFF);
+	}
+	display_flag = !display_flag;
+	LCD_Drawreq_Set();
 }
 
 void LCD_Key_Up(void)
@@ -126,6 +152,19 @@ void LCD_Key_Confirm(void)
 
 void LCD_Key_UniteConfirm(void)
 {
+	uint8_t level = LCD_Menu_GetLevel();
+	uint8_t menu = LCD_Menu_GetID();
+
+	if((MENU_LEVEL_1 == level) &&(MENU_L1_PARAMSET == menu))
+	{
+		return;
+	}
+	if((MENU_LEVEL_0 == level) &&(MENU_L0_AUTOMEASURE == menu))
+	{
+		LCD_Menu_AlertDisplay(DISPLAY_ON);
+		Timer_Clear(TIMER_ID_ALERT);
+	}
+
 	LCD_Menu_SetLevel(MENU_LEVEL_1);
 	LCD_Menu_SetID(MENU_L1_PARAMSET);
 	LCD_Drawreq_Set();
@@ -136,28 +175,20 @@ void LCD_Draw(void)
 	if(0 != lcd_draw_req)
 	{
 		clealddram();
-		delay(400);
 
 		LCD_Screen_Draw();
 		LCD_Drawreq_Clear();
 	}
 
-	delay(200);
 }
 
-void LCD_Str_Draw(Stringinfo_t *str)
+static void Lcd_Mst_Init(void)
 {
-	switch(str->str_type)
-	{
-		case STR_ZH:
-			LCD_P16x16Str(str->str_x, str->str_y, str->pstr);
-			break;
-		case STR_EN:
-			LCD_P8x16Str(str->str_x, str->str_y, str->pstr);
-			break;
-		default:
-			break;
-	}
+	GPIO_Init(RES, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(CS1, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(A0, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(SCL, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(SDA, 1, 0, 0, 0);	//初始化LCDIO
 }
 
 static void LCD_Drawreq_Clear(void)
@@ -169,126 +200,3 @@ static void LCD_Drawreq_Set(void)
 {
 	lcd_draw_req = 1;
 }
-
-static void LCD_P8x16Str(uint8_t x, uint8_t y, uint8_t* pstr)
-{
-	uint8_t i = 0;
-
-	Setadd(x, y);
-	for (i = 0; i < 8; i++)
-	{
-		write_data(*pstr);//Delay(10);
-		pstr++;
-	}
-
-	Setadd(x, (y + 1));
-	for (i = 0; i < 8; i++)
-	{
-		write_data(*pstr);//Delay(10);
-		pstr++;
-	}
-}
-
-static void LCD_P16x16Str(uint8_t x, uint8_t y, uint8_t* pstr)
-{
-	uint8_t i = 0;
-
-	Setadd(x, y);
-	for (i = 0; i < 8; i++)
-	{
-		write_data(*pstr);//Delay(10);
-		pstr++;
-	}
-
-	Setadd((x + 8), y);
-	for (i = 0; i < 8; i++)
-	{
-		write_data(*pstr);//Delay(10);
-		pstr++;
-	}
-
-	Setadd(x, (y + 1));
-	for (i = 0; i < 8; i++)
-	{
-		write_data(*pstr);//Delay(10);
-		pstr++;
-	}
-
-	Setadd((x + 8), (y + 1));
-	for (i = 0; i < 8; i++)
-	{
-		write_data(*pstr);//Delay(10);
-		pstr++;
-	}
-}
-
-void Setadd(uint8_t xl,uint8_t yl)  //设置写入位置
-{
-	uint8_t i;
-	i=xl&0x0f;
-	xl=(xl>>4)+0x10;
-
-	 write_com(0xb7-yl);
-	 write_com(xl);
-	 write_com(i);
-}
-
-void write_com(uint8_t para)
-{
-	int j=8;
-	GPIO_ClrBit(CS1);
-	GPIO_ClrBit(A0);//A0=0;
-	do
-	{
-		if(para&0x80)
-			GPIO_SetBit(SDA);//SDA=1;
-		else
-			GPIO_ClrBit(SDA);//SDA=0;
-			GPIO_ClrBit(SCL);//SCL=0;
-		delay_us(1);
-			GPIO_SetBit(SCL);
-		--j;
-			para<<=1;
-	}
-	while(j);
-
-	GPIO_SetBit(CS1);//CS1=1;
-}
-
-void write_data(uint8_t para)
-{
-	int j=8;
-	GPIO_ClrBit(CS1);
-	GPIO_SetBit(A0);//A0=1;
-	do
-	{
-		if(para&0x80)
-			GPIO_SetBit(SDA);//SDA=1;
-		else
-			GPIO_ClrBit(SDA);//SDA=0;
-			GPIO_ClrBit(SCL);//SCL=0;
-			delay_us(1);
-			GPIO_SetBit(SCL);
-			--j;
-			para<<=1;
-	}
-	while(j);
-
-	GPIO_SetBit(CS1);//CS1=1;
-}
-
-void clealddram()
-{
-	int i,j;
-	for(i=0Xb0;i<0Xb8;i++)
-	{
-		write_com(i);
-		write_com(0x10);
-		write_com(0x00);
-		for(j=0;j<132;j++)
-		{
-			write_data(0x00);
-		}
-	}
-}
-

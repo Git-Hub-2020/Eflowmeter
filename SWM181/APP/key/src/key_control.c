@@ -3,6 +3,7 @@
 
 uint8_t status_key=0x00;
 uint8_t key_sign=0;
+uint8_t key_status = KEY_INVALID;
 
 void Key_init(void)
 {
@@ -10,14 +11,16 @@ void Key_init(void)
 	GPIO_Init(GPIOD, PIN3, 0, 1, 0, 0);			//输入，上拉使能，接KEY2
 	GPIO_Init(GPIOC, PIN6, 0, 1, 0, 0);			//输入，上拉使能，接KEY3
 	GPIO_Init(GPIOC, PIN7, 0, 1, 0, 0);			//输入，上拉使能，接KEY4
-	TIMR_Init(TIMR0, TIMR_MODE_TIMER, SystemCoreClock/20, 1);	//每100ms触发一次中断
-	IRQ_Connect(IRQ0_15_TIMR0, IRQ5_IRQ, 2);		//定时器0中断链接到IRQ5中断线，低优先级
-	TIMR_Start(TIMR0);
+}
+
+void Key_StatusSet(uint8_t status)
+{
+	key_status = status;
 }
 
 void KeyControl(void)
 {
-	if(key_sign >= 2)
+	if((key_sign >= 2))
 	{
 		key_sign = 0;
 		switch(status_key)
@@ -61,13 +64,13 @@ void KeyControl(void)
 			case 0x0f:
 				printf("key1 key2 key3 key4 pressed \r\n");break;
 		}
-//			status_key = 0x00; //按键状态清零
-		key_sign=0;
 	}
 }
 
 void GetKey(void)
 {
+	if(KEY_INVALID == key_status) return;
+
 	status_key = 0x00;
 	if(GPIO_GetBit(GPIOC, PIN7) == 0x00)//判断key4
 		status_key++;
@@ -80,4 +83,6 @@ void GetKey(void)
 	status_key=status_key << 1;
 	if(GPIO_GetBit(GPIOD, PIN2) == 0x00)//判断key1
 		status_key++;
+
+	if(status_key)key_sign++;	//有按键按下
 }

@@ -1,9 +1,13 @@
+#include "common.h"
 #include "lcd_menu.h"
-#include "lcd_control.h"
+#include "eeprom.h"
+#include "lcd_draw.h"
 #include "lcd_screen_data.h"
+#include "lcd_string_en.h"
+#include "lcd_string_zh.h"
 
-uint8_t lcd_menu_id = MENU_L0_INIT;
-uint8_t lcd_menu_level = MENU_LEVEL_0;
+static uint8_t lcd_menu_id = MENU_L0_INIT;
+static uint8_t lcd_menu_level = MENU_LEVEL_0;
 
 void LCD_Menu_Key_L1(MenuKey_t key)
 {
@@ -136,6 +140,35 @@ void LCD_Screen_Draw(void)
 	for(i = 0; i < list->str_num; i++)
 	{
 		LCD_Str_Draw(&(list->pstr[i]));
+	}
+}
+
+void LCD_Menu_InitDisplay(uint8_t count)
+{
+	uint16_t version = 0;
+	MenuList_t *list;
+
+	if(0 == count){
+		version = Eeprom_GetVersion();
+		list = &Menu_level0_list_zh[MENU_L0_INIT];
+		list->pstr[3].pstr = Menu_Number_Tbl[version/100];
+		list->pstr[5].pstr = Menu_Number_Tbl[(version%100)/10];
+		list->pstr[6].pstr = Menu_Number_Tbl[version%10];
+	}
+	else if((1 <= count) && (3 >= count)){
+		list->pstr[12+count].pstr = (uint8_t*)str_en_dot;
+	}
+}
+
+void LCD_Menu_AlertDisplay(uint8_t display)
+{
+	MenuList_t *list = &Menu_level0_list_zh[MENU_L0_AUTOMEASURE];
+
+	if(DISPLAY_ON == display){
+		list->pstr[6].pstr = (uint8_t*)str_pic_alerticon;
+	}
+	else{
+		list->pstr[6].pstr = NULL;
 	}
 }
 

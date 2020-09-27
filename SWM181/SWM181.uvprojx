@@ -332,7 +332,7 @@
               <MiscControls></MiscControls>
               <Define></Define>
               <Undefine></Undefine>
-              <IncludePath>..\SWM181_StdPeriph_Driver\CSL\CMSIS\CoreSupport;..\SWM181_StdPeriph_Driver\CSL\CMSIS\DeviceSupport;..\SWM181_StdPeriph_Driver\CSL\SWM181_StdPeriph_Driver;.\APP\lcd\inc;.\APP\key\inc</IncludePath>
+              <IncludePath>..\SWM181_StdPeriph_Driver\CSL\CMSIS\CoreSupport;..\SWM181_StdPeriph_Driver\CSL\CMSIS\DeviceSupport;..\SWM181_StdPeriph_Driver\CSL\SWM181_StdPeriph_Driver;.\Common;.\Driver\uart\inc;.\Driver\timer\inc;.\Driver\eeprom\inc;.\APP\lcd\inc;.\APP\key\inc</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -373,6 +373,86 @@
       </TargetOption>
       <Groups>
         <Group>
+          <GroupName>Common</GroupName>
+          <Files>
+            <File>
+              <FileName>common.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Common\common.c</FilePath>
+            </File>
+            <File>
+              <FileName>common.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Common\common.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver\uart\inc</GroupName>
+          <Files>
+            <File>
+              <FileName>uart.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\uart\inc\uart.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver\uart\src</GroupName>
+          <Files>
+            <File>
+              <FileName>uart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Driver\uart\src\uart.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver\timer\inc</GroupName>
+          <Files>
+            <File>
+              <FileName>timer.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\timer\inc\timer.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver\timer\src</GroupName>
+          <Files>
+            <File>
+              <FileName>timer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Driver\timer\src\timer.c</FilePath>
+            </File>
+            <File>
+              <FileName>timer_tbl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Driver\timer\src\timer_tbl.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver\eeprom\inc</GroupName>
+          <Files>
+            <File>
+              <FileName>eeprom.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\eeprom\inc\eeprom.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>Driver\eeprom\src</GroupName>
+          <Files>
+            <File>
+              <FileName>eeprom.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Driver\eeprom\src\eeprom.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>APP\lcd\inc</GroupName>
           <Files>
             <File>
@@ -399,6 +479,11 @@
               <FileName>lcd_string_zh.h</FileName>
               <FileType>5</FileType>
               <FilePath>.\APP\lcd\inc\lcd_string_zh.h</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_draw.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\lcd\inc\lcd_draw.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -429,6 +514,11 @@
               <FileName>lcd_string_zh.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\APP\lcd\src\lcd_string_zh.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_draw.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\lcd\src\lcd_draw.c</FilePath>
             </File>
           </Files>
         </Group>

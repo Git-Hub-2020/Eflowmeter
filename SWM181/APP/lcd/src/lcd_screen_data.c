@@ -2,28 +2,49 @@
 #include "lcd_string_en.h"
 #include "lcd_string_zh.h"
 
+/* 初始画面 */
+Stringinfo_t Menu_Init[] =
+{
+	{24, 0, STR_EN, (uint8_t*)str_en_V},
+	{32, 0, STR_EN, (uint8_t*)str_en_e},
+	{40, 0, STR_EN, (uint8_t*)str_en_r},
+	{56, 0, STR_EN, (uint8_t*)str_en_0},
+	{64, 0, STR_EN, (uint8_t*)str_en_dot},
+	{72, 0, STR_EN, (uint8_t*)str_en_0},
+	{80, 0, STR_EN, (uint8_t*)str_en_0},
+	{24, 2, STR_ZH, (uint8_t*)str_zh_dian_1},
+	{40, 2, STR_ZH, (uint8_t*)str_zh_ci},
+	{56, 2, STR_ZH, (uint8_t*)str_zh_liu},
+	{72, 2, STR_ZH, (uint8_t*)str_zh_liang},
+	{88, 2, STR_ZH, (uint8_t*)str_zh_ji_1},
+	{40, 4, STR_EN, (uint8_t*)str_en_dot},
+	{48, 4, STR_EN, NULL},
+	{56, 4, STR_EN, NULL},
+	{64, 4, STR_EN, NULL},
+};
+
 /* 自动测量画面 */
 Stringinfo_t Menu_AutoMeasure[] =
 {
-	{88, 0, STR_EN, (uint8_t*)str_en_0},
-	{96, 0, STR_EN, (uint8_t*)str_en_dot},
+	{80, 0, STR_EN, (uint8_t*)str_en_0},
+	{88, 0, STR_EN, (uint8_t*)str_en_dot},
+	{96, 0, STR_EN, (uint8_t*)str_en_0},
 	{104, 0, STR_EN, (uint8_t*)str_en_0},
 	{112, 0, STR_EN, (uint8_t*)str_en_0},
 	{120, 0, STR_EN, (uint8_t*)str_en_0},
-	{128, 0, STR_EN, (uint8_t*)str_en_0},
-	{8, 2, STR_ZH, (uint8_t*)str_pic_alerticon},
+	{0, 2, STR_ZH, (uint8_t*)str_pic_alerticon},
+	{16, 2, STR_EN, (uint8_t*)str_en_S},
+	{24, 2, STR_EN, (uint8_t*)str_en_Y},
 	{32, 2, STR_EN, (uint8_t*)str_en_S},
-	{40, 2, STR_EN, (uint8_t*)str_en_Y},
-	{48, 2, STR_EN, (uint8_t*)str_en_S},
-	{104, 2, STR_ZH, (uint8_t*)str_pic_unit},
-	{120, 2, STR_EN, (uint8_t*)str_en_line_1},
-	{128, 2, STR_EN, (uint8_t*)str_en_h},
-	{8, 6, STR_ZH, (uint8_t*)str_pic_flowicon},
+	{96, 2, STR_ZH, (uint8_t*)str_pic_unit},
+	{112, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{120, 2, STR_EN, (uint8_t*)str_en_h},
+	{0, 6, STR_ZH, (uint8_t*)str_pic_flowicon},
+	{72, 6, STR_EN, (uint8_t*)str_en_0},
+	{80, 6, STR_EN, (uint8_t*)str_en_dot},
 	{88, 6, STR_EN, (uint8_t*)str_en_0},
-	{96, 6, STR_EN, (uint8_t*)str_en_dot},
-	{104, 6, STR_EN, (uint8_t*)str_en_0},
-	{112, 6, STR_EN, (uint8_t*)str_en_0},
-	{120, 6, STR_ZH, (uint8_t*)str_pic_unit}
+	{96, 6, STR_EN, (uint8_t*)str_en_0},
+	{104, 6, STR_ZH, (uint8_t*)str_pic_unit}
 };
 
 /* 参数设置 */
@@ -649,8 +670,24 @@ Stringinfo_t Menu_L3_02_en[] =
 	{64, 2, STR_EN, (uint8_t*)str_en_0},
 };
 
+/* Number Table */
+uint8_t* Menu_Number_Tbl[] =
+{
+	{(uint8_t*)str_en_0},
+	{(uint8_t*)str_en_1},
+	{(uint8_t*)str_en_2},
+	{(uint8_t*)str_en_3},
+	{(uint8_t*)str_en_4},
+	{(uint8_t*)str_en_5},
+	{(uint8_t*)str_en_6},
+	{(uint8_t*)str_en_7},
+	{(uint8_t*)str_en_8},
+	{(uint8_t*)str_en_9}
+};
+
 MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
 {
+	{16, Menu_Init},		/* 初始画面 */
 	{19, Menu_AutoMeasure},	/* 自动测量画面 */
 };
 

@@ -96,5 +96,6 @@ extern MenuList_t Menu_level0_list_zh[MENU_L0_MAX];
 extern MenuList_t Menu_level1_list_zh[MENU_L1_MAX];
 extern MenuList_t Menu_level2_list_zh[MENU_L2_MAX];
 extern MenuList_t Menu_level3_list_zh[MENU_L3_MAX];
+extern uint8_t* Menu_Number_Tbl[];
 
 #endif /* LCD_SCREEN_DATA_H_ */
