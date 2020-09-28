@@ -16,29 +16,34 @@ Stringinfo_t Menu_Init[] =
 	{40, 2, STR_ZH, (uint8_t*)str_zh_ci},
 	{56, 2, STR_ZH, (uint8_t*)str_zh_liu},
 	{72, 2, STR_ZH, (uint8_t*)str_zh_liang},
-	{88, 2, STR_ZH, (uint8_t*)str_zh_ji_1},
+	{88, 2, STR_ZH, (uint8_t*)str_zh_ji_1}
+};
+
+/* 初始画面(....) */
+Stringinfo_t Menu_Init_Dot[] =
+{
 	{40, 4, STR_EN, (uint8_t*)str_en_dot},
-	{48, 4, STR_EN, NULL},
-	{56, 4, STR_EN, NULL},
-	{64, 4, STR_EN, NULL},
+	{48, 4, STR_EN, (uint8_t*)str_en_dot},
+	{56, 4, STR_EN, (uint8_t*)str_en_dot},
+	{64, 4, STR_EN, (uint8_t*)str_en_dot}
 };
 
 /* 自动测量画面 */
 Stringinfo_t Menu_AutoMeasure[] =
 {
-	{80, 0, STR_EN, (uint8_t*)str_en_0},
-	{88, 0, STR_EN, (uint8_t*)str_en_dot},
-	{96, 0, STR_EN, (uint8_t*)str_en_0},
-	{104, 0, STR_EN, (uint8_t*)str_en_0},
-	{112, 0, STR_EN, (uint8_t*)str_en_0},
-	{120, 0, STR_EN, (uint8_t*)str_en_0},
-	{0, 2, STR_ZH, (uint8_t*)str_pic_alerticon},
-	{16, 2, STR_EN, (uint8_t*)str_en_S},
-	{24, 2, STR_EN, (uint8_t*)str_en_Y},
-	{32, 2, STR_EN, (uint8_t*)str_en_S},
-	{96, 2, STR_ZH, (uint8_t*)str_pic_unit},
-	{112, 2, STR_EN, (uint8_t*)str_en_line_1},
-	{120, 2, STR_EN, (uint8_t*)str_en_h},
+	{32, 0, STR_LARGE, (uint8_t*)str_en_0_large},
+	{48, 0, STR_LARGE, (uint8_t*)str_en_dot_large},
+	{64, 0, STR_LARGE, (uint8_t*)str_en_0_large},
+	{80, 0, STR_LARGE, (uint8_t*)str_en_0_large},
+	{96, 0, STR_LARGE, (uint8_t*)str_en_0_large},
+	{112, 0, STR_LARGE, (uint8_t*)str_en_0_large},
+	{0, 4, STR_ZH, (uint8_t*)str_pic_alerticon},
+	{16, 4, STR_EN, (uint8_t*)str_en_S},
+	{24, 4, STR_EN, (uint8_t*)str_en_Y},
+	{32, 4, STR_EN, (uint8_t*)str_en_S},
+	{96, 4, STR_ZH, (uint8_t*)str_pic_unit},
+	{112, 4, STR_EN, (uint8_t*)str_en_line_1},
+	{120, 4, STR_EN, (uint8_t*)str_en_h},
 	{0, 6, STR_ZH, (uint8_t*)str_pic_flowicon},
 	{72, 6, STR_EN, (uint8_t*)str_en_0},
 	{80, 6, STR_EN, (uint8_t*)str_en_dot},
@@ -687,7 +692,7 @@ uint8_t* Menu_Number_Tbl[] =
 
 MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
 {
-	{16, Menu_Init},		/* 初始画面 */
+	{12, Menu_Init},		/* 初始画面 */
 	{19, Menu_AutoMeasure},	/* 自动测量画面 */
 };
 

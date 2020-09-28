@@ -17,11 +17,12 @@ void LCD_Menu_Key_L1(MenuKey_t key);
 void LCD_Menu_Key_L2(MenuKey_t key);
 void LCD_Menu_Key_L3(MenuKey_t key);
 void LCD_Screen_Draw(void);
+void LCD_Anime_Draw(void);
 void LCD_Menu_SetID(uint8_t menu_id);
 uint8_t LCD_Menu_GetID(void);
 void LCD_Menu_SetLevel(uint8_t level);
 uint8_t LCD_Menu_GetLevel(void);
-void LCD_Menu_InitDisplay(uint8_t count);
-void LCD_Menu_AlertDisplay(uint8_t display);
+void LCD_Menu_InitVerDisplay(void);
+void LCD_Menu_AlertDisplay(void);
 
 #endif /* LCD_MENU_H_ */

@@ -66,5 +66,17 @@ extern const unsigned char str_en_W[16];
 extern const unsigned char str_en_X[16];
 extern const unsigned char str_en_Y[16];
 extern const unsigned char str_en_Z[16];
+extern const unsigned char str_empty[64];
+extern const unsigned char str_en_0_large[64];
+extern const unsigned char str_en_1_large[64];
+extern const unsigned char str_en_2_large[64];
+extern const unsigned char str_en_3_large[64];
+extern const unsigned char str_en_4_large[64];
+extern const unsigned char str_en_5_large[64];
+extern const unsigned char str_en_6_large[64];
+extern const unsigned char str_en_7_large[64];
+extern const unsigned char str_en_8_large[64];
+extern const unsigned char str_en_9_large[64];
+extern const unsigned char str_en_dot_large[64];
 
 #endif /* LCD_STRING_EN_H_ */

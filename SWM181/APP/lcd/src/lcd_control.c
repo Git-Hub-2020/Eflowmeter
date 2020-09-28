@@ -6,10 +6,11 @@
 #include "lcd_screen_data.h"
 #include "key_control.h"
 
-static uint8_t lcd_draw_req = 0;
+uint8_t Init_Frame = 0;
+BOOL Warning_Disp_Flag = FALSE;
+static uint8_t lcd_draw_req = REQ_OFF;
+static uint8_t lcd_clear_req = REQ_OFF;
 static void Lcd_Mst_Init(void);
-static void LCD_Drawreq_Clear(void);
-static void LCD_Drawreq_Set(void);
 
 void LCD_init(void)
 {
@@ -43,39 +44,34 @@ void LCD_init(void)
 	LCD_Menu_SetID(MENU_L0_INIT);
 	LCD_TimeOut_Init();
 	Timer_Setup(TIMER_ID_INIT);
-	LCD_Drawreq_Set();
+	LCD_Drawreq_Set(REQ_ON);
 }
 
 void LCD_TimeOut_Init(void)
 {
-	static uint8_t count = 0;
-
-	if(count < 4){
-		LCD_Menu_InitDisplay(count);
-		count++;
+	if(Init_Frame == 0){
+		LCD_Menu_InitVerDisplay();
+		Init_Frame++;
+	}
+	else if(Init_Frame < 4){
+		Init_Frame++;
 	}
 	else{
+		Init_Frame = 0;
+		Timer_Clear(TIMER_ID_INIT);
 		LCD_Menu_SetLevel(MENU_LEVEL_0);
 		LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
-		Timer_Clear(TIMER_ID_INIT);
+		Timer_Setup(TIMER_ID_ALERT);
 		Key_StatusSet(KEY_VALID);
 	}
 
-	LCD_Drawreq_Set();
+	LCD_Drawreq_Set(REQ_ON);
 }
 
 void LCD_TimeOut_Alert(void)
 {
-	static BOOL display_flag = FALSE;
-
-	if(TRUE == display_flag){
-		LCD_Menu_AlertDisplay(DISPLAY_ON);
-	}
-	else{
-		LCD_Menu_AlertDisplay(DISPLAY_OFF);
-	}
-	display_flag = !display_flag;
-	LCD_Drawreq_Set();
+	Warning_Disp_Flag = !Warning_Disp_Flag;
+	LCD_Drawreq_Set(REQ_ON);
 }
 
 void LCD_Key_Up(void)
@@ -86,15 +82,15 @@ void LCD_Key_Up(void)
 			break;
 		case MENU_LEVEL_1:
 			LCD_Menu_Key_L1(MENU_KEY_UP);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_2:
 			LCD_Menu_Key_L2(MENU_KEY_UP);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_3:
 			LCD_Menu_Key_L3(MENU_KEY_UP);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		default:
 			break;
@@ -109,15 +105,15 @@ void LCD_Key_Down(void)
 			break;
 		case MENU_LEVEL_1:
 			LCD_Menu_Key_L1(MENU_KEY_DOWN);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_2:
 			LCD_Menu_Key_L2(MENU_KEY_DOWN);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_3:
 			LCD_Menu_Key_L3(MENU_KEY_DOWN);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		default:
 			break;
@@ -133,17 +129,17 @@ void LCD_Key_Confirm(void)
 		case MENU_LEVEL_1:
 			LCD_Menu_SetLevel(MENU_LEVEL_2);
 			LCD_Menu_Key_L1(MENU_KEY_CONFIRM);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_2:
 			LCD_Menu_SetLevel(MENU_LEVEL_3);
 			LCD_Menu_Key_L2(MENU_KEY_CONFIRM);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_3:
 			LCD_Menu_SetLevel(MENU_LEVEL_2);
 			LCD_Menu_Key_L3(MENU_KEY_CONFIRM);
-			LCD_Drawreq_Set();
+			LCD_Drawreq_Set(REQ_ON);
 			break;
 		default:
 			break;
@@ -161,23 +157,26 @@ void LCD_Key_UniteConfirm(void)
 	}
 	if((MENU_LEVEL_0 == level) &&(MENU_L0_AUTOMEASURE == menu))
 	{
-		LCD_Menu_AlertDisplay(DISPLAY_ON);
 		Timer_Clear(TIMER_ID_ALERT);
 	}
 
 	LCD_Menu_SetLevel(MENU_LEVEL_1);
 	LCD_Menu_SetID(MENU_L1_PARAMSET);
-	LCD_Drawreq_Set();
+	LCD_Drawreq_Set(REQ_ON);
 }
 
 void LCD_Draw(void)
 {
-	if(0 != lcd_draw_req)
+	if(REQ_ON == lcd_draw_req)
 	{
-		clealddram();
+		if(REQ_ON == lcd_clear_req){
+			clealddram();
+			LCD_Clearreq_Set(REQ_OFF);
+		}
 
 		LCD_Screen_Draw();
-		LCD_Drawreq_Clear();
+		LCD_Anime_Draw();
+		LCD_Drawreq_Set(REQ_OFF);
 	}
 
 }
@@ -191,12 +190,12 @@ static void Lcd_Mst_Init(void)
 	GPIO_Init(SDA, 1, 0, 0, 0);	//³õÊ¼»¯LCDIO
 }
 
-static void LCD_Drawreq_Clear(void)
+void LCD_Drawreq_Set(uint8_t req)
 {
-	lcd_draw_req = 0;
+	lcd_draw_req = req;
 }
 
-static void LCD_Drawreq_Set(void)
+void LCD_Clearreq_Set(uint8_t req)
 {
-	lcd_draw_req = 1;
+	lcd_clear_req = req;
 }

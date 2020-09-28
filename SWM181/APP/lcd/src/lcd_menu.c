@@ -1,13 +1,15 @@
 #include "common.h"
 #include "lcd_menu.h"
+#include "lcd_control.h"
 #include "eeprom.h"
 #include "lcd_draw.h"
 #include "lcd_screen_data.h"
-#include "lcd_string_en.h"
-#include "lcd_string_zh.h"
 
 static uint8_t lcd_menu_id = MENU_L0_INIT;
 static uint8_t lcd_menu_level = MENU_LEVEL_0;
+
+extern uint8_t Init_Frame;
+extern BOOL Warning_Disp_Flag;
 
 void LCD_Menu_Key_L1(MenuKey_t key)
 {
@@ -143,38 +145,49 @@ void LCD_Screen_Draw(void)
 	}
 }
 
-void LCD_Menu_InitDisplay(uint8_t count)
+void LCD_Anime_Draw(void)
 {
-	uint16_t version = 0;
-	MenuList_t *list;
+	uint8_t level = LCD_Menu_GetLevel();
+	uint8_t menu = LCD_Menu_GetID();
 
-	if(0 == count){
-		version = Eeprom_GetVersion();
-		list = &Menu_level0_list_zh[MENU_L0_INIT];
-		list->pstr[3].pstr = Menu_Number_Tbl[version/100];
-		list->pstr[5].pstr = Menu_Number_Tbl[(version%100)/10];
-		list->pstr[6].pstr = Menu_Number_Tbl[version%10];
-	}
-	else if((1 <= count) && (3 >= count)){
-		list->pstr[12+count].pstr = (uint8_t*)str_en_dot;
+	if (MENU_LEVEL_0 == level){
+		if (MENU_L0_INIT == menu){
+			LCD_Str_Draw(&Menu_Init_Dot[Init_Frame-1]);
+		}
+		else if (MENU_L0_AUTOMEASURE == menu){
+			LCD_Menu_AlertDisplay();
+		}
 	}
 }
 
-void LCD_Menu_AlertDisplay(uint8_t display)
+void LCD_Menu_InitVerDisplay(void)
+{
+	int version = 0;
+	MenuList_t *list;
+
+	version = Eeprom_GetVersion();
+	list = &Menu_level0_list_zh[MENU_L0_INIT];
+	list->pstr[3].pstr = Menu_Number_Tbl[version/100];
+	list->pstr[5].pstr = Menu_Number_Tbl[(version%100)/10];
+	list->pstr[6].pstr = Menu_Number_Tbl[version%10];
+}
+
+void LCD_Menu_AlertDisplay(void)
 {
 	MenuList_t *list = &Menu_level0_list_zh[MENU_L0_AUTOMEASURE];
 
-	if(DISPLAY_ON == display){
-		list->pstr[6].pstr = (uint8_t*)str_pic_alerticon;
+	if(TRUE == Warning_Disp_Flag){
+		LCD_Str_Draw(&(list->pstr[6]));
 	}
 	else{
-		list->pstr[6].pstr = NULL;
+		LCD_Str_Clear(&(list->pstr[6]));
 	}
 }
 
 void LCD_Menu_SetID(uint8_t menu_id)
 {
 	lcd_menu_id = menu_id;
+	LCD_Clearreq_Set(REQ_ON);
 }
 
 uint8_t LCD_Menu_GetID(void)

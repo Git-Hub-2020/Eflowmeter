@@ -76,6 +76,7 @@ typedef enum StringType
 {
 	STR_ZH = 0,
 	STR_EN,
+	STR_LARGE
 } StringType_t;
 
 typedef struct Stringinfo
@@ -97,5 +98,6 @@ extern MenuList_t Menu_level1_list_zh[MENU_L1_MAX];
 extern MenuList_t Menu_level2_list_zh[MENU_L2_MAX];
 extern MenuList_t Menu_level3_list_zh[MENU_L3_MAX];
 extern uint8_t* Menu_Number_Tbl[];
+extern Stringinfo_t Menu_Init_Dot[];
 
 #endif /* LCD_SCREEN_DATA_H_ */

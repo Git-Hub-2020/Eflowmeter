@@ -11,6 +11,7 @@
 #define SCL			GPIOB,PIN6
 
 void LCD_Str_Draw(Stringinfo_t *str);
+void LCD_Str_Clear(Stringinfo_t *str);
 void write_com(uint8_t para);
 void clealddram(void);
 
