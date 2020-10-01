@@ -32,13 +32,17 @@ void KeyControl(void)
 				LCD_Key_Down(); /* 下键 */
 				break;
 			case 0x03:
-				printf("key1 key2 pressed \r\n");break;
+				printf("key1 key2 pressed \r\n");
+				LCD_Key_UniteDown(); /* 复合+下键 */
+				break;
 			case 0x04:
 				printf("key3 pressed \r\n");
 				LCD_Key_Up(); /* 上键 */
 				break;
 			case 0x05:
-				printf("key1 key3 pressed \r\n");break;
+				printf("key1 key3 pressed \r\n");
+				LCD_Key_UniteUp(); /* 复合+上键 */
+				break;
 			case 0x06:
 				printf("key2 key3 pressed \r\n");break;
 			case 0x07:

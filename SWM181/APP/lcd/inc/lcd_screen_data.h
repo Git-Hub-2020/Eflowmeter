@@ -7,6 +7,7 @@
 #define MENU_LEVEL_1	1	/* 功能选择画面 */
 #define MENU_LEVEL_2	2	/* 参数设置菜单 */
 #define MENU_LEVEL_3	3	/* 详细设置画面 */
+#define MENU_LEVEL_4	4	/* 密码 */
 
 /* MENU_LEVEL_0 */
 #define MENU_L0_INIT		0	/* 初始画面 */
@@ -72,6 +73,12 @@
 #define MENU_L3_02	2	/* 仪表通讯地址 */
 #define MENU_L3_MAX	3
 
+/* MENU_LEVEL_4 */
+#define MENU_L4_00	0	/* 参数设置密码 */
+#define MENU_L4_01	1	/* 总量清零密码 */
+#define MENU_L4_02	2	/* 总量清零密码设置 */
+#define MENU_L4_MAX	3
+
 typedef enum StringType
 {
 	STR_ZH = 0,
@@ -97,7 +104,9 @@ extern MenuList_t Menu_level0_list_zh[MENU_L0_MAX];
 extern MenuList_t Menu_level1_list_zh[MENU_L1_MAX];
 extern MenuList_t Menu_level2_list_zh[MENU_L2_MAX];
 extern MenuList_t Menu_level3_list_zh[MENU_L3_MAX];
+extern MenuList_t Menu_level4_list_zh[MENU_L4_MAX];
 extern uint8_t* Menu_Number_Tbl[];
 extern Stringinfo_t Menu_Init_Dot[];
+extern Stringinfo_t Menu_Cursor_default;
 
 #endif /* LCD_SCREEN_DATA_H_ */

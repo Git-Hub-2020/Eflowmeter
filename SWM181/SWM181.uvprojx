@@ -385,6 +385,16 @@
               <FileType>5</FileType>
               <FilePath>.\Common\common.h</FilePath>
             </File>
+            <File>
+              <FileName>version.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Common\version.c</FilePath>
+            </File>
+            <File>
+              <FileName>version.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Common\version.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -440,6 +450,11 @@
               <FileType>5</FileType>
               <FilePath>.\Driver\eeprom\inc\eeprom.h</FilePath>
             </File>
+            <File>
+              <FileName>eeprom_api.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\eeprom\inc\eeprom_api.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -485,6 +500,11 @@
               <FileType>5</FileType>
               <FilePath>.\APP\lcd\inc\lcd_draw.h</FilePath>
             </File>
+            <File>
+              <FileName>lcd_setup.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\lcd\inc\lcd_setup.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -519,6 +539,11 @@
               <FileName>lcd_draw.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\APP\lcd\src\lcd_draw.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_setup.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\lcd\src\lcd_setup.c</FilePath>
             </File>
           </Files>
         </Group>

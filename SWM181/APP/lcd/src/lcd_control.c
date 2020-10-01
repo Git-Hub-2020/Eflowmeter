@@ -10,11 +10,12 @@ uint8_t Init_Frame = 0;
 BOOL Warning_Disp_Flag = FALSE;
 static uint8_t lcd_draw_req = REQ_OFF;
 static uint8_t lcd_clear_req = REQ_OFF;
-static void Lcd_Mst_Init(void);
+static uint8_t lcd_cursor_req = REQ_OFF;
+static void LCD_Mst_Init(void);
 
 void LCD_init(void)
 {
-	Lcd_Mst_Init();
+	LCD_Mst_Init();
     GPIO_SetBit(RES);//RES=1;
     delay(2);
     GPIO_ClrBit(RES);//RES=0;
@@ -42,6 +43,7 @@ void LCD_init(void)
 
 	LCD_Menu_SetLevel(MENU_LEVEL_0);
 	LCD_Menu_SetID(MENU_L0_INIT);
+	LCD_Cursor_StatusSet(CURSOR_INVALID);
 	LCD_TimeOut_Init();
 	Timer_Setup(TIMER_ID_INIT);
 	LCD_Drawreq_Set(REQ_ON);
@@ -50,7 +52,7 @@ void LCD_init(void)
 void LCD_TimeOut_Init(void)
 {
 	if(Init_Frame == 0){
-		LCD_Menu_InitVerDisplay();
+		LCD_Menu_InitVerGet();
 		Init_Frame++;
 	}
 	else if(Init_Frame < 4){
@@ -92,6 +94,10 @@ void LCD_Key_Up(void)
 			LCD_Menu_Key_L3(MENU_KEY_UP);
 			LCD_Drawreq_Set(REQ_ON);
 			break;
+		case MENU_LEVEL_4:
+			LCD_Menu_Key_L4(MENU_KEY_UP);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
 		default:
 			break;
 	}
@@ -115,6 +121,10 @@ void LCD_Key_Down(void)
 			LCD_Menu_Key_L3(MENU_KEY_DOWN);
 			LCD_Drawreq_Set(REQ_ON);
 			break;
+		case MENU_LEVEL_4:
+			LCD_Menu_Key_L4(MENU_KEY_DOWN);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
 		default:
 			break;
 	}
@@ -127,8 +137,9 @@ void LCD_Key_Confirm(void)
 		case MENU_LEVEL_0:
 			break;
 		case MENU_LEVEL_1:
-			LCD_Menu_SetLevel(MENU_LEVEL_2);
+			LCD_Menu_SetLevel(MENU_LEVEL_4);
 			LCD_Menu_Key_L1(MENU_KEY_CONFIRM);
+			LCD_Cursor_StatusSet(CURSOR_VALID);
 			LCD_Drawreq_Set(REQ_ON);
 			break;
 		case MENU_LEVEL_2:
@@ -139,6 +150,39 @@ void LCD_Key_Confirm(void)
 		case MENU_LEVEL_3:
 			LCD_Menu_SetLevel(MENU_LEVEL_2);
 			LCD_Menu_Key_L3(MENU_KEY_CONFIRM);
+			LCD_Cursor_StatusSet(CURSOR_FREEZE);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
+		case MENU_LEVEL_4:
+			LCD_Menu_Key_L4(MENU_KEY_CONFIRM);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
+		default:
+			break;
+	}
+}
+
+void LCD_Key_UniteUp(void)
+{
+	switch(LCD_Menu_GetLevel())
+	{
+		case MENU_LEVEL_4:
+			LCD_Menu_Key_L4(MENU_KEY_UNITUP);
+			LCD_Cursor_StatusSet(CURSOR_RIGHT);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
+		default:
+			break;
+	}
+}
+
+void LCD_Key_UniteDown(void)
+{
+	switch(LCD_Menu_GetLevel())
+	{
+		case MENU_LEVEL_4:
+			LCD_Menu_Key_L4(MENU_KEY_UNITDOWN);
+			LCD_Cursor_StatusSet(CURSOR_LEFT);
 			LCD_Drawreq_Set(REQ_ON);
 			break;
 		default:
@@ -148,21 +192,26 @@ void LCD_Key_Confirm(void)
 
 void LCD_Key_UniteConfirm(void)
 {
-	uint8_t level = LCD_Menu_GetLevel();
-	uint8_t menu = LCD_Menu_GetID();
-
-	if((MENU_LEVEL_1 == level) &&(MENU_L1_PARAMSET == menu))
+	switch(LCD_Menu_GetLevel())
 	{
-		return;
+		case MENU_LEVEL_0:
+			Timer_Clear(TIMER_ID_ALERT);
+			LCD_Menu_SetLevel(MENU_LEVEL_1);
+			LCD_Menu_SetID(MENU_L1_PARAMSET);
+			LCD_Cursor_StatusSet(CURSOR_INVALID);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
+		case MENU_LEVEL_4:
+			LCD_Menu_Key_L4(MENU_KEY_UNITCONFIRM);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
+		default:
+			LCD_Menu_SetLevel(MENU_LEVEL_1);
+			LCD_Menu_SetID(MENU_L1_PARAMSET);
+			LCD_Cursor_StatusSet(CURSOR_INVALID);
+			LCD_Drawreq_Set(REQ_ON);
+			break;
 	}
-	if((MENU_LEVEL_0 == level) &&(MENU_L0_AUTOMEASURE == menu))
-	{
-		Timer_Clear(TIMER_ID_ALERT);
-	}
-
-	LCD_Menu_SetLevel(MENU_LEVEL_1);
-	LCD_Menu_SetID(MENU_L1_PARAMSET);
-	LCD_Drawreq_Set(REQ_ON);
 }
 
 void LCD_Draw(void)
@@ -172,16 +221,22 @@ void LCD_Draw(void)
 		if(REQ_ON == lcd_clear_req){
 			clealddram();
 			LCD_Clearreq_Set(REQ_OFF);
+			LCD_Screen_Draw();
 		}
 
-		LCD_Screen_Draw();
 		LCD_Anime_Draw();
+
+		if(REQ_ON == lcd_cursor_req){
+			LCD_Cursor_Draw();
+			LCD_Cursorreq_Set(REQ_OFF);
+		}
+
 		LCD_Drawreq_Set(REQ_OFF);
 	}
 
 }
 
-static void Lcd_Mst_Init(void)
+static void LCD_Mst_Init(void)
 {
 	GPIO_Init(RES, 1, 0, 0, 0);	//初始化LCDIO
 	GPIO_Init(CS1, 1, 0, 0, 0);	//初始化LCDIO
@@ -198,4 +253,9 @@ void LCD_Drawreq_Set(uint8_t req)
 void LCD_Clearreq_Set(uint8_t req)
 {
 	lcd_clear_req = req;
+}
+
+void LCD_Cursorreq_Set(uint8_t req)
+{
+	lcd_cursor_req = req;
 }

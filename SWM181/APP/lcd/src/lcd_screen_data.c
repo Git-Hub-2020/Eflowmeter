@@ -52,6 +52,28 @@ Stringinfo_t Menu_AutoMeasure[] =
 	{104, 6, STR_ZH, (uint8_t*)str_pic_unit}
 };
 
+/* 密码 */
+Stringinfo_t Menu_Password_zh[] =
+{
+	{44, 4, STR_EN, (uint8_t*)str_en_0},
+	{52, 4, STR_EN, (uint8_t*)str_en_0},
+	{60, 4, STR_EN, (uint8_t*)str_en_0},
+	{68, 4, STR_EN, (uint8_t*)str_en_0},
+	{76, 4, STR_EN, (uint8_t*)str_en_0},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_mi},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_ma}
+};
+
+/* 密码设定 */
+Stringinfo_t Menu_PasswordSet_zh[] =
+{
+	{44, 2, STR_EN, (uint8_t*)str_en_0},
+	{52, 2, STR_EN, (uint8_t*)str_en_0},
+	{60, 2, STR_EN, (uint8_t*)str_en_0},
+	{68, 2, STR_EN, (uint8_t*)str_en_0},
+	{76, 2, STR_EN, (uint8_t*)str_en_0}
+};
+
 /* 参数设置 */
 Stringinfo_t Menu_ParamSet_zh[] =
 {
@@ -690,6 +712,9 @@ uint8_t* Menu_Number_Tbl[] =
 	{(uint8_t*)str_en_9}
 };
 
+/* 光标 */
+Stringinfo_t Menu_Cursor_default = {72, 4, STR_EN, (uint8_t*)str_en_line};
+
 MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
 {
 	{12, Menu_Init},		/* 初始画面 */
@@ -757,3 +782,11 @@ MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 	{7, Menu_L3_01_en},	/* English */
 	{3, Menu_L3_02_en},	/* 仪表通讯地址 */
 };
+
+MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
+{
+	{7, Menu_Password_zh},		/* 参数设置密码 */
+	{7, Menu_Password_zh},		/* 总量清零密码 */
+	{5, Menu_PasswordSet_zh},	/* 密码设定 */
+};
+

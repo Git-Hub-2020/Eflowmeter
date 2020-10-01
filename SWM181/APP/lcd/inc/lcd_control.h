@@ -10,10 +10,13 @@ void LCD_init(void);
 void LCD_Key_Up(void);
 void LCD_Key_Down(void);
 void LCD_Key_Confirm(void);
+void LCD_Key_UniteUp(void);
+void LCD_Key_UniteDown(void);
 void LCD_Key_UniteConfirm(void);
 void LCD_Draw(void);
 void LCD_Drawreq_Set(uint8_t req);
 void LCD_Clearreq_Set(uint8_t req);
+void LCD_Cursorreq_Set(uint8_t req);
 void LCD_TimeOut_Init(void);
 void LCD_TimeOut_Alert(void);
 
