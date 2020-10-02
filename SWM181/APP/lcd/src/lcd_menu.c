@@ -183,6 +183,7 @@ void LCD_Menu_Key_L4(MenuKey_t key)
 				else{
 					LCD_Menu_SetID(menu);
 					LCD_Cursor_StatusSet(CURSOR_VALID);
+					memset(&PWInfo, 0, sizeof(PWInfo));
 				}
 			}
 			break;
