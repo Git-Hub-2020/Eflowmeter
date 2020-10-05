@@ -31,6 +31,7 @@ typedef struct PWInfo
 #define DISPLAY_ON  1
 #define DISPLAY_OFF 0
 
+void LCD_Menu_Init(void);
 void LCD_Menu_Key_L1(MenuKey_t key);
 void LCD_Menu_Key_L2(MenuKey_t key);
 void LCD_Menu_Key_L3(MenuKey_t key);

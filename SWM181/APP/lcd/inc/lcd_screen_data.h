@@ -100,11 +100,11 @@ typedef struct MenuList
 	Stringinfo_t*	pstr;
 } MenuList_t;
 
-extern MenuList_t Menu_level0_list_zh[MENU_L0_MAX];
-extern MenuList_t Menu_level1_list_zh[MENU_L1_MAX];
-extern MenuList_t Menu_level2_list_zh[MENU_L2_MAX];
-extern MenuList_t Menu_level3_list_zh[MENU_L3_MAX];
-extern MenuList_t Menu_level4_list_zh[MENU_L4_MAX];
+extern MenuList_t* Menu_level0_list[];
+extern MenuList_t* Menu_level1_list[];
+extern MenuList_t* Menu_level2_list[];
+extern MenuList_t* Menu_level3_list[];
+extern MenuList_t* Menu_level4_list[];
 extern uint8_t* Menu_Number_Tbl[];
 extern Stringinfo_t Menu_Init_Dot[];
 extern Stringinfo_t Menu_Cursor_default;

@@ -14,9 +14,20 @@ static uint8_t lcd_menu_id = MENU_L0_INIT;
 static uint8_t lcd_menu_level = MENU_LEVEL_0;
 static CursorSts_t lcd_cursor_sts = CURSOR_INVALID;
 static PWInfo_t PWInfo;
+static StringType_t lcd_Language = STR_ZH;
 
 static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y);
 static BOOL LCD_Password_Check(uint8_t *pw);
+
+void LCD_Menu_Init(void)
+{
+	LCD_Menu_SetLevel(MENU_LEVEL_0);
+	LCD_Menu_SetID(MENU_L0_INIT);
+	LCD_Cursor_StatusSet(CURSOR_INVALID);
+
+	Lcd_Get_Language(&lcd_Language);
+	if(STR_EN < lcd_Language) lcd_Language = STR_EN;
+}
 
 void LCD_Menu_Key_L1(MenuKey_t key)
 {
@@ -110,6 +121,8 @@ void LCD_Menu_Key_L3(MenuKey_t key)
 			else
 			{
 				LCD_Menu_SetID(MENU_L2_PARAMSET00);
+				lcd_Language = STR_ZH;
+				Lcd_Set_Language(lcd_Language);
 			}
 			break;
 		case MENU_L3_01:
@@ -120,6 +133,8 @@ void LCD_Menu_Key_L3(MenuKey_t key)
 			else
 			{
 				LCD_Menu_SetID(MENU_L2_PARAMSET00);
+				lcd_Language = STR_EN;
+				Lcd_Set_Language(lcd_Language);
 			}
 			break;
 		case MENU_L3_02:
@@ -201,19 +216,19 @@ void LCD_Screen_Draw(void)
 	switch(level)
 	{
 		case MENU_LEVEL_0:
-			list = &Menu_level0_list_zh[menu];
+			list = &(Menu_level0_list[lcd_Language])[menu];
 			break;
 		case MENU_LEVEL_1:
-			list = &Menu_level1_list_zh[menu];
+			list = &(Menu_level1_list[lcd_Language])[menu];
 			break;
 		case MENU_LEVEL_2:
-			list = &Menu_level2_list_zh[menu];
+			list = &(Menu_level2_list[lcd_Language])[menu];
 			break;
 		case MENU_LEVEL_3:
-			list = &Menu_level3_list_zh[menu];
+			list = &(Menu_level3_list[lcd_Language])[menu];
 			break;
 		case MENU_LEVEL_4:
-			list = &Menu_level4_list_zh[menu];
+			list = &(Menu_level4_list[lcd_Language])[menu];
 			break;
 		default:
 			break;
@@ -240,9 +255,9 @@ void LCD_Anime_Draw(void)
 		}
 	}
 	else if (MENU_LEVEL_4 == level){
-		str.str_x = Menu_level4_list_zh[menu].pstr[PWInfo.pos].str_x;
-		str.str_y = Menu_level4_list_zh[menu].pstr[PWInfo.pos].str_y;
-		str.str_type = Menu_level4_list_zh[menu].pstr[PWInfo.pos].str_type;
+		str.str_x = (Menu_level4_list[lcd_Language])[menu].pstr[PWInfo.pos].str_x;
+		str.str_y = (Menu_level4_list[lcd_Language])[menu].pstr[PWInfo.pos].str_y;
+		str.str_type = (Menu_level4_list[lcd_Language])[menu].pstr[PWInfo.pos].str_type;
 		str.pstr = Menu_Number_Tbl[PWInfo.pw[PWInfo.pos]];
 		LCD_Str_Draw(&str);
 	}
@@ -337,7 +352,7 @@ void LCD_Menu_InitVerGet(void)
 	MenuList_t *list;
 
 	Version_GetNum(version);
-	list = &Menu_level0_list_zh[MENU_L0_INIT];
+	list = &(Menu_level0_list[lcd_Language])[MENU_L0_INIT];
 	list->pstr[3].pstr = Menu_Number_Tbl[version[0]];
 	list->pstr[5].pstr = Menu_Number_Tbl[version[1]];
 	list->pstr[6].pstr = Menu_Number_Tbl[version[2]];
@@ -345,7 +360,7 @@ void LCD_Menu_InitVerGet(void)
 
 void LCD_Menu_AlertDisplay(void)
 {
-	MenuList_t *list = &Menu_level0_list_zh[MENU_L0_AUTOMEASURE];
+	MenuList_t *list = &(Menu_level0_list[lcd_Language])[MENU_L0_AUTOMEASURE];
 
 	if(TRUE == Warning_Disp_Flag){
 		LCD_Str_Draw(&(list->pstr[6]));

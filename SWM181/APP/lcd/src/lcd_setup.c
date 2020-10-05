@@ -24,6 +24,21 @@ void Lcd_Get_Password(uint8_t *pw)
 	printf("Present PW:[%d][%d][%d][%d][%d]\r\n",pw[0],pw[1],pw[2],pw[3],pw[4]);
 }
 
+void Lcd_Set_Language(uint8_t lang)
+{
+	uint32_t language = lang;
+
+	Eeprom_SetLanguage(&language);
+}
+
+void Lcd_Get_Language(uint8_t *lang)
+{
+	uint32_t language = 0;
+
+	Eeprom_GetLanguage(&language);
+	*lang = (uint8_t)language;
+}
+
 static void Lcd_EEPConvert_Set(uint32_t *dst, uint8_t *src, uint8_t src_size)
 {
 	uint8_t i = 0;

@@ -41,9 +41,7 @@ void LCD_init(void)
  	write_com(0xaf);        //Lcd Disply ON
 	delay(5);
 
-	LCD_Menu_SetLevel(MENU_LEVEL_0);
-	LCD_Menu_SetID(MENU_L0_INIT);
-	LCD_Cursor_StatusSet(CURSOR_INVALID);
+	LCD_Menu_Init();
 	LCD_TimeOut_Init();
 	Timer_Setup(TIMER_ID_INIT);
 	LCD_Drawreq_Set(REQ_ON);
