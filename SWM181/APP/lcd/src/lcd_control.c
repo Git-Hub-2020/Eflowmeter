@@ -199,10 +199,10 @@ void LCD_Key_UniteConfirm(void)
 			LCD_Cursor_StatusSet(CURSOR_INVALID);
 			LCD_Drawreq_Set(REQ_ON);
 			break;
-		case MENU_LEVEL_4:
-			LCD_Menu_Key_L4(MENU_KEY_UNITCONFIRM);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
+		//case MENU_LEVEL_4:
+		//	LCD_Menu_Key_L4(MENU_KEY_UNITCONFIRM);
+		//	LCD_Drawreq_Set(REQ_ON);
+		//	break;
 		default:
 			LCD_Menu_SetLevel(MENU_LEVEL_1);
 			LCD_Menu_SetID(MENU_L1_PARAMSET);

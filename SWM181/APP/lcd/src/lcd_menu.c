@@ -167,7 +167,26 @@ void LCD_Menu_Key_L4(MenuKey_t key)
 			}
 			break;
 		case MENU_KEY_CONFIRM:
-			if(MENU_L4_02 == menu){
+			if(MENU_L4_00 == menu){
+				if(TRUE == LCD_Password_Check(PWInfo.pw)){
+					LCD_Menu_SetLevel(MENU_LEVEL_2);
+					LCD_Menu_SetID(MENU_L2_PARAMSET00);
+					LCD_Cursor_StatusSet(CURSOR_FREEZE);
+				}
+			}
+			else if(MENU_L4_01 == menu){
+				if(TRUE == LCD_Password_Check(PWInfo.pw)){
+					LCD_Menu_SetID(menu);
+					LCD_Cursor_StatusSet(CURSOR_VALID);
+					memset(&PWInfo, 0, sizeof(PWInfo));
+				}
+				else{
+					LCD_Menu_SetLevel(MENU_LEVEL_0);
+					LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
+					LCD_Cursor_StatusSet(CURSOR_INVALID);
+				}
+			}
+			else if(MENU_L4_02 == menu){
 				Lcd_Set_Password(PWInfo.pw);
 				LCD_Menu_SetLevel(MENU_LEVEL_2);
 				LCD_Menu_SetID(MENU_L2_PARAMSET24);
@@ -187,20 +206,6 @@ void LCD_Menu_Key_L4(MenuKey_t key)
 			}
 			break;
 		case MENU_KEY_UNITCONFIRM:
-			if(MENU_L4_02 != menu){
-				if(TRUE == LCD_Password_Check(PWInfo.pw)){
-					if(MENU_L4_00 == menu){
-						LCD_Menu_SetLevel(MENU_LEVEL_2);
-						LCD_Menu_SetID(MENU_L2_PARAMSET00);
-						LCD_Cursor_StatusSet(CURSOR_FREEZE);
-					}
-				}
-				else{
-					LCD_Menu_SetID(menu);
-					LCD_Cursor_StatusSet(CURSOR_VALID);
-					memset(&PWInfo, 0, sizeof(PWInfo));
-				}
-			}
 			break;
 		default:
 			break;
