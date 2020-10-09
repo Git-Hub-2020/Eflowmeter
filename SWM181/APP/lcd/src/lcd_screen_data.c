@@ -997,10 +997,9 @@ Stringinfo_t Menu_L3_01_en[] =
 	{80, 2, STR_EN, (uint8_t*)str_en_h},
 };
 
-/* 001 */
+/* 00 */
 Stringinfo_t Menu_L3_02_en[] =
 {
-	{48, 2, STR_EN, (uint8_t*)str_en_0},
 	{56, 2, STR_EN, (uint8_t*)str_en_0},
 	{64, 2, STR_EN, (uint8_t*)str_en_0},
 };

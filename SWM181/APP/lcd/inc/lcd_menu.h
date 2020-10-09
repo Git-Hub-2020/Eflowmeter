@@ -22,12 +22,6 @@ typedef enum CursorSts
 	CURSOR_RIGHT
 } CursorSts_t;
 
-typedef struct PWInfo
-{
-	uint8_t pw[5];
-	uint8_t pos;
-} PWInfo_t;
-
 #define DISPLAY_ON  1
 #define DISPLAY_OFF 0
 

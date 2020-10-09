@@ -505,6 +505,11 @@
               <FileType>5</FileType>
               <FilePath>.\APP\lcd\inc\lcd_setup.h</FilePath>
             </File>
+            <File>
+              <FileName>lcd_menu_type.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\lcd\inc\lcd_menu_type.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

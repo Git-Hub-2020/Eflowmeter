@@ -1,8 +1,8 @@
 #include "SWM181.h"
 #include <string.h>
 
-#include "../Driver/timer/inc/timer.h"
-#include "../Driver/uart/inc/uart.h"
+#include "timer.h"
+#include "uart.h"
 #include "common.h"
 #include "lcd_control.h"
 #include "key_control.h"

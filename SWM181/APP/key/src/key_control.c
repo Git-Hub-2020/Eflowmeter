@@ -4,6 +4,7 @@
 uint8_t status_key=0x00;
 uint8_t key_sign=0;
 uint8_t key_status = KEY_INVALID;
+extern void Eeprom_Read_Test(void);
 
 void Key_init(void)
 {
@@ -66,7 +67,9 @@ void KeyControl(void)
 			case 0x0e:
 				printf("key2 key3 key4 pressed \r\n");break;
 			case 0x0f:
-				printf("key1 key2 key3 key4 pressed \r\n");break;
+				printf("key1 key2 key3 key4 pressed \r\n");
+				Eeprom_Read_Test(); /* Flash bufferÊä³ö  */
+				break;
 		}
 	}
 }
