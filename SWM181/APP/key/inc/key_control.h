@@ -6,9 +6,10 @@
 #define KEY_INVALID 0
 #define KEY_VALID   1
 
+/*---------------------------------------------------------
+        系统函数声明
+---------------------------------------------------------*/
 void Key_init(void);
-void Key_StatusSet(uint8_t status);
 void KeyControl(void);
-void GetKey(void);
 
 #endif /* KEY_CONTROL_H_ */

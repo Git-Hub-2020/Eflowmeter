@@ -4,7 +4,7 @@ extern TimerTable_t timer_table[TIMER_ID_MAX];
 
 void Timer_init(void)
 {
-	TIMR_Init(TIMR0, TIMR_MODE_TIMER, SystemCoreClock/20, 1);	//每100ms触发一次中断
+	TIMR_Init(TIMR0, TIMR_MODE_TIMER, SystemCoreClock/200, 1);	//每5ms触发一次中断
 	IRQ_Connect(IRQ0_15_TIMR0, IRQ5_IRQ, 2);		//定时器0中断链接到IRQ5中断线，低优先级
 	TIMR_Start(TIMR0);
 }

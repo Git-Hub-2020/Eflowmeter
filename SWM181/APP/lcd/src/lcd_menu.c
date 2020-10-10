@@ -3,7 +3,6 @@
 #include "version.h"
 #include "lcd_menu.h"
 #include "lcd_menu_type.h"
-#include "lcd_control.h"
 #include "lcd_draw.h"
 #include "lcd_screen_data.h"
 #include "lcd_setup.h"
@@ -32,25 +31,47 @@ void LCD_Menu_Init(void)
 	Lcd_Get_Commaddr(lcd_Commaddr.addr, numof(lcd_Commaddr.addr));
 }
 
-void LCD_Menu_Key_L1(MenuKey_t key)
+DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key)
 {
+	DisplayReq_t disp_req = REQ_ON;
+
+	switch(key)
+	{
+	case MENU_KEY_UNITCONFIRM:
+		LCD_AutoMeasure_Transfer(REQ_OFF);
+		break;
+	default:
+		disp_req = REQ_OFF;
+		break;
+	}
+
+	return disp_req;
+}
+
+DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key)
+{
+	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
 
-	if(MENU_KEY_DOWN == key){
+	switch(key)
+	{
+	case MENU_KEY_DOWN:
 		if(menu == MENU_L1_PARAMSET)
 		{
 			menu = MENU_L1_MAX;
 		}
 		menu--;
-	}
-	else if(MENU_KEY_UP == key){
+		LCD_Menu_SetID(menu);
+		break;
+	case MENU_KEY_UP:
 		menu++;
 		if(menu == MENU_L1_MAX)
 		{
 			menu = MENU_L1_PARAMSET;
 		}
-	}
-	else if(MENU_KEY_CONFIRM == key){
+		LCD_Menu_SetID(menu);
+		break;
+	case MENU_KEY_CONFIRM:
 		switch(menu)
 		{
 			case MENU_L1_PARAMSET:
@@ -64,30 +85,46 @@ void LCD_Menu_Key_L1(MenuKey_t key)
 			default:
 				break;
 		}
+		LCD_Menu_SetID(menu);
+		LCD_Menu_SetLevel(MENU_LEVEL_4);
+		LCD_Cursor_StatusSet(CURSOR_VALID);
+		break;
+	case MENU_KEY_LONGCONFIRM:
+		LCD_AutoMeasure_Transfer(REQ_ON);
+		break;
+	default:
+		disp_req = REQ_OFF;
+		break;
 	}
 
-	LCD_Menu_SetID(menu);
+	return disp_req;
 }
 
-void LCD_Menu_Key_L2(MenuKey_t key)
+DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 {
+	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
 
-	if(MENU_KEY_DOWN == key){
+	switch(key)
+	{
+	case MENU_KEY_DOWN:
 		if(menu == MENU_L2_PARAMSET00)
 		{
 			menu = MENU_L2_MAX;
 		}
 		menu--;
-	}
-	else if(MENU_KEY_UP == key){
+		LCD_Menu_SetID(menu);
+		break;
+	case MENU_KEY_UP:
 		menu++;
 		if(menu == MENU_L2_MAX)
 		{
 			menu = MENU_L2_PARAMSET00;
 		}
-	}
-	else if(MENU_KEY_CONFIRM == key){
+		LCD_Menu_SetID(menu);
+		break;
+	case MENU_KEY_CONFIRM:
+		LCD_Menu_SetLevel(MENU_LEVEL_3);
 		switch(menu)
 		{
 			case MENU_L2_PARAMSET00:
@@ -114,13 +151,32 @@ void LCD_Menu_Key_L2(MenuKey_t key)
 			default:
 				break;
 		}
+		LCD_Menu_SetID(menu);
+		break;
+	case MENU_KEY_LONGCONFIRM:
+		LCD_AutoMeasure_Transfer(REQ_ON);
+		break;
+	default:
+		disp_req = REQ_OFF;
+		break;
 	}
 
-	LCD_Menu_SetID(menu);
+	return disp_req;
 }
 
-void LCD_Menu_Key_L3(MenuKey_t key)
+DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 {
+	DisplayReq_t disp_req = REQ_ON;
+
+	if(MENU_KEY_CONFIRM == key){
+		LCD_Menu_SetLevel(MENU_LEVEL_2);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
+	}
+	else if(MENU_KEY_LONGCONFIRM == key){
+		LCD_AutoMeasure_Transfer(REQ_ON);
+		return REQ_ON;
+	}
+
 	switch(LCD_Menu_GetID())
 	{
 		case MENU_L3_00:
@@ -170,21 +226,27 @@ void LCD_Menu_Key_L3(MenuKey_t key)
 					lcd_Commaddr.pos = numof(lcd_Commaddr.addr);
 				}
 				lcd_Commaddr.pos--;
+				LCD_Cursor_StatusSet(CURSOR_LEFT);
 			}
 			else if(MENU_KEY_UNITUP == key){
 				lcd_Commaddr.pos++;
 				if(numof(lcd_Commaddr.addr) <= lcd_Commaddr.pos){
 					lcd_Commaddr.pos = 0;
 				}
+				LCD_Cursor_StatusSet(CURSOR_RIGHT);
 			}
 			break;
 		default:
+			disp_req = REQ_OFF;
 			break;
 	}
+
+	return disp_req;
 }
 
-void LCD_Menu_Key_L4(MenuKey_t key)
+DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 {
+	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
 
 	switch(key)
@@ -233,18 +295,24 @@ void LCD_Menu_Key_L4(MenuKey_t key)
 				PWInfo.pos = numof(PWInfo.pw);
 			}
 			PWInfo.pos--;
+			LCD_Cursor_StatusSet(CURSOR_LEFT);
 			break;
 		case MENU_KEY_UNITUP:
 			PWInfo.pos++;
 			if(numof(PWInfo.pw) <= PWInfo.pos){
 				PWInfo.pos = 0;
 			}
+			LCD_Cursor_StatusSet(CURSOR_RIGHT);
 			break;
-		case MENU_KEY_UNITCONFIRM:
+		case MENU_KEY_LONGCONFIRM:
+			LCD_AutoMeasure_Transfer(REQ_ON);
 			break;
 		default:
+			disp_req = REQ_OFF;
 			break;
 	}
+
+	return disp_req;
 }
 
 void LCD_Screen_Draw(void)

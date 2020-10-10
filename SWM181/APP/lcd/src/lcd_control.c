@@ -8,10 +8,13 @@
 
 uint8_t Init_Frame = 0;
 BOOL Warning_Disp_Flag = FALSE;
+static BOOL Lcd_key_Flag = FALSE; //KEYÆÁ±Î
+static volatile MenuKey_t lcd_key_status = MENU_KEY_INVALID;
 static uint8_t lcd_draw_req = REQ_OFF;
 static uint8_t lcd_clear_req = REQ_OFF;
 static uint8_t lcd_cursor_req = REQ_OFF;
 static void LCD_Mst_Init(void);
+static void LCD_Key_Response(void);
 
 void LCD_init(void)
 {
@@ -43,177 +46,16 @@ void LCD_init(void)
 
 	LCD_Menu_Init();
 	LCD_TimeOut_Init();
-	Timer_Setup(TIMER_ID_INIT);
-	LCD_Drawreq_Set(REQ_ON);
-}
-
-void LCD_TimeOut_Init(void)
-{
-	if(Init_Frame == 0){
-		LCD_Menu_InitVerGet();
-		Init_Frame++;
-	}
-	else if(Init_Frame < 4){
-		Init_Frame++;
-	}
-	else{
-		Init_Frame = 0;
-		Timer_Clear(TIMER_ID_INIT);
-		LCD_Menu_SetLevel(MENU_LEVEL_0);
-		LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
-		Timer_Setup(TIMER_ID_ALERT);
-		Key_StatusSet(KEY_VALID);
-	}
-
-	LCD_Drawreq_Set(REQ_ON);
-}
-
-void LCD_TimeOut_Alert(void)
-{
-	Warning_Disp_Flag = !Warning_Disp_Flag;
-	LCD_Drawreq_Set(REQ_ON);
-}
-
-void LCD_Key_Up(void)
-{
-	switch(LCD_Menu_GetLevel())
-	{
-		case MENU_LEVEL_0:
-			break;
-		case MENU_LEVEL_1:
-			LCD_Menu_Key_L1(MENU_KEY_UP);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_2:
-			LCD_Menu_Key_L2(MENU_KEY_UP);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_3:
-			LCD_Menu_Key_L3(MENU_KEY_UP);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_4:
-			LCD_Menu_Key_L4(MENU_KEY_UP);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		default:
-			break;
-	}
-}
-
-void LCD_Key_Down(void)
-{
-	switch(LCD_Menu_GetLevel())
-	{
-		case MENU_LEVEL_0:
-			break;
-		case MENU_LEVEL_1:
-			LCD_Menu_Key_L1(MENU_KEY_DOWN);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_2:
-			LCD_Menu_Key_L2(MENU_KEY_DOWN);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_3:
-			LCD_Menu_Key_L3(MENU_KEY_DOWN);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_4:
-			LCD_Menu_Key_L4(MENU_KEY_DOWN);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		default:
-			break;
-	}
-}
-
-void LCD_Key_Confirm(void)
-{
-	switch(LCD_Menu_GetLevel())
-	{
-		case MENU_LEVEL_0:
-			break;
-		case MENU_LEVEL_1:
-			LCD_Menu_SetLevel(MENU_LEVEL_4);
-			LCD_Menu_Key_L1(MENU_KEY_CONFIRM);
-			LCD_Cursor_StatusSet(CURSOR_VALID);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_2:
-			LCD_Menu_SetLevel(MENU_LEVEL_3);
-			LCD_Menu_Key_L2(MENU_KEY_CONFIRM);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_3:
-			LCD_Menu_SetLevel(MENU_LEVEL_2);
-			LCD_Menu_Key_L3(MENU_KEY_CONFIRM);
-			LCD_Cursor_StatusSet(CURSOR_FREEZE);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		case MENU_LEVEL_4:
-			LCD_Menu_Key_L4(MENU_KEY_CONFIRM);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		default:
-			break;
-	}
-}
-
-void LCD_Key_UniteUp(void)
-{
-	switch(LCD_Menu_GetLevel())
-	{
-		case MENU_LEVEL_4:
-			LCD_Menu_Key_L4(MENU_KEY_UNITUP);
-			LCD_Cursor_StatusSet(CURSOR_RIGHT);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		default:
-			break;
-	}
-}
-
-void LCD_Key_UniteDown(void)
-{
-	switch(LCD_Menu_GetLevel())
-	{
-		case MENU_LEVEL_4:
-			LCD_Menu_Key_L4(MENU_KEY_UNITDOWN);
-			LCD_Cursor_StatusSet(CURSOR_LEFT);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		default:
-			break;
-	}
-}
-
-void LCD_Key_UniteConfirm(void)
-{
-	switch(LCD_Menu_GetLevel())
-	{
-		case MENU_LEVEL_0:
-			Timer_Clear(TIMER_ID_ALERT);
-			LCD_Menu_SetLevel(MENU_LEVEL_1);
-			LCD_Menu_SetID(MENU_L1_PARAMSET);
-			LCD_Cursor_StatusSet(CURSOR_INVALID);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-		//case MENU_LEVEL_4:
-		//	LCD_Menu_Key_L4(MENU_KEY_UNITCONFIRM);
-		//	LCD_Drawreq_Set(REQ_ON);
-		//	break;
-		default:
-			LCD_Menu_SetLevel(MENU_LEVEL_1);
-			LCD_Menu_SetID(MENU_L1_PARAMSET);
-			LCD_Cursor_StatusSet(CURSOR_INVALID);
-			LCD_Drawreq_Set(REQ_ON);
-			break;
-	}
 }
 
 void LCD_Draw(void)
 {
+
+	if ((TRUE == Lcd_key_Flag) && (MENU_KEY_INVALID != lcd_key_status)){
+		LCD_Key_Response();
+		LCD_Key_StatusSet(MENU_KEY_INVALID);
+	}
+
 	if(REQ_ON == lcd_draw_req)
 	{
 		if(REQ_ON == lcd_clear_req){
@@ -231,7 +73,68 @@ void LCD_Draw(void)
 
 		LCD_Drawreq_Set(REQ_OFF);
 	}
+}
 
+void LCD_Key_StatusSet(MenuKey_t key_status)
+{
+	lcd_key_status = key_status;
+}
+
+void LCD_TimeOut_Init(void)
+{
+	if(Init_Frame == 0){
+		LCD_Menu_InitVerGet();
+		Timer_Setup(TIMER_ID_INIT);
+		Init_Frame++;
+	}
+	else if(Init_Frame < 4){
+		Init_Frame++;
+	}
+	else{
+		Init_Frame = 0;
+		Timer_Clear(TIMER_ID_INIT);
+		Lcd_key_Flag = TRUE; //KEYÆÁ±Î½â³ý
+		LCD_AutoMeasure_Transfer(REQ_ON);
+	}
+
+	LCD_Drawreq_Set(REQ_ON);
+}
+
+void LCD_TimeOut_Alert(void)
+{
+	Warning_Disp_Flag = !Warning_Disp_Flag;
+	LCD_Drawreq_Set(REQ_ON);
+}
+
+void LCD_AutoMeasure_Transfer(DisplayReq_t enter)
+{
+	if(REQ_ON == enter){
+		LCD_Menu_SetLevel(MENU_LEVEL_0);
+		LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
+		Timer_Setup(TIMER_ID_ALERT);
+	}
+	else{
+		Timer_Clear(TIMER_ID_ALERT);
+		LCD_Menu_SetLevel(MENU_LEVEL_1);
+		LCD_Menu_SetID(MENU_L1_PARAMSET);
+		LCD_Cursor_StatusSet(CURSOR_INVALID);
+	}
+}
+
+static void LCD_Key_Response(void)
+{
+	static const MenuFunc Menu_Level[] =
+	{
+		LCD_Menu_Key_L0,
+		LCD_Menu_Key_L1,
+		LCD_Menu_Key_L2,
+		LCD_Menu_Key_L3,
+		LCD_Menu_Key_L4
+	};
+
+	if(LCD_Menu_GetLevel() < numof(Menu_Level)){
+		LCD_Drawreq_Set(Menu_Level[LCD_Menu_GetLevel()](lcd_key_status));
+	}
 }
 
 static void LCD_Mst_Init(void)

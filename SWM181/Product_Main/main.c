@@ -21,7 +21,6 @@ int main(void)
     while(1)
 	{
     	Timer_TimeOut_Manager();
-    	KeyControl();
     	LCD_Draw();
 	}
 }
@@ -30,7 +29,7 @@ void IRQ5_Handler(void)        //定时器中断函数
 {
 	TIMR_INTClr(TIMR0);
 	Timer_Counter();
-	GetKey();
+	KeyControl();
 }
 
 /******************************************************************************************************************************************
