@@ -1,10 +1,9 @@
 #include <string.h>
 #include "common.h"
-#include "version.h"
 #include "lcd_menu.h"
+#include "lcd_sub_menu.h"
 #include "lcd_menu_type.h"
 #include "lcd_draw.h"
-#include "lcd_screen_data.h"
 #include "lcd_setup.h"
 
 extern uint8_t Init_Frame;
@@ -13,25 +12,45 @@ extern BOOL Warning_Disp_Flag;
 static uint8_t lcd_menu_id = MENU_L0_INIT;
 static uint8_t lcd_menu_level = MENU_LEVEL_0;
 static CursorSts_t lcd_cursor_sts = CURSOR_INVALID;
-static PWInfo_t PWInfo;
-static Language_t lcd_Language = LANG_ZH;
-static Commaddress_t lcd_Commaddr;
 
+static DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key);
+static DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key);
+static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key);
+static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key);
+static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key);
 static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y);
 static BOOL LCD_Password_Check(uint8_t *pw);
 
 void LCD_Menu_Init(void)
 {
+	LCD_Draw_Init();
 	LCD_Menu_SetLevel(MENU_LEVEL_0);
 	LCD_Menu_SetID(MENU_L0_INIT);
 	LCD_Cursor_StatusSet(CURSOR_INVALID);
-
-	Lcd_Get_Language(&lcd_Language);
-	if(LANG_EN < lcd_Language) lcd_Language = LANG_EN;
-	Lcd_Get_Commaddr(lcd_Commaddr.addr, numof(lcd_Commaddr.addr));
+	LCD_Sub_Menu_Init();
 }
 
-DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key)
+DisplayReq_t LCD_Menu_Key_Response(MenuKey_t key)
+{
+	DisplayReq_t disp_req = REQ_OFF;
+
+	static const MenuFunc Menu_Level[] =
+	{
+		LCD_Menu_Key_L0,
+		LCD_Menu_Key_L1,
+		LCD_Menu_Key_L2,
+		LCD_Menu_Key_L3,
+		LCD_Menu_Key_L4
+	};
+
+	if(LCD_Menu_GetLevel() < numof(Menu_Level)){
+		disp_req = Menu_Level[LCD_Menu_GetLevel()](key);
+	}
+
+	return disp_req;
+}
+
+static DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 
@@ -48,7 +67,7 @@ DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key)
 	return disp_req;
 }
 
-DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key)
+static DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
@@ -100,7 +119,7 @@ DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key)
 	return disp_req;
 }
 
-DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
+static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
@@ -140,6 +159,7 @@ DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 				menu = MENU_L3_02;
 				(Menu_level3_list[lcd_Language])[menu].pstr[0].pstr = Menu_Number_Tbl[lcd_Commaddr.addr[0]];
 				(Menu_level3_list[lcd_Language])[menu].pstr[1].pstr = Menu_Number_Tbl[lcd_Commaddr.addr[1]];
+				lcd_Commaddr.pos = 0;
 				LCD_Cursor_StatusSet(CURSOR_VALID);
 				break;
 			case MENU_L2_PARAMSET24:
@@ -164,7 +184,7 @@ DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 	return disp_req;
 }
 
-DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
+static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 
@@ -177,74 +197,12 @@ DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 		return REQ_ON;
 	}
 
-	switch(LCD_Menu_GetID())
-	{
-		case MENU_L3_00:
-			if((MENU_KEY_DOWN == key) || (MENU_KEY_UP == key)){
-				LCD_Menu_SetID(MENU_L3_01);
-			}
-			else if(MENU_KEY_CONFIRM == key){
-				LCD_Menu_SetID(MENU_L2_PARAMSET00);
-				lcd_Language = LANG_ZH;
-				Lcd_Set_Language(lcd_Language);
-			}
-			break;
-		case MENU_L3_01:
-			if((MENU_KEY_DOWN == key) || (MENU_KEY_UP == key)){
-				LCD_Menu_SetID(MENU_L3_00);
-			}
-			else if(MENU_KEY_CONFIRM == key){
-				LCD_Menu_SetID(MENU_L2_PARAMSET00);
-				lcd_Language = LANG_EN;
-				Lcd_Set_Language(lcd_Language);
-			}
-			break;
-		case MENU_L3_02:
-			if(MENU_KEY_DOWN == key){
-				if(0 == lcd_Commaddr.pos){
-					if(0 < lcd_Commaddr.addr[lcd_Commaddr.pos]){
-						lcd_Commaddr.addr[lcd_Commaddr.pos]--;
-					}
-				}
-				else{
-					if(1 < lcd_Commaddr.addr[lcd_Commaddr.pos]){
-						lcd_Commaddr.addr[lcd_Commaddr.pos]--;
-					}
-				}
-			}
-			else if(MENU_KEY_UP == key){
-				if(9 > lcd_Commaddr.addr[lcd_Commaddr.pos]){
-					lcd_Commaddr.addr[lcd_Commaddr.pos]++;
-				}
-			}
-			else if(MENU_KEY_CONFIRM == key){
-				Lcd_Set_Commaddr(lcd_Commaddr.addr, numof(lcd_Commaddr.addr));
-				LCD_Menu_SetID(MENU_L2_PARAMSET01);
-			}
-			else if(MENU_KEY_UNITDOWN == key){
-				if(0 == lcd_Commaddr.pos){
-					lcd_Commaddr.pos = numof(lcd_Commaddr.addr);
-				}
-				lcd_Commaddr.pos--;
-				LCD_Cursor_StatusSet(CURSOR_LEFT);
-			}
-			else if(MENU_KEY_UNITUP == key){
-				lcd_Commaddr.pos++;
-				if(numof(lcd_Commaddr.addr) <= lcd_Commaddr.pos){
-					lcd_Commaddr.pos = 0;
-				}
-				LCD_Cursor_StatusSet(CURSOR_RIGHT);
-			}
-			break;
-		default:
-			disp_req = REQ_OFF;
-			break;
-	}
+	disp_req = LCD_Sub_Menu_L3(LCD_Menu_GetID(), key);
 
 	return disp_req;
 }
 
-DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
+static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
@@ -320,6 +278,8 @@ void LCD_Screen_Draw(void)
 	uint8_t level = LCD_Menu_GetLevel();
 	uint8_t i = 0, menu = LCD_Menu_GetID();
 	MenuList_t *list;
+
+	clealddram(); //È«»­ÃæÇå¿Õ
 
 	switch(level)
 	{
@@ -470,12 +430,10 @@ static BOOL LCD_Password_Check(uint8_t *pw)
 	}
 }
 
-void LCD_Menu_InitVerGet(void)
+void LCD_Menu_InitVersion(uint8_t *version)
 {
-	uint8_t version[3] = {0};
 	MenuList_t *list;
 
-	Version_GetNum(version);
 	list = &(Menu_level0_list[lcd_Language])[MENU_L0_INIT];
 	list->pstr[3].pstr = Menu_Number_Tbl[version[0]];
 	list->pstr[5].pstr = Menu_Number_Tbl[version[1]];
@@ -497,7 +455,7 @@ void LCD_Menu_AlertDisplay(void)
 void LCD_Menu_SetID(uint8_t menu_id)
 {
 	lcd_menu_id = menu_id;
-	LCD_Clearreq_Set(REQ_ON);
+	LCD_Screenreq_Set(REQ_ON);
 }
 
 uint8_t LCD_Menu_GetID(void)

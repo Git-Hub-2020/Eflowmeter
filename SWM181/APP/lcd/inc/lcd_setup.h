@@ -1,8 +1,6 @@
 #ifndef LCD_SETUP_H_
 #define LCD_SETUP_H_
 
-#include "SWM181.h"
-
 void Lcd_Set_Password(uint8_t *data, uint8_t data_num);
 void Lcd_Get_Password(uint8_t *data, uint8_t data_num);
 void Lcd_Set_Language(uint8_t lang);

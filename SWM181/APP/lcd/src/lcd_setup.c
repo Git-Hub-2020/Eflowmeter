@@ -1,4 +1,3 @@
-#include "lcd_setup.h"
 #include "eeprom_api.h"
 
 static void Lcd_EEPConvert_Set(uint32_t *dst, uint8_t *src, uint8_t src_size);

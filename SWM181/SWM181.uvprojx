@@ -510,6 +510,11 @@
               <FileType>5</FileType>
               <FilePath>.\APP\lcd\inc\lcd_menu_type.h</FilePath>
             </File>
+            <File>
+              <FileName>lcd_sub_menu.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\APP\lcd\inc\lcd_sub_menu.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -549,6 +554,16 @@
               <FileName>lcd_setup.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\APP\lcd\src\lcd_setup.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_sub_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\lcd\src\lcd_sub_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>lcd_menu_type.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\APP\lcd\src\lcd_menu_type.c</FilePath>
             </File>
           </Files>
         </Group>

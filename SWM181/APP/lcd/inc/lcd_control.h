@@ -27,7 +27,7 @@ void LCD_init(void);
 void LCD_Key_StatusSet(MenuKey_t key_status);
 void LCD_Draw(void);
 void LCD_Drawreq_Set(uint8_t req);
-void LCD_Clearreq_Set(uint8_t req);
+void LCD_Screenreq_Set(uint8_t req);
 void LCD_Cursorreq_Set(uint8_t req);
 void LCD_AutoMeasure_Transfer(DisplayReq_t enter);
 void LCD_TimeOut_Init(void);

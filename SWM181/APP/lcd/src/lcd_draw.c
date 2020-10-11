@@ -2,11 +2,49 @@
 #include "lcd_draw.h"
 #include "lcd_string_en.h"
 
+#define SLV_ADDR	0x6C
+#define RES			GPIOB,PIN8
+#define CS1			GPIOB,PIN9
+#define A0			GPIOB,PIN7
+#define SDA			GPIOB,PIN5
+#define SCL			GPIOB,PIN6
+
+static void LCD_Mst_Init(void);
 static void LCD_P8x16Str(uint8_t x, uint8_t y, uint8_t* pstr);
 static void LCD_P16x16Str(uint8_t x, uint8_t y, uint8_t* pstr);
 static void LCD_P16x32Str(uint8_t x, uint8_t y, uint8_t* pstr);
 static void Setadd(uint8_t xl,uint8_t yl);
 static void write_data(uint8_t para);
+static void write_com(uint8_t para);
+
+void LCD_Draw_Init(void)
+{
+	LCD_Mst_Init();
+	GPIO_SetBit(RES);//RES=1;
+	delay(2);
+	GPIO_ClrBit(RES);//RES=0;
+	delay(2);
+	GPIO_SetBit(RES);//RES=1;
+	delay(20);
+	write_com(0xa2);        //1/9 Bias
+	write_com(0xa6);        //
+	write_com(0xa1);        //ADC set (SEG)
+	write_com(0xc8);        //COM reves
+	write_com(0x22);        //有效值范围：0X20-0X27粗调 每升高一阶电压增加零点几伏
+	write_com(0x81);        //Electronic Volume Mode Set
+	write_com(0x18);        //有效值范围：0X00-0X3F微调 每升高一阶电压增加零点零几伏
+	write_com(0x2c);
+	delay(200);             //延时200mS
+	write_com(0x2e);
+	delay(200);             ////延时200mS
+	write_com(0x2f);        //The Power Control Set
+
+	delay(200);             //延时200mS
+	write_com(0xaf);        //Lcd Disply ON
+	delay(5);
+ 	write_com(0xaf);        //Lcd Disply ON
+	delay(5);
+}
 
 void LCD_Str_Draw(Stringinfo_t *str)
 {
@@ -63,7 +101,16 @@ void clealddram(void)
 	}
 }
 
-void write_com(uint8_t para)
+static void LCD_Mst_Init(void)
+{
+	GPIO_Init(RES, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(CS1, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(A0, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(SCL, 1, 0, 0, 0);	//初始化LCDIO
+	GPIO_Init(SDA, 1, 0, 0, 0);	//初始化LCDIO
+}
+
+static void write_com(uint8_t para)
 {
 	int j=8;
 	GPIO_ClrBit(CS1);

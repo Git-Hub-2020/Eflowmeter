@@ -16,11 +16,7 @@ typedef enum CursorSts
 #define DISPLAY_OFF 0
 
 void LCD_Menu_Init(void);
-DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key);
-DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key);
-DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key);
-DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key);
-DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key);
+DisplayReq_t LCD_Menu_Key_Response(MenuKey_t key);
 void LCD_Screen_Draw(void);
 void LCD_Anime_Draw(void);
 void LCD_Cursor_Draw(void);
@@ -28,7 +24,7 @@ void LCD_Menu_SetID(uint8_t menu_id);
 uint8_t LCD_Menu_GetID(void);
 void LCD_Menu_SetLevel(uint8_t level);
 uint8_t LCD_Menu_GetLevel(void);
-void LCD_Menu_InitVerGet(void);
+void LCD_Menu_InitVersion(uint8_t *version);
 void LCD_Menu_AlertDisplay(void);
 void LCD_Cursor_StatusSet(CursorSts_t status);
 
