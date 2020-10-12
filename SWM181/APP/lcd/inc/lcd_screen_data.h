@@ -68,16 +68,58 @@
 #define MENU_L2_MAX			45
 
 /* MENU_LEVEL_3 */
-#define MENU_L3_00	0	/* 中文 */
-#define MENU_L3_01	1	/* English */
-#define MENU_L3_02	2	/* 仪表通讯地址 */
-#define MENU_L3_MAX	3
+#define MENU_L3_00			0	/* 语言 */
+#define MENU_L3_01			1	/* 仪表通讯地址 */
+#define MENU_L3_02			2	/* 仪表通讯速度 */
+#define MENU_L3_03			3	/* 测量管道口径 */
+#define MENU_L3_04			4	/* 流量单位 */
+#define MENU_L3_05			5	/* 仪表量程设置 */
+#define MENU_L3_06			6	/* 测量阻尼时间 */
+#define MENU_L3_07			7	/* 流量方向择项 */
+#define MENU_L3_08			8	/* 流量零点修正 */
+#define MENU_L3_09			9	/* 小信号切除点 */
+#define MENU_L3_10			10	/* 允许切除显示 */
+#define MENU_L3_11			11	/* 流量积算单位 */
+#define MENU_L3_12			12	/* 反向输出允许 */
+#define MENU_L3_13			13	/* 电流输出类型 */
+#define MENU_L3_14			14	/* 脉冲输出方式 */
+#define MENU_L3_15			15	/* 脉冲单位当量 */
+#define MENU_L3_16			16	/* 频率输出范围 */
+#define MENU_L3_17			17	/* 空管报警允许 */
+#define MENU_L3_18			18	/* 空管报警阈值 */
+#define MENU_L3_19			19	/* 上限报警允许 */
+#define MENU_L3_20			20	/* 上限报警数值 */
+#define MENU_L3_21			21	/* 下限报警允许 */
+#define MENU_L3_22			22	/* 下限报警数值 */
+#define MENU_L3_23			23	/* 励磁报警允许 */
+#define MENU_L3_24			24	/* 总量清零密码 */
+#define MENU_L3_25			25	/* 传感器编码1 */
+#define MENU_L3_26			26	/* 传感器编码2 */
+#define MENU_L3_27			27	/* 励磁方式选择 */
+#define MENU_L3_28			28	/* 传感器系数值 */
+#define MENU_L3_29			29	/* 修正系数0 */
+#define MENU_L3_30			30	/* 流量修正点0 */
+#define MENU_L3_31			31	/* 修正系数1 */
+#define MENU_L3_32			32	/* 流量修正点1 */
+#define MENU_L3_33			33	/* 修正系数2 */
+#define MENU_L3_34			34	/* 流量修正点2 */
+#define MENU_L3_35			35	/* 修正系数3 */
+#define MENU_L3_36			36	/* 流量修正点3 */
+#define MENU_L3_37			37	/* 修正系数4 */
+#define MENU_L3_38			38	/* 正向累计设定 */
+#define MENU_L3_39			39	/* 反向累计设定 */
+#define MENU_L3_40			40	/* 电流零点修正 */
+#define MENU_L3_41			41	/* 电流满度修正 */
+#define MENU_L3_42			42	/* 出厂标定系数 */
+#define MENU_L3_43			43	/* 设定密度 */
+#define MENU_L3_44			44	/* 远传间隔时间 */
+#define MENU_L3_MAX			45
 
 /* MENU_LEVEL_4 */
-#define MENU_L4_00	0	/* 参数设置密码 */
-#define MENU_L4_01	1	/* 总量清零密码 */
-#define MENU_L4_02	2	/* 总量清零密码设置 */
-#define MENU_L4_MAX	3
+#define MENU_L4_00			0	/* 参数设置密码 */
+#define MENU_L4_01			1	/* 总量清零密码 */
+#define MENU_L4_02			2	/* 总量清零密码设置 */
+#define MENU_L4_MAX			3
 
 typedef enum StringType
 {
@@ -96,8 +138,8 @@ typedef struct Stringinfo
 
 typedef struct MenuList
 {
-	uint8_t			str_num;
-	Stringinfo_t*	pstr;
+	uint8_t			menu_num;
+	void*			p_menu;
 } MenuList_t;
 
 extern MenuList_t* Menu_level0_list[];

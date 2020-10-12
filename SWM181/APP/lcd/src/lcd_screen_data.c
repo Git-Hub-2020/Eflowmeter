@@ -1,6 +1,11 @@
+#include "common.h"
 #include "lcd_screen_data.h"
 #include "lcd_string_en.h"
 #include "lcd_string_zh.h"
+
+/********************************************
+ *     各画面构成信息
+ ********************************************/
 
 /* 初始画面 */
 Stringinfo_t Menu_Init[] =
@@ -978,32 +983,6 @@ Stringinfo_t Menu_ParamSet_45_zh[] =
 	{96, 2, STR_ZH, (uint8_t*)str_zh_jian}
 };
 
-/* 中文 */
-Stringinfo_t Menu_L3_00_zh[] =
-{
-	{48, 2, STR_ZH, (uint8_t*)str_zh_zhong},
-	{64, 2, STR_ZH, (uint8_t*)str_zh_wen}
-};
-
-/* English */
-Stringinfo_t Menu_L3_01_en[] =
-{
-	{32, 2, STR_EN, (uint8_t*)str_en_E},
-	{40, 2, STR_EN, (uint8_t*)str_en_n},
-	{48, 2, STR_EN, (uint8_t*)str_en_g},
-	{56, 2, STR_EN, (uint8_t*)str_en_l},
-	{64, 2, STR_EN, (uint8_t*)str_en_i},
-	{72, 2, STR_EN, (uint8_t*)str_en_s},
-	{80, 2, STR_EN, (uint8_t*)str_en_h},
-};
-
-/* 00 */
-Stringinfo_t Menu_L3_02_en[] =
-{
-	{56, 2, STR_EN, (uint8_t*)str_en_0},
-	{64, 2, STR_EN, (uint8_t*)str_en_0},
-};
-
 /* Number Table */
 uint8_t* Menu_Number_Tbl[] =
 {
@@ -1022,129 +1001,177 @@ uint8_t* Menu_Number_Tbl[] =
 /* 光标 */
 Stringinfo_t Menu_Cursor_default = {72, 4, STR_EN, (uint8_t*)str_en_line};
 
+/* 中文 */
+Stringinfo_t Menu_L3_00_Chn_zh[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zhong},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_wen}
+};
+
+/* English */
+Stringinfo_t Menu_L3_00_Eng_en[] =
+{
+	{32, 2, STR_EN, (uint8_t*)str_en_E},
+	{40, 2, STR_EN, (uint8_t*)str_en_n},
+	{48, 2, STR_EN, (uint8_t*)str_en_g},
+	{56, 2, STR_EN, (uint8_t*)str_en_l},
+	{64, 2, STR_EN, (uint8_t*)str_en_i},
+	{72, 2, STR_EN, (uint8_t*)str_en_s},
+	{80, 2, STR_EN, (uint8_t*)str_en_h},
+};
+
+/* 00 */
+Stringinfo_t Menu_L3_01_Adr_en[] =
+{
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/********** 参数设置子菜单画面构成信息 ********/
+/* 语言 */
+MenuList_t Menu_level3_00_zh[] =
+{
+	{numof(Menu_L3_00_Chn_zh), Menu_L3_00_Chn_zh},	/* 中文 */
+	{numof(Menu_L3_00_Eng_en), Menu_L3_00_Eng_en},	/* English */
+};
+
+/* 仪表通讯地址 */
+MenuList_t Menu_level3_01_zh[] =
+{
+	{numof(Menu_L3_01_Adr_en), Menu_L3_01_Adr_en},	/* 仪表通讯地址 */
+};
+
+
+/********************************************
+ *      各层级菜单构成信息
+ ********************************************/
+
 MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
 {
-	{12, Menu_Init},		/* 初始画面 */
-	{19, Menu_AutoMeasure},	/* 自动测量画面 */
+	{numof(Menu_Init), Menu_Init},					/* 初始画面 */
+	{numof(Menu_AutoMeasure), Menu_AutoMeasure},	/* 自动测量画面 */
 };
 
 MenuList_t Menu_level1_list_zh[MENU_L1_MAX] =
 {
-	{4, Menu_ParamSet_zh},	/* 参数设置 */
-	{4, Menu_TotalClr_zh},	/* 总量清零 */
+	{numof(Menu_ParamSet_zh), Menu_ParamSet_zh},	/* 参数设置 */
+	{numof(Menu_TotalClr_zh), Menu_TotalClr_zh},	/* 总量清零 */
 };
 
 MenuList_t Menu_level2_list_zh[MENU_L2_MAX] =
 {
-	{3, Menu_ParamSet_01_zh},	/* 语言 */
-	{7, Menu_ParamSet_02_zh},	/* 仪表通讯地址 */
-	{7, Menu_ParamSet_03_zh},	/* 仪表通讯速度 */
-	{7, Menu_ParamSet_04_zh},	/* 测量管道口径 */
-	{5, Menu_ParamSet_05_zh},	/* 流量单位 */
-	{7, Menu_ParamSet_06_zh},	/* 仪表量程设置 */
-	{7, Menu_ParamSet_07_zh},	/* 测量阻尼时间 */
-	{7, Menu_ParamSet_08_zh},	/* 流量方向择项 */
-	{7, Menu_ParamSet_09_zh},	/* 流量零点修正 */
-	{8, Menu_ParamSet_10_zh},	/* 小信号切除点 */
-	{8, Menu_ParamSet_11_zh},	/* 允许切除显示 */
-	{8, Menu_ParamSet_12_zh},	/* 流量积算单位 */
-	{8, Menu_ParamSet_13_zh},	/* 反向输出允许 */
-	{8, Menu_ParamSet_14_zh},	/* 电流输出类型 */
-	{8, Menu_ParamSet_15_zh},	/* 脉冲输出方式 */
-	{8, Menu_ParamSet_16_zh},	/* 脉冲单位当量 */
-	{8, Menu_ParamSet_17_zh},	/* 频率输出范围 */
-	{8, Menu_ParamSet_18_zh},	/* 空管报警允许 */
-	{8, Menu_ParamSet_19_zh},	/* 空管报警阈值 */
-	{8, Menu_ParamSet_20_zh},	/* 上限报警允许 */
-	{8, Menu_ParamSet_21_zh},	/* 上限报警数值 */
-	{8, Menu_ParamSet_22_zh},	/* 下限报警允许 */
-	{8, Menu_ParamSet_23_zh},	/* 下限报警数值 */
-	{8, Menu_ParamSet_24_zh},	/* 励磁报警允许 */
-	{8, Menu_ParamSet_25_zh},	/* 总量清零密码 */
-	{8, Menu_ParamSet_26_zh},	/* 传感器编码1 */
-	{8, Menu_ParamSet_27_zh},	/* 传感器编码2 */
-	{8, Menu_ParamSet_28_zh},	/* 励磁方式选择 */
-	{8, Menu_ParamSet_29_zh},	/* 传感器系数值 */
-	{7, Menu_ParamSet_30_zh},	/* 修正系数0 */
-	{8, Menu_ParamSet_31_zh},	/* 流量修正点0 */
-	{7, Menu_ParamSet_32_zh},	/* 修正系数1 */
-	{8, Menu_ParamSet_33_zh},	/* 流量修正点1 */
-	{7, Menu_ParamSet_34_zh},	/* 修正系数2 */
-	{8, Menu_ParamSet_35_zh},	/* 流量修正点2 */
-	{7, Menu_ParamSet_36_zh},	/* 修正系数3 */
-	{8, Menu_ParamSet_37_zh},	/* 流量修正点3 */
-	{7, Menu_ParamSet_38_zh},	/* 修正系数4 */
-	{8, Menu_ParamSet_39_zh},	/* 正向累计设定 */
-	{8, Menu_ParamSet_40_zh},	/* 反向累计设定 */
-	{8, Menu_ParamSet_41_zh},	/* 电流零点修正 */
-	{8, Menu_ParamSet_42_zh},	/* 电流满度修正 */
-	{8, Menu_ParamSet_43_zh},	/* 出厂标定系数 */
-	{6, Menu_ParamSet_44_zh},	/* 设定密度 */
-	{8, Menu_ParamSet_45_zh},	/* 远传间隔时间 */
+	{numof(Menu_ParamSet_01_zh), Menu_ParamSet_01_zh},	/* 语言 */
+	{numof(Menu_ParamSet_02_zh), Menu_ParamSet_02_zh},	/* 仪表通讯地址 */
+	{numof(Menu_ParamSet_03_zh), Menu_ParamSet_03_zh},	/* 仪表通讯速度 */
+	{numof(Menu_ParamSet_04_zh), Menu_ParamSet_04_zh},	/* 测量管道口径 */
+	{numof(Menu_ParamSet_05_zh), Menu_ParamSet_05_zh},	/* 流量单位 */
+	{numof(Menu_ParamSet_06_zh), Menu_ParamSet_06_zh},	/* 仪表量程设置 */
+	{numof(Menu_ParamSet_07_zh), Menu_ParamSet_07_zh},	/* 测量阻尼时间 */
+	{numof(Menu_ParamSet_08_zh), Menu_ParamSet_08_zh},	/* 流量方向择项 */
+	{numof(Menu_ParamSet_09_zh), Menu_ParamSet_09_zh},	/* 流量零点修正 */
+	{numof(Menu_ParamSet_10_zh), Menu_ParamSet_10_zh},	/* 小信号切除点 */
+	{numof(Menu_ParamSet_11_zh), Menu_ParamSet_11_zh},	/* 允许切除显示 */
+	{numof(Menu_ParamSet_12_zh), Menu_ParamSet_12_zh},	/* 流量积算单位 */
+	{numof(Menu_ParamSet_13_zh), Menu_ParamSet_13_zh},	/* 反向输出允许 */
+	{numof(Menu_ParamSet_14_zh), Menu_ParamSet_14_zh},	/* 电流输出类型 */
+	{numof(Menu_ParamSet_15_zh), Menu_ParamSet_15_zh},	/* 脉冲输出方式 */
+	{numof(Menu_ParamSet_16_zh), Menu_ParamSet_16_zh},	/* 脉冲单位当量 */
+	{numof(Menu_ParamSet_17_zh), Menu_ParamSet_17_zh},	/* 频率输出范围 */
+	{numof(Menu_ParamSet_18_zh), Menu_ParamSet_18_zh},	/* 空管报警允许 */
+	{numof(Menu_ParamSet_19_zh), Menu_ParamSet_19_zh},	/* 空管报警阈值 */
+	{numof(Menu_ParamSet_20_zh), Menu_ParamSet_20_zh},	/* 上限报警允许 */
+	{numof(Menu_ParamSet_21_zh), Menu_ParamSet_21_zh},	/* 上限报警数值 */
+	{numof(Menu_ParamSet_22_zh), Menu_ParamSet_22_zh},	/* 下限报警允许 */
+	{numof(Menu_ParamSet_23_zh), Menu_ParamSet_23_zh},	/* 下限报警数值 */
+	{numof(Menu_ParamSet_24_zh), Menu_ParamSet_24_zh},	/* 励磁报警允许 */
+	{numof(Menu_ParamSet_25_zh), Menu_ParamSet_25_zh},	/* 总量清零密码 */
+	{numof(Menu_ParamSet_26_zh), Menu_ParamSet_26_zh},	/* 传感器编码1 */
+	{numof(Menu_ParamSet_27_zh), Menu_ParamSet_27_zh},	/* 传感器编码2 */
+	{numof(Menu_ParamSet_28_zh), Menu_ParamSet_28_zh},	/* 励磁方式选择 */
+	{numof(Menu_ParamSet_29_zh), Menu_ParamSet_29_zh},	/* 传感器系数值 */
+	{numof(Menu_ParamSet_30_zh), Menu_ParamSet_30_zh},	/* 修正系数0 */
+	{numof(Menu_ParamSet_31_zh), Menu_ParamSet_31_zh},	/* 流量修正点0 */
+	{numof(Menu_ParamSet_32_zh), Menu_ParamSet_32_zh},	/* 修正系数1 */
+	{numof(Menu_ParamSet_33_zh), Menu_ParamSet_33_zh},	/* 流量修正点1 */
+	{numof(Menu_ParamSet_34_zh), Menu_ParamSet_34_zh},	/* 修正系数2 */
+	{numof(Menu_ParamSet_35_zh), Menu_ParamSet_35_zh},	/* 流量修正点2 */
+	{numof(Menu_ParamSet_36_zh), Menu_ParamSet_36_zh},	/* 修正系数3 */
+	{numof(Menu_ParamSet_37_zh), Menu_ParamSet_37_zh},	/* 流量修正点3 */
+	{numof(Menu_ParamSet_38_zh), Menu_ParamSet_38_zh},	/* 修正系数4 */
+	{numof(Menu_ParamSet_39_zh), Menu_ParamSet_39_zh},	/* 正向累计设定 */
+	{numof(Menu_ParamSet_40_zh), Menu_ParamSet_40_zh},	/* 反向累计设定 */
+	{numof(Menu_ParamSet_41_zh), Menu_ParamSet_41_zh},	/* 电流零点修正 */
+	{numof(Menu_ParamSet_42_zh), Menu_ParamSet_42_zh},	/* 电流满度修正 */
+	{numof(Menu_ParamSet_43_zh), Menu_ParamSet_43_zh},	/* 出厂标定系数 */
+	{numof(Menu_ParamSet_44_zh), Menu_ParamSet_44_zh},	/* 设定密度 */
+	{numof(Menu_ParamSet_45_zh), Menu_ParamSet_45_zh},	/* 远传间隔时间 */
 };
 
 MenuList_t Menu_level2_list_en[MENU_L2_MAX] =
 {
-	{9, Menu_ParamSet_01_en},	/* Language */
-	{12, Menu_ParamSet_02_en},	/* Commaddress */
-	{9, Menu_ParamSet_03_en},	/* Baud Rate */
-	{9, Menu_ParamSet_04_en},	/* Snsr Size */
-	{9, Menu_ParamSet_05_en},	/* Flow Unit */
-	{10, Menu_ParamSet_06_en},	/* Flow Range */
-	{5, Menu_ParamSet_07_en},	/* Damp */
-	{11, Menu_ParamSet_08_en},	/* Flow Direct */
-	{9, Menu_ParamSet_09_en},	/* Flow Zero */
-	{12, Menu_ParamSet_10_en},	/* Flow Cutoff */
-	{11, Menu_ParamSet_11_en},	/* Cutoff Ena */
-	{11, Menu_ParamSet_12_en},	/* Total Unit */
-	{11, Menu_ParamSet_13_en},	/* SegmaN Ena */
-	{12, Menu_ParamSet_14_en},	/* Analog Type */
-	{11, Menu_ParamSet_15_en},	/* Pluse Type */
-	{11, Menu_ParamSet_16_en},	/* Pluse Fact */
-	{11, Menu_ParamSet_17_en},	/* Freque Max */
-	{11, Menu_ParamSet_18_en},	/* Mtsnsr Ena */
-	{12, Menu_ParamSet_19_en},	/* Mtsnsr Trip */
-	{8, Menu_ParamSet_20_zh},	/* 上限报警允许 */
-	{10, Menu_ParamSet_21_en},	/* Alm Hi Val */
-	{8, Menu_ParamSet_22_zh},	/* 下限报警允许 */
-	{8, Menu_ParamSet_23_zh},	/* 下限报警数值 */
-	{8, Menu_ParamSet_24_zh},	/* 励磁报警允许 */
-	{11, Menu_ParamSet_25_en},	/* Clr Sum Key */
-	{8, Menu_ParamSet_26_zh},	/* 传感器编码1 */
-	{8, Menu_ParamSet_27_zh},	/* 传感器编码2 */
-	{8, Menu_ParamSet_28_zh},	/* 励磁方式选择 */
-	{8, Menu_ParamSet_29_zh},	/* 传感器系数值 */
-	{7, Menu_ParamSet_30_zh},	/* 修正系数0 */
-	{8, Menu_ParamSet_31_zh},	/* 流量修正点0 */
-	{7, Menu_ParamSet_32_zh},	/* 修正系数1 */
-	{8, Menu_ParamSet_33_zh},	/* 流量修正点1 */
-	{7, Menu_ParamSet_34_zh},	/* 修正系数2 */
-	{8, Menu_ParamSet_35_zh},	/* 流量修正点2 */
-	{7, Menu_ParamSet_36_zh},	/* 修正系数3 */
-	{8, Menu_ParamSet_37_zh},	/* 流量修正点3 */
-	{7, Menu_ParamSet_38_zh},	/* 修正系数4 */
-	{8, Menu_ParamSet_39_zh},	/* 正向累计设定 */
-	{8, Menu_ParamSet_40_zh},	/* 反向累计设定 */
-	{8, Menu_ParamSet_41_zh},	/* 电流零点修正 */
-	{8, Menu_ParamSet_42_zh},	/* 电流满度修正 */
-	{8, Menu_ParamSet_43_zh},	/* 出厂标定系数 */
-	{6, Menu_ParamSet_44_zh},	/* 设定密度 */
-	{8, Menu_ParamSet_45_zh},	/* 远传间隔时间 */
+	{numof(Menu_ParamSet_01_en), Menu_ParamSet_01_en},	/* Language */
+	{numof(Menu_ParamSet_02_en), Menu_ParamSet_02_en},	/* Commaddress */
+	{numof(Menu_ParamSet_03_en), Menu_ParamSet_03_en},	/* Baud Rate */
+	{numof(Menu_ParamSet_04_en), Menu_ParamSet_04_en},	/* Snsr Size */
+	{numof(Menu_ParamSet_05_en), Menu_ParamSet_05_en},	/* Flow Unit */
+	{numof(Menu_ParamSet_06_en), Menu_ParamSet_06_en},	/* Flow Range */
+	{numof(Menu_ParamSet_07_en), Menu_ParamSet_07_en},	/* Damp */
+	{numof(Menu_ParamSet_08_en), Menu_ParamSet_08_en},	/* Flow Direct */
+	{numof(Menu_ParamSet_09_en), Menu_ParamSet_09_en},	/* Flow Zero */
+	{numof(Menu_ParamSet_10_en), Menu_ParamSet_10_en},	/* Flow Cutoff */
+	{numof(Menu_ParamSet_11_en), Menu_ParamSet_11_en},	/* Cutoff Ena */
+	{numof(Menu_ParamSet_12_en), Menu_ParamSet_12_en},	/* Total Unit */
+	{numof(Menu_ParamSet_13_en), Menu_ParamSet_13_en},	/* SegmaN Ena */
+	{numof(Menu_ParamSet_14_en), Menu_ParamSet_14_en},	/* Analog Type */
+	{numof(Menu_ParamSet_15_en), Menu_ParamSet_15_en},	/* Pluse Type */
+	{numof(Menu_ParamSet_16_en), Menu_ParamSet_16_en},	/* Pluse Fact */
+	{numof(Menu_ParamSet_17_en), Menu_ParamSet_17_en},	/* Freque Max */
+	{numof(Menu_ParamSet_18_en), Menu_ParamSet_18_en},	/* Mtsnsr Ena */
+	{numof(Menu_ParamSet_19_en), Menu_ParamSet_19_en},	/* Mtsnsr Trip */
+	{numof(Menu_ParamSet_20_zh), Menu_ParamSet_20_zh},	/* 上限报警允许 */
+	{numof(Menu_ParamSet_21_en), Menu_ParamSet_21_en},	/* Alm Hi Val */
+	{numof(Menu_ParamSet_22_zh), Menu_ParamSet_22_zh},	/* 下限报警允许 */
+	{numof(Menu_ParamSet_23_zh), Menu_ParamSet_23_zh},	/* 下限报警数值 */
+	{numof(Menu_ParamSet_24_zh), Menu_ParamSet_24_zh},	/* 励磁报警允许 */
+	{numof(Menu_ParamSet_25_en), Menu_ParamSet_25_en},	/* Clr Sum Key */
+	{numof(Menu_ParamSet_26_zh), Menu_ParamSet_26_zh},	/* 传感器编码1 */
+	{numof(Menu_ParamSet_27_zh), Menu_ParamSet_27_zh},	/* 传感器编码2 */
+	{numof(Menu_ParamSet_28_zh), Menu_ParamSet_28_zh},	/* 励磁方式选择 */
+	{numof(Menu_ParamSet_29_zh), Menu_ParamSet_29_zh},	/* 传感器系数值 */
+	{numof(Menu_ParamSet_30_zh), Menu_ParamSet_30_zh},	/* 修正系数0 */
+	{numof(Menu_ParamSet_31_zh), Menu_ParamSet_31_zh},	/* 流量修正点0 */
+	{numof(Menu_ParamSet_32_zh), Menu_ParamSet_32_zh},	/* 修正系数1 */
+	{numof(Menu_ParamSet_33_zh), Menu_ParamSet_33_zh},	/* 流量修正点1 */
+	{numof(Menu_ParamSet_34_zh), Menu_ParamSet_34_zh},	/* 修正系数2 */
+	{numof(Menu_ParamSet_35_zh), Menu_ParamSet_35_zh},	/* 流量修正点2 */
+	{numof(Menu_ParamSet_36_zh), Menu_ParamSet_36_zh},	/* 修正系数3 */
+	{numof(Menu_ParamSet_37_zh), Menu_ParamSet_37_zh},	/* 流量修正点3 */
+	{numof(Menu_ParamSet_38_zh), Menu_ParamSet_38_zh},	/* 修正系数4 */
+	{numof(Menu_ParamSet_39_zh), Menu_ParamSet_39_zh},	/* 正向累计设定 */
+	{numof(Menu_ParamSet_40_zh), Menu_ParamSet_40_zh},	/* 反向累计设定 */
+	{numof(Menu_ParamSet_41_zh), Menu_ParamSet_41_zh},	/* 电流零点修正 */
+	{numof(Menu_ParamSet_42_zh), Menu_ParamSet_42_zh},	/* 电流满度修正 */
+	{numof(Menu_ParamSet_43_zh), Menu_ParamSet_43_zh},	/* 出厂标定系数 */
+	{numof(Menu_ParamSet_44_zh), Menu_ParamSet_44_zh},	/* 设定密度 */
+	{numof(Menu_ParamSet_45_zh), Menu_ParamSet_45_zh},	/* 远传间隔时间 */
 };
 
 MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 {
-	{2, Menu_L3_00_zh},	/* 中文 */
-	{7, Menu_L3_01_en},	/* English */
-	{3, Menu_L3_02_en},	/* 仪表通讯地址 */
+	{numof(Menu_level3_00_zh), Menu_level3_00_zh},	/* 中文, English */
+	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 仪表通讯地址 */
 };
 
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
 {
-	{7, Menu_Password_zh},		/* 参数设置密码 */
-	{7, Menu_Password_zh},		/* 总量清零密码 */
-	{5, Menu_PasswordSet_zh},	/* 密码设定 */
+	{numof(Menu_Password_zh), Menu_Password_zh},		/* 参数设置密码 */
+	{numof(Menu_Password_zh), Menu_Password_zh},		/* 总量清零密码 */
+	{numof(Menu_PasswordSet_zh), Menu_PasswordSet_zh},	/* 密码设定 */
 };
+
+/********************************************
+ *                               各层级菜单 总管理列表
+ ********************************************/
 
 MenuList_t* Menu_level0_list[] =
 {
