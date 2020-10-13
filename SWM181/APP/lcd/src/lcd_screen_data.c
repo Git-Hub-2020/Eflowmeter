@@ -1001,14 +1001,14 @@ uint8_t* Menu_Number_Tbl[] =
 /* 光标 */
 Stringinfo_t Menu_Cursor_default = {72, 4, STR_EN, (uint8_t*)str_en_line};
 
-/* 中文 */
+/* 语言_中文 */
 Stringinfo_t Menu_L3_00_Chn_zh[] =
 {
 	{48, 2, STR_ZH, (uint8_t*)str_zh_zhong},
 	{64, 2, STR_ZH, (uint8_t*)str_zh_wen}
 };
 
-/* English */
+/* 语言_English */
 Stringinfo_t Menu_L3_00_Eng_en[] =
 {
 	{32, 2, STR_EN, (uint8_t*)str_en_E},
@@ -1020,11 +1020,48 @@ Stringinfo_t Menu_L3_00_Eng_en[] =
 	{80, 2, STR_EN, (uint8_t*)str_en_h},
 };
 
-/* 00 */
-Stringinfo_t Menu_L3_01_Adr_en[] =
+/* 仪表通讯地址_01 */
+Stringinfo_t Menu_L3_01_Adr[] =
 {
 	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_1},
+};
+
+/* 仪表通讯速度_2400 */
+Stringinfo_t Menu_L3_02_2400[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_2},
+	{56, 2, STR_EN, (uint8_t*)str_en_4},
 	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/* 仪表通讯速度_4800 */
+Stringinfo_t Menu_L3_02_4800[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_4},
+	{56, 2, STR_EN, (uint8_t*)str_en_8},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/* 仪表通讯速度_9600 */
+Stringinfo_t Menu_L3_02_9600[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_9},
+	{56, 2, STR_EN, (uint8_t*)str_en_6},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/* 仪表通讯速度_19200 */
+Stringinfo_t Menu_L3_02_19200[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_1},
+	{56, 2, STR_EN, (uint8_t*)str_en_9},
+	{64, 2, STR_EN, (uint8_t*)str_en_2},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+	{80, 2, STR_EN, (uint8_t*)str_en_0},
 };
 
 /********** 参数设置子菜单画面构成信息 ********/
@@ -1038,9 +1075,17 @@ MenuList_t Menu_level3_00_zh[] =
 /* 仪表通讯地址 */
 MenuList_t Menu_level3_01_zh[] =
 {
-	{numof(Menu_L3_01_Adr_en), Menu_L3_01_Adr_en},	/* 仪表通讯地址 */
+	{numof(Menu_L3_01_Adr), Menu_L3_01_Adr},	/* 仪表通讯地址 */
 };
 
+/* 仪表通讯速度 */
+MenuList_t Menu_level3_02_zh[] =
+{
+	{numof(Menu_L3_02_2400), Menu_L3_02_2400},		/* 2400 */
+	{numof(Menu_L3_02_4800), Menu_L3_02_4800},		/* 4800 */
+	{numof(Menu_L3_02_9600), Menu_L3_02_9600},		/* 9600 */
+	{numof(Menu_L3_02_19200), Menu_L3_02_19200},	/* 19200 */
+};
 
 /********************************************
  *      各层级菜单构成信息
@@ -1160,6 +1205,7 @@ MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 {
 	{numof(Menu_level3_00_zh), Menu_level3_00_zh},	/* 中文, English */
 	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 仪表通讯地址 */
+	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯速度 */
 };
 
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =

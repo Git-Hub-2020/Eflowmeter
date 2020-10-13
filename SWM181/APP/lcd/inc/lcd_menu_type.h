@@ -25,9 +25,19 @@ typedef struct Commaddress
 	uint8_t pos;
 } Commaddress_t;
 
+/* 仪表通讯速度 */
+typedef enum BaudRate
+{
+	RATE_2400 = 0,
+	RATE_4800,
+	RATE_9600,
+	RATE_19200,
+	RATE_MAX
+} BaudRate_t;
 
 extern PWInfo_t PWInfo;
 extern Language_t lcd_Language;
 extern Commaddress_t lcd_Commaddr;
+extern BaudRate_t lcd_baudrate;
 
 #endif /* MENU_TYPE_H_ */

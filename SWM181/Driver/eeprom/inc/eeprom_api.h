@@ -15,6 +15,7 @@ typedef struct Eeprom
 #define MEM_EEP_ADDR(member) (uint32_t)(EEPROM_ADDR+OFFSET_OF(Eeprom_t, member))
 #define MEM_SIZE (uint32_t)1
 
+extern void Eeprom_Erase(uint32_t addr);
 extern void Eeprom_Write(uint32_t addr, uint32_t *value,uint32_t size);
 extern void Eeprom_Read(uint32_t addr, uint32_t *value,uint32_t size);
 

@@ -74,8 +74,8 @@ void KeyControl(void)
 		KeyPressCount[KeyCount] ++;//
 		if (KeyPressCount[KeyCount] == 2)
 		{//单击键刚满20mS
-			if (KeyDblCount[KeyCount] != KeyCount)
-			{
+//			if (KeyDblCount[KeyCount] != KeyCount)
+//			{
 				KeyCommandExec(1, KeyCount);//单击压键
 				for (i = 0; i < 4; i ++ )
 				{
@@ -88,22 +88,22 @@ void KeyControl(void)
 						KeyDblCount[i] = -1;//摧毁其他键单击标志
 					}
 				}
-			}
-			else
-			{
-				KeyCommandExec(2, KeyCount);//双击压键
-				for (i = 0; i < 4; i ++ )
-				{
-					if (i == KeyCount)
-					{
-						KeyDblCount[i] = 0x80 + KeyCount;//设置双击标志
-					}
-					else
-					{
-						KeyDblCount[i] = -1;//摧毁其他键双击标志
-					}
-				}
-			}
+//			}
+//			else
+//			{
+//				KeyCommandExec(2, KeyCount);//双击压键
+//				for (i = 0; i < 4; i ++ )
+//				{
+//					if (i == KeyCount)
+//					{
+//						KeyDblCount[i] = 0x80 + KeyCount;//设置双击标志
+//					}
+//					else
+//					{
+//						KeyDblCount[i] = -1;//摧毁其他键双击标志
+//					}
+//				}
+//			}
 		}
 		else if (KeyPressCount[KeyCount] >= 5 * 50)
 		{//5S长压键
@@ -173,6 +173,7 @@ static void Key01(void)
 	{
 	  printf("key2 released \r\n");
 	  //在此添加单击键释放事件处理
+	  LCD_Key_StatusSet(MENU_KEY_DOWN);/* 下键 */
 	}
 
 }
@@ -187,6 +188,7 @@ static void Key02(void)
 	{
 	  printf("key3 released \r\n");
 	  //在此添加单击键释放事件处理
+	  LCD_Key_StatusSet(MENU_KEY_UP);/* 上键 */
 	}
 
 }
@@ -201,6 +203,7 @@ static void Key03(void)
 	{
 	  printf("key4 released \r\n");
 	  //在此添加单击键释放事件处理
+	  LCD_Key_StatusSet(MENU_KEY_CONFIRM);/* 确认键 */
 	}
 
 }
@@ -233,7 +236,6 @@ static void Key11(void)
     Key1_2();return;
   }
   printf("key2 pressed \r\n");
-  LCD_Key_StatusSet(MENU_KEY_DOWN);/* 下键 */
 }
 
 static void Key12(void)
@@ -251,7 +253,6 @@ static void Key12(void)
     Key2_3();return;
   }
   printf("key3 pressed \r\n");
-  LCD_Key_StatusSet(MENU_KEY_UP);/* 上键 */
 }
 
 static void Key13(void)
@@ -265,7 +266,6 @@ static void Key13(void)
     Key3_0();return;
   }
   printf("key4 pressed \r\n");
-  LCD_Key_StatusSet(MENU_KEY_CONFIRM);/* 确认键 */
 }
 
 static void Key20(void)//双击键事件

@@ -149,6 +149,9 @@ static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 		LCD_Menu_SetLevel(MENU_LEVEL_3);
 		disp_req = LCD_Sub_Menu_L2(menu, key);
 		break;
+	case MENU_KEY_UNITCONFIRM:
+		LCD_AutoMeasure_Transfer(REQ_OFF);
+		break;
 	case MENU_KEY_LONGCONFIRM:
 		LCD_AutoMeasure_Transfer(REQ_ON);
 		break;
@@ -167,6 +170,10 @@ static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 	if(MENU_KEY_CONFIRM == key){
 		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);
+	}
+	else if(MENU_KEY_UNITCONFIRM == key){
+		LCD_AutoMeasure_Transfer(REQ_OFF);
+		return REQ_ON;
 	}
 	else if(MENU_KEY_LONGCONFIRM == key){
 		LCD_AutoMeasure_Transfer(REQ_ON);
@@ -218,7 +225,8 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 				}
 			}
 			else if(MENU_L4_02 == menu){
-				Lcd_Set_Password(PWInfo.pw, numof(PWInfo.pw));
+				//Lcd_Set_Password(PWInfo.pw, numof(PWInfo.pw));
+				Lcd_EEPSet_All();
 				LCD_Menu_SetLevel(MENU_LEVEL_2);
 				LCD_Menu_SetID(MENU_L2_PARAMSET24);
 				LCD_Cursor_StatusSet(CURSOR_FREEZE);
@@ -237,6 +245,9 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 				PWInfo.pos = 0;
 			}
 			LCD_Cursor_StatusSet(CURSOR_RIGHT);
+			break;
+		case MENU_KEY_UNITCONFIRM:
+			LCD_AutoMeasure_Transfer(REQ_OFF);
 			break;
 		case MENU_KEY_LONGCONFIRM:
 			LCD_AutoMeasure_Transfer(REQ_ON);
@@ -325,13 +336,14 @@ void LCD_Cursor_Draw(void)
 
 static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y)
 {
-	uint8_t Def_X_Min = 0, Def_X_Max = 0;
+	uint8_t Def_X_Min = 0, Def_X_Max = 0, Default_X = 72;
 	uint8_t level = LCD_Menu_GetLevel();
 	uint8_t menu = LCD_Menu_GetID();
 
 	if(MENU_LEVEL_4 == level){
 		Def_X_Min = 44;
 		Def_X_Max = 76;
+		Default_X = Def_X_Min;
 		if((MENU_L4_00 == menu) || (MENU_L4_01 == menu)){
 			*y = 6;
 		}
@@ -345,12 +357,13 @@ static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y)
 			Def_X_Min = 56;
 			Def_X_Max = 64;
 		}
+		Default_X = Def_X_Max;
 	}
 
 	switch(sts)
 	{
 		case CURSOR_VALID:
-			*x = Def_X_Min;
+			*x = Default_X;
 			break;
 		case CURSOR_LEFT:
 			*x -= 8;
