@@ -10,6 +10,7 @@ extern uint8_t Init_Frame;
 extern BOOL Warning_Disp_Flag;
 
 MenuList_t *Current_Menu_Info;
+uint8_t lcd_cursor_pos;
 
 static uint8_t lcd_menu_id = MENU_L0_INIT;
 static uint8_t lcd_menu_level = MENU_LEVEL_0;
@@ -99,10 +100,12 @@ static DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key)
 			case MENU_L1_PARAMSET:
 				menu = MENU_L4_00;
 				memset(&PWInfo, 0, sizeof(PWInfo));
+				lcd_cursor_pos = 0;
 				break;
 			case MENU_L1_TOTALCLR:
 				menu = MENU_L4_01;
 				memset(&PWInfo, 0, sizeof(PWInfo));
+				lcd_cursor_pos = 0;
 				break;
 			default:
 				break;
@@ -193,15 +196,15 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 	switch(key)
 	{
 		case MENU_KEY_DOWN:
-			if(0 == PWInfo.pw[PWInfo.pos]){
-				PWInfo.pw[PWInfo.pos] = 10;
+			if(0 == PWInfo.pw[lcd_cursor_pos]){
+				PWInfo.pw[lcd_cursor_pos] = 10;
 			}
-			PWInfo.pw[PWInfo.pos]--;
+			PWInfo.pw[lcd_cursor_pos]--;
 			break;
 		case MENU_KEY_UP:
-			PWInfo.pw[PWInfo.pos]++;
-			if(10 <= PWInfo.pw[PWInfo.pos]){
-				PWInfo.pw[PWInfo.pos] = 0;
+			PWInfo.pw[lcd_cursor_pos]++;
+			if(10 <= PWInfo.pw[lcd_cursor_pos]){
+				PWInfo.pw[lcd_cursor_pos] = 0;
 			}
 			break;
 		case MENU_KEY_CONFIRM:
@@ -233,16 +236,16 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 			}
 			break;
 		case MENU_KEY_UNITDOWN:
-			if(0 == PWInfo.pos){
-				PWInfo.pos = numof(PWInfo.pw);
+			if(0 == lcd_cursor_pos){
+				lcd_cursor_pos = numof(PWInfo.pw);
 			}
-			PWInfo.pos--;
+			lcd_cursor_pos--;
 			LCD_Cursor_StatusSet(CURSOR_LEFT);
 			break;
 		case MENU_KEY_UNITUP:
-			PWInfo.pos++;
-			if(numof(PWInfo.pw) <= PWInfo.pos){
-				PWInfo.pos = 0;
+			lcd_cursor_pos++;
+			if(numof(PWInfo.pw) <= lcd_cursor_pos){
+				lcd_cursor_pos = 0;
 			}
 			LCD_Cursor_StatusSet(CURSOR_RIGHT);
 			break;
@@ -288,18 +291,25 @@ void LCD_Anime_Draw(void)
 	}
 	else if (MENU_LEVEL_3 == level){
 		if (MENU_L3_01 == menu){
-			str.str_x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_Commaddr.pos].str_x;
-			str.str_y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_Commaddr.pos].str_y;
-			str.str_type = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_Commaddr.pos].str_type;
-			str.pstr = Menu_Number_Tbl[lcd_Commaddr.addr[lcd_Commaddr.pos]];
+			str.str_x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_x;
+			str.str_y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_y;
+			str.str_type = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_type;
+			str.pstr = Menu_Number_Tbl[lcd_Commaddr.data[lcd_cursor_pos]];
+			LCD_Str_Draw(&str);
+		}
+		else if(MENU_L3_03 == menu){
+			str.str_x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_x;
+			str.str_y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_y;
+			str.str_type = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_type;
+			str.pstr = Menu_Number_Tbl[lcd_snsrsize.data[lcd_cursor_pos]];
 			LCD_Str_Draw(&str);
 		}
 	}
 	else if (MENU_LEVEL_4 == level){
-		str.str_x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[PWInfo.pos].str_x;
-		str.str_y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[PWInfo.pos].str_y;
-		str.str_type = ((Stringinfo_t*)Current_Menu_Info->p_menu)[PWInfo.pos].str_type;
-		str.pstr = Menu_Number_Tbl[PWInfo.pw[PWInfo.pos]];
+		str.str_x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_x;
+		str.str_y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_y;
+		str.str_type = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_type;
+		str.pstr = Menu_Number_Tbl[PWInfo.pw[lcd_cursor_pos]];
 		LCD_Str_Draw(&str);
 	}
 }
@@ -352,12 +362,10 @@ static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y)
 		}
 	}
 	else if(MENU_LEVEL_3 == level){
-		*y = 4;
-		if(MENU_L3_01 == menu){
-			Def_X_Min = 56;
-			Def_X_Max = 64;
-		}
+		Def_X_Min = ((Stringinfo_t*)Current_Menu_Info->p_menu)[0].str_x;
+		Def_X_Max = ((Stringinfo_t*)Current_Menu_Info->p_menu)[Current_Menu_Info->menu_num-1].str_x;
 		Default_X = Def_X_Max;
+		*y = 4;
 	}
 
 	switch(sts)
@@ -366,15 +374,9 @@ static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y)
 			*x = Default_X;
 			break;
 		case CURSOR_LEFT:
-			*x -= 8;
-			if(*x < Def_X_Min){
-				*x = Def_X_Max;
-			}
-			break;
 		case CURSOR_RIGHT:
-			*x += 8;
-			if(*x > Def_X_Max){
-				*x = Def_X_Min;
+			if((Def_X_Min + 8*lcd_cursor_pos) <= Def_X_Max){
+				*x = Def_X_Min + 8*lcd_cursor_pos;
 			}
 			break;
 		default:

@@ -1064,27 +1064,92 @@ Stringinfo_t Menu_L3_02_19200[] =
 	{80, 2, STR_EN, (uint8_t*)str_en_0},
 };
 
+/* 测量管道口径_0003 */
+Stringinfo_t Menu_L3_03_Size[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_0},
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_3},
+};
+
+/* 流量单位_L/s */
+Stringinfo_t Menu_L3_04_Ls[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_L},
+	{56, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{64, 2, STR_EN, (uint8_t*)str_en_s},
+};
+
+/* 流量单位_L/m */
+Stringinfo_t Menu_L3_04_Lm[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_L},
+	{56, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{64, 2, STR_EN, (uint8_t*)str_en_m},
+};
+
+/* 流量单位_L/h */
+Stringinfo_t Menu_L3_04_Lh[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_L},
+	{56, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{64, 2, STR_EN, (uint8_t*)str_en_h},
+};
+
+/* 流量单位_m3/s */
+Stringinfo_t Menu_L3_04_m3s[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_pic_unit},
+	{64, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{72, 2, STR_EN, (uint8_t*)str_en_s},
+};
+
+/* 流量单位_m3/m */
+Stringinfo_t Menu_L3_04_m3m[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_pic_unit},
+	{64, 2, STR_EN, (uint8_t*)str_en_line_1},
+	{72, 2, STR_EN, (uint8_t*)str_en_m},
+};
+
 /********** 参数设置子菜单画面构成信息 ********/
-/* 语言 */
+/* 1.语言 */
 MenuList_t Menu_level3_00_zh[] =
 {
 	{numof(Menu_L3_00_Chn_zh), Menu_L3_00_Chn_zh},	/* 中文 */
 	{numof(Menu_L3_00_Eng_en), Menu_L3_00_Eng_en},	/* English */
 };
 
-/* 仪表通讯地址 */
+/* 2.仪表通讯地址 */
 MenuList_t Menu_level3_01_zh[] =
 {
 	{numof(Menu_L3_01_Adr), Menu_L3_01_Adr},	/* 仪表通讯地址 */
 };
 
-/* 仪表通讯速度 */
+/* 3.仪表通讯速度 */
 MenuList_t Menu_level3_02_zh[] =
 {
 	{numof(Menu_L3_02_2400), Menu_L3_02_2400},		/* 2400 */
 	{numof(Menu_L3_02_4800), Menu_L3_02_4800},		/* 4800 */
 	{numof(Menu_L3_02_9600), Menu_L3_02_9600},		/* 9600 */
 	{numof(Menu_L3_02_19200), Menu_L3_02_19200},	/* 19200 */
+};
+
+/* 4.测量管道口径 */
+MenuList_t Menu_level3_03_zh[] =
+{
+	{numof(Menu_L3_03_Size), Menu_L3_03_Size},	/* 测量管道口径 */
+};
+
+/* 5.流量单位 */
+MenuList_t Menu_level3_04_zh[] =
+{
+	{numof(Menu_L3_04_Ls), Menu_L3_04_Ls},		/* L/s */
+	{numof(Menu_L3_04_Lm), Menu_L3_04_Lm},		/* L/m */
+	{numof(Menu_L3_04_Lh), Menu_L3_04_Lh},		/* L/h */
+	{numof(Menu_L3_04_m3s), Menu_L3_04_m3s},	/* m3/s */
+	{numof(Menu_L3_04_m3m), Menu_L3_04_m3m},	/* m3/m */
 };
 
 /********************************************
@@ -1206,6 +1271,8 @@ MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 	{numof(Menu_level3_00_zh), Menu_level3_00_zh},	/* 中文, English */
 	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 仪表通讯地址 */
 	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯速度 */
+	{numof(Menu_level3_03_zh), Menu_level3_03_zh},	/* 测量管道口径 */
+	{numof(Menu_level3_04_zh), Menu_level3_04_zh},	/* 流量单位 */
 };
 
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
@@ -1216,7 +1283,7 @@ MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
 };
 
 /********************************************
- *                               各层级菜单 总管理列表
+ *      各层级菜单 总管理列表
  ********************************************/
 
 MenuList_t* Menu_level0_list[] =

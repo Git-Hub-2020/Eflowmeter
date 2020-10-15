@@ -7,7 +7,6 @@
 typedef struct PWInfo
 {
 	uint8_t pw[5];
-	uint8_t pos;
 } PWInfo_t;
 
 /* 语言 */
@@ -21,8 +20,7 @@ typedef enum Language
 /* 仪表通讯地址 */
 typedef struct Commaddress
 {
-	uint8_t addr[2];
-	uint8_t pos;
+	uint8_t data[2];
 } Commaddress_t;
 
 /* 仪表通讯速度 */
@@ -35,9 +33,28 @@ typedef enum BaudRate
 	RATE_MAX
 } BaudRate_t;
 
+/* 测量管道口径 */
+typedef struct SnsrSize
+{
+	uint8_t data[4];
+} SnsrSize_t;
+
+/* 流量单位 */
+typedef enum FlowUnit
+{
+	UNIT_LS = 0,
+	UNIT_LM,
+	UNIT_LH,
+	UNIT_M3S,
+	UNIT_M3M,
+	UNIT_MAX
+} FlowUnit_t;
+
 extern PWInfo_t PWInfo;
 extern Language_t lcd_Language;
 extern Commaddress_t lcd_Commaddr;
 extern BaudRate_t lcd_baudrate;
+extern SnsrSize_t lcd_snsrsize;
+extern FlowUnit_t lcd_flowunit;
 
 #endif /* MENU_TYPE_H_ */

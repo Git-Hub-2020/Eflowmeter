@@ -173,7 +173,6 @@ static void Key01(void)
 	{
 	  printf("key2 released \r\n");
 	  //在此添加单击键释放事件处理
-	  LCD_Key_StatusSet(MENU_KEY_DOWN);/* 下键 */
 	}
 
 }
@@ -188,7 +187,6 @@ static void Key02(void)
 	{
 	  printf("key3 released \r\n");
 	  //在此添加单击键释放事件处理
-	  LCD_Key_StatusSet(MENU_KEY_UP);/* 上键 */
 	}
 
 }
@@ -203,7 +201,6 @@ static void Key03(void)
 	{
 	  printf("key4 released \r\n");
 	  //在此添加单击键释放事件处理
-	  LCD_Key_StatusSet(MENU_KEY_CONFIRM);/* 确认键 */
 	}
 
 }
@@ -235,6 +232,7 @@ static void Key11(void)
   {//在KEY2也压下时执行组合键事件
     Key1_2();return;
   }
+  LCD_Key_StatusSet(MENU_KEY_DOWN);/* 下键 */
   printf("key2 pressed \r\n");
 }
 
@@ -252,6 +250,7 @@ static void Key12(void)
   {//在KEY3也压下时执行组合键事件
     Key2_3();return;
   }
+  LCD_Key_StatusSet(MENU_KEY_UP);/* 上键 */
   printf("key3 pressed \r\n");
 }
 
@@ -265,6 +264,7 @@ static void Key13(void)
   {//在KEY0也压下时执行组合键事件
     Key3_0();return;
   }
+  LCD_Key_StatusSet(MENU_KEY_CONFIRM);/* 确认键 */
   printf("key4 pressed \r\n");
 }
 

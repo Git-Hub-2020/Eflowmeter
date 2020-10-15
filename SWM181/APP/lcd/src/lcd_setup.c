@@ -14,15 +14,20 @@ void Lcd_EEPSet_All(void)
 
 	Lcd_Set_Password(PWInfo.pw, numof(PWInfo.pw));
 	Lcd_Set_Language(&lcd_Language);
-	Lcd_Set_Commaddr(lcd_Commaddr.addr, numof(lcd_Commaddr.addr));
+	Lcd_Set_Commaddr(lcd_Commaddr.data, numof(lcd_Commaddr.data));
 	Lcd_Set_Baudrate(&lcd_baudrate);
+	Lcd_Set_Snsrsize(lcd_snsrsize.data, numof(lcd_snsrsize.data));
+	Lcd_Set_Flowunit(&lcd_flowunit);
 }
 
 void Lcd_EEPGet_All(void)
 {
+	Lcd_Get_Password(PWInfo.pw, numof(PWInfo.pw));
 	Lcd_Get_Language(&lcd_Language);
-	Lcd_Get_Commaddr(lcd_Commaddr.addr, numof(lcd_Commaddr.addr));
+	Lcd_Get_Commaddr(lcd_Commaddr.data, numof(lcd_Commaddr.data));
 	Lcd_Get_Baudrate(&lcd_baudrate);
+	Lcd_Get_Snsrsize(lcd_snsrsize.data, numof(lcd_snsrsize.data));
+	Lcd_Get_Flowunit(&lcd_flowunit);
 }
 
 void Lcd_Set_Password(uint8_t *data, uint8_t data_num)
@@ -119,6 +124,52 @@ void Lcd_Get_Baudrate(uint8_t *data)
 	if(RATE_MAX <= *data){
 		*data = RATE_2400;
 		printf("Error:Baud Rate will be set to 2400 by default.\n");
+	}
+}
+
+void Lcd_Set_Snsrsize(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(snsrsize), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Snsrsize(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(snsrsize), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//管道口径为无效值时默认0003
+	if((9 < data[0]) || (9 < data[1]) || (9 < data[2]) || (9 < data[3]) || (3 > data[3])){
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 3;
+		printf("Error:Snsr Size will be set to 0003 by default.\n");
+	}
+}
+
+void Lcd_Set_Flowunit(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(flowunit), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Flowunit(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(flowunit), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	//流量单位为无效值时默认L/s
+	if(UNIT_MAX <= *data){
+		*data = UNIT_LS;
+		printf("Error:Flow Unit will be set to L/s by default.\n");
 	}
 }
 
