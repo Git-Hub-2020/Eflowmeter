@@ -21,7 +21,7 @@ static DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key);
 static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key);
 static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key);
 static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key);
-static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y);
+static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y);
 static BOOL LCD_Password_Check(uint8_t *pw);
 
 void LCD_Menu_Init(void)
@@ -326,7 +326,7 @@ void LCD_Cursor_Draw(void)
 			LCD_Str_Draw(&Menu_Cursor_default);
 			break;
 		case CURSOR_VALID:		/* 迁入非光标固定画面 */
-			LCD_Menu_CursorPosGet(CURSOR_VALID, &(cursor_info.str_x), &(cursor_info.str_y));
+			LCD_Menu_CursorPosGet(&(cursor_info.str_x), &(cursor_info.str_y));
 			cursor_info.str_type = Menu_Cursor_default.str_type;
 			cursor_info.pstr = Menu_Cursor_default.pstr;
 			LCD_Str_Draw(&cursor_info);
@@ -334,7 +334,7 @@ void LCD_Cursor_Draw(void)
 		case CURSOR_LEFT:		/* 非光标固定画面中左移 */
 		case CURSOR_RIGHT:		/* 非光标固定画面中右移 */
 			LCD_Str_Clear(&cursor_info);
-			LCD_Menu_CursorPosGet(lcd_cursor_sts, &(cursor_info.str_x), &(cursor_info.str_y));
+			LCD_Menu_CursorPosGet(&(cursor_info.str_x), &(cursor_info.str_y));
 			cursor_info.str_type = Menu_Cursor_default.str_type;
 			cursor_info.pstr = Menu_Cursor_default.pstr;
 			LCD_Str_Draw(&cursor_info);
@@ -344,44 +344,10 @@ void LCD_Cursor_Draw(void)
 	}
 }
 
-static void LCD_Menu_CursorPosGet(CursorSts_t sts, uint8_t *x, uint8_t *y)
+static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y)
 {
-	uint8_t Def_X_Min = 0, Def_X_Max = 0, Default_X = 72;
-	uint8_t level = LCD_Menu_GetLevel();
-	uint8_t menu = LCD_Menu_GetID();
-
-	if(MENU_LEVEL_4 == level){
-		Def_X_Min = 44;
-		Def_X_Max = 76;
-		Default_X = Def_X_Min;
-		if((MENU_L4_00 == menu) || (MENU_L4_01 == menu)){
-			*y = 6;
-		}
-		else{
-			*y = 4;
-		}
-	}
-	else if(MENU_LEVEL_3 == level){
-		Def_X_Min = ((Stringinfo_t*)Current_Menu_Info->p_menu)[0].str_x;
-		Def_X_Max = ((Stringinfo_t*)Current_Menu_Info->p_menu)[Current_Menu_Info->menu_num-1].str_x;
-		Default_X = Def_X_Max;
-		*y = 4;
-	}
-
-	switch(sts)
-	{
-		case CURSOR_VALID:
-			*x = Default_X;
-			break;
-		case CURSOR_LEFT:
-		case CURSOR_RIGHT:
-			if((Def_X_Min + 8*lcd_cursor_pos) <= Def_X_Max){
-				*x = Def_X_Min + 8*lcd_cursor_pos;
-			}
-			break;
-		default:
-			break;
-	}
+	*x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_x;
+	*y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_y + 2;
 }
 
 static BOOL LCD_Password_Check(uint8_t *pw)

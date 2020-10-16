@@ -1113,6 +1113,38 @@ Stringinfo_t Menu_L3_04_m3m[] =
 	{72, 2, STR_EN, (uint8_t*)str_en_m},
 };
 
+/* 仪表量程设置_00000 */
+Stringinfo_t Menu_L3_05_Range[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_0},
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+	{80, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/* 测量阻尼时间_01 */
+Stringinfo_t Menu_L3_06_Damp[] =
+{
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_1},
+};
+
+/* 流量方向择项_正向 */
+Stringinfo_t Menu_L3_07_Forward_zh[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_zh_zheng},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xiang},
+};
+
+/* 流量方向择项_反向 */
+Stringinfo_t Menu_L3_07_Backward_zh[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_zh_fan},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_xiang},
+};
+
+
 /********** 参数设置子菜单画面构成信息 ********/
 /* 1.语言 */
 MenuList_t Menu_level3_00_zh[] =
@@ -1151,6 +1183,92 @@ MenuList_t Menu_level3_04_zh[] =
 	{numof(Menu_L3_04_m3s), Menu_L3_04_m3s},	/* m3/s */
 	{numof(Menu_L3_04_m3m), Menu_L3_04_m3m},	/* m3/m */
 };
+
+/* 6.仪表量程设置 */
+MenuList_t Menu_level3_05_zh[] =
+{
+	{numof(Menu_L3_05_Range), Menu_L3_05_Range},	/* 仪表量程设置 */
+};
+
+/* 7.测量阻尼时间 */
+MenuList_t Menu_level3_06_zh[] =
+{
+	{numof(Menu_L3_06_Damp), Menu_L3_06_Damp},		/* 测量阻尼时间 */
+};
+
+/* 8.流量方向择项 */
+MenuList_t Menu_level3_07_zh[] =
+{
+	{numof(Menu_L3_07_Forward_zh), Menu_L3_07_Forward_zh},		/* 正向 */
+	{numof(Menu_L3_07_Backward_zh), Menu_L3_07_Backward_zh},	/* 反向 */
+};
+
+/* 9.流量零点修正 */
+MenuList_t Menu_level3_08_zh[] =
+{
+	{0},
+};
+
+/* 10.小信号切除点 */
+MenuList_t Menu_level3_09_zh[] =
+{
+	{0},
+};
+
+/* 11.允许切除显示 */
+MenuList_t Menu_level3_10_zh[] =
+{
+	{0},
+};
+
+/* 12.流量积算单位 */
+MenuList_t Menu_level3_11_zh[] =
+{
+	{0},
+};
+
+/* 13.反向输出允许 */
+MenuList_t Menu_level3_12_zh[] =
+{
+	{0},
+};
+
+/* 14.电流输出类型 */
+MenuList_t Menu_level3_13_zh[] =
+{
+	{0},
+};
+
+/* 15.脉冲输出方式 */
+MenuList_t Menu_level3_14_zh[] =
+{
+	{0},
+};
+
+/* 16.脉冲单位当量 */
+MenuList_t Menu_level3_15_zh[] =
+{
+	{0},
+};
+
+/* 17.频率输出范围 */
+MenuList_t Menu_level3_16_zh[] =
+{
+	{0},
+};
+
+/* 18.空管报警允许 */
+MenuList_t Menu_level3_17_zh[] =
+{
+	{0},
+};
+
+/* 19.空管报警阈值 */
+MenuList_t Menu_level3_18_zh[] =
+{
+	{0},
+};
+
 
 /********************************************
  *      各层级菜单构成信息
@@ -1268,11 +1386,25 @@ MenuList_t Menu_level2_list_en[MENU_L2_MAX] =
 
 MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 {
-	{numof(Menu_level3_00_zh), Menu_level3_00_zh},	/* 中文, English */
-	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 仪表通讯地址 */
-	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯速度 */
-	{numof(Menu_level3_03_zh), Menu_level3_03_zh},	/* 测量管道口径 */
+	{numof(Menu_level3_00_zh), Menu_level3_00_zh},	/* 语言_中文/English */
+	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 仪表通讯地址_0～99 */
+	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯速度_300～38400 */
+	{numof(Menu_level3_03_zh), Menu_level3_03_zh},	/* 测量管道口径_3～3000 */
 	{numof(Menu_level3_04_zh), Menu_level3_04_zh},	/* 流量单位 */
+	{numof(Menu_level3_05_zh), Menu_level3_05_zh},	/* 仪表量程设置_0～99999 */
+	{numof(Menu_level3_06_zh), Menu_level3_06_zh},	/* 测量阻尼时间_1～64 */
+	{numof(Menu_level3_07_zh), Menu_level3_07_zh},	/* 流量方向择项_正向/反向 */
+	{numof(Menu_level3_08_zh), Menu_level3_08_zh},	/* 流量零点修正_0～±9999 */
+	{numof(Menu_level3_09_zh), Menu_level3_09_zh},	/* 小信号切除点_0～599.99% */
+	{numof(Menu_level3_10_zh), Menu_level3_10_zh},	/* 允许切除显示_允许/禁止 */
+	{numof(Menu_level3_11_zh), Menu_level3_11_zh},	/* 流量积算单位_0.001m3～1m3/0.001L～1L */
+	{numof(Menu_level3_12_zh), Menu_level3_12_zh},	/* 反向输出允许_允许/禁止 */
+	{numof(Menu_level3_13_zh), Menu_level3_13_zh},	/* 电流输出类型_0～10mA/4～20mA */
+	{numof(Menu_level3_14_zh), Menu_level3_14_zh},	/* 脉冲输出方式_频率/脉冲 */
+	{numof(Menu_level3_15_zh), Menu_level3_15_zh},	/* 脉冲单位当量_0.001m3～1m3/0.001L～1L */
+	{numof(Menu_level3_16_zh), Menu_level3_16_zh},	/* 频率输出范围_1～ 5999 Hz */
+	{numof(Menu_level3_17_zh), Menu_level3_17_zh},	/* 空管报警允许_允许/禁止 */
+	{numof(Menu_level3_18_zh), Menu_level3_18_zh},	/* 空管报警阈值_59999 */
 };
 
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =

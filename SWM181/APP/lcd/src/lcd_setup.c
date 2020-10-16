@@ -6,6 +6,7 @@
 
 static void Lcd_EEPConvert_Set(uint32_t *dst, uint8_t *src, uint8_t src_size);
 static void Lcd_EEPConvert_Get(uint8_t *dst, uint32_t *src, uint8_t dst_size);
+static void Lcd_StrToNum_Convert(uint8_t *str, unsigned long long *num, uint8_t str_size);
 
 void Lcd_EEPSet_All(void)
 {
@@ -94,12 +95,14 @@ void Lcd_Set_Commaddr(uint8_t *data, uint8_t data_num)
 void Lcd_Get_Commaddr(uint8_t *data, uint8_t data_num)
 {
 	uint32_t eep_buff = 0;
+	unsigned long long value;
 
 	Eeprom_Read(MEM_EEP_ADDR(commaddress), &eep_buff, MEM_SIZE);
 	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
 
 	//地址为无效值时默认01
-	if((9 < data[0]) || (9 < data[1]) || (1 > data[1])){
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if((1 > value) || (99 < value)){
 		data[0] = 0;
 		data[1] = 1;
 		printf("Error:Commaddr will be set to 01 by default.\n");
@@ -138,12 +141,14 @@ void Lcd_Set_Snsrsize(uint8_t *data, uint8_t data_num)
 void Lcd_Get_Snsrsize(uint8_t *data, uint8_t data_num)
 {
 	uint32_t eep_buff = 0;
+	unsigned long long value;
 
 	Eeprom_Read(MEM_EEP_ADDR(snsrsize), &eep_buff, MEM_SIZE);
 	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
 
 	//管道口径为无效值时默认0003
-	if((9 < data[0]) || (9 < data[1]) || (9 < data[2]) || (9 < data[3]) || (3 > data[3])){
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if((3 > value) || (3000 < value)){
 		data[0] = 0;
 		data[1] = 0;
 		data[2] = 0;
@@ -192,6 +197,16 @@ static void Lcd_EEPConvert_Get(uint8_t *dst, uint32_t *src, uint8_t dst_size)
 
 	for(i = 0; i < dst_size; i++){
 		dst[i] = (uint8_t)((*src >> 4*i) & 0x0F);
+	}
+}
+
+static void Lcd_StrToNum_Convert(uint8_t *str, unsigned long long *num, uint8_t str_size)
+{
+	uint8_t i = 0;
+
+	for(i = 0; i < str_size; i++){
+		*num += str[i];
+		if(i < str_size - 1) *num *= 10;
 	}
 }
 
