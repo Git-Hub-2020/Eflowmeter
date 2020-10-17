@@ -3,6 +3,23 @@
 
 #include "lcd_control.h"
 
+typedef enum SubMenuType
+{
+	TYPE_SELECT = 0,
+	TYPE_SETNUM
+} SubMenuType_t;
+
+typedef struct SubMenuInfo
+{
+	uint8_t				menu_id;
+	uint8_t				pre_menu;
+	uint8_t				obj_num;
+	uint8_t*			obj;
+	SubMenuType_t		type;
+	unsigned long long	obj_min;
+	unsigned long long	obj_max;
+} SubMenuInfo_t;
+
 void LCD_Sub_Menu_Init(void);
 uint8_t LCD_SubMenu_IdxGet(void);
 DisplayReq_t LCD_Sub_Menu_L2(uint8_t menu, MenuKey_t key);

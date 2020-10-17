@@ -6,7 +6,6 @@
 
 static void Lcd_EEPConvert_Set(uint32_t *dst, uint8_t *src, uint8_t src_size);
 static void Lcd_EEPConvert_Get(uint8_t *dst, uint32_t *src, uint8_t dst_size);
-static void Lcd_StrToNum_Convert(uint8_t *str, unsigned long long *num, uint8_t str_size);
 
 void Lcd_EEPSet_All(void)
 {
@@ -19,6 +18,9 @@ void Lcd_EEPSet_All(void)
 	Lcd_Set_Baudrate(&lcd_baudrate);
 	Lcd_Set_Snsrsize(lcd_snsrsize.data, numof(lcd_snsrsize.data));
 	Lcd_Set_Flowunit(&lcd_flowunit);
+	Lcd_Set_Flowrange(lcd_flowrange.data, numof(lcd_flowrange.data));
+	Lcd_Set_Damp(lcd_damp.data, numof(lcd_damp.data));
+	Lcd_Set_Flowdirect(&lcd_flowdirect);
 }
 
 void Lcd_EEPGet_All(void)
@@ -29,6 +31,9 @@ void Lcd_EEPGet_All(void)
 	Lcd_Get_Baudrate(&lcd_baudrate);
 	Lcd_Get_Snsrsize(lcd_snsrsize.data, numof(lcd_snsrsize.data));
 	Lcd_Get_Flowunit(&lcd_flowunit);
+	Lcd_Get_Flowrange(lcd_flowrange.data, numof(lcd_flowrange.data));
+	Lcd_Get_Damp(lcd_damp.data, numof(lcd_damp.data));
+	Lcd_Get_Flowdirect(&lcd_flowdirect);
 }
 
 void Lcd_Set_Password(uint8_t *data, uint8_t data_num)
@@ -178,6 +183,80 @@ void Lcd_Get_Flowunit(uint8_t *data)
 	}
 }
 
+void Lcd_Set_Flowrange(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(flowrange), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Flowrange(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+	unsigned long long value;
+
+	Eeprom_Read(MEM_EEP_ADDR(flowrange), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//仪表量程设置为无效值时默认00000
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if(99999 < value){
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 0;
+		data[4] = 0;
+		printf("Error:Flow Range will be set to 00000 by default.\n");
+	}
+}
+
+void Lcd_Set_Damp(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(damp), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Damp(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+	unsigned long long value;
+
+	Eeprom_Read(MEM_EEP_ADDR(damp), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//测量阻尼时间为无效值时默认01
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if((1 > value) || (64 < value)){
+		data[0] = 0;
+		data[1] = 1;
+		printf("Error:Damp will be set to 01 by default.\n");
+	}
+}
+
+void Lcd_Set_Flowdirect(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(flowdirect), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Flowdirect(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(flowdirect), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	//流量方向择项为无效值时默认正向
+	if(DIR_MAX <= *data){
+		*data = DIR_FORWARD;
+		printf("Error:Flow Direct will be set to Forward by default.\n");
+	}
+}
+
 static void Lcd_EEPConvert_Set(uint32_t *dst, uint8_t *src, uint8_t src_size)
 {
 	uint8_t i = 0;
@@ -200,7 +279,7 @@ static void Lcd_EEPConvert_Get(uint8_t *dst, uint32_t *src, uint8_t dst_size)
 	}
 }
 
-static void Lcd_StrToNum_Convert(uint8_t *str, unsigned long long *num, uint8_t str_size)
+void Lcd_StrToNum_Convert(uint8_t *str, unsigned long long *num, uint8_t str_size)
 {
 	uint8_t i = 0;
 

@@ -50,11 +50,34 @@ typedef enum FlowUnit
 	UNIT_MAX
 } FlowUnit_t;
 
+/* 仪表量程设置 */
+typedef struct FlowRange
+{
+	uint8_t data[5];
+} FlowRange_t;
+
+/* 测量阻尼时间 */
+typedef struct Damp
+{
+	uint8_t data[2];
+} Damp_t;
+
+/* 流量方向择项 */
+typedef enum FlowDirect
+{
+	DIR_FORWARD = 0,
+	DIR_BACKWARD,
+	DIR_MAX
+} FlowDirect_t;
+
 extern PWInfo_t PWInfo;
 extern Language_t lcd_Language;
 extern Commaddress_t lcd_Commaddr;
 extern BaudRate_t lcd_baudrate;
 extern SnsrSize_t lcd_snsrsize;
 extern FlowUnit_t lcd_flowunit;
+extern FlowRange_t lcd_flowrange;
+extern Damp_t lcd_damp;
+extern FlowDirect_t lcd_flowdirect;
 
 #endif /* MENU_TYPE_H_ */
