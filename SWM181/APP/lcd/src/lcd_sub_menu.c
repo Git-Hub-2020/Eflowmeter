@@ -175,11 +175,17 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		if(obj_min < check_num){
 			obj[lcd_cursor_pos]--;
 		}
+		else{
+			disp_req = REQ_OFF;
+		}
 		break;
 	case MENU_KEY_UP:
 		Lcd_StrToNum_Convert(obj, &check_num, obj_num);
 		if(obj_max > check_num){
 			obj[lcd_cursor_pos]++;
+		}
+		else{
+			disp_req = REQ_OFF;
 		}
 		break;
 	case MENU_KEY_CONFIRM:
