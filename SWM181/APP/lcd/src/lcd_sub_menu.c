@@ -147,6 +147,7 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 	case MENU_KEY_CONFIRM:
 		Lcd_EEPSet_All();
 		LCD_Menu_SetID(pre_menu);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
 	default:
 		disp_req = REQ_OFF;
@@ -184,6 +185,7 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 	case MENU_KEY_CONFIRM:
 		Lcd_EEPSet_All();
 		LCD_Menu_SetID(pre_menu);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
 	case MENU_KEY_UNITDOWN:
 		if(0 == lcd_cursor_pos){
