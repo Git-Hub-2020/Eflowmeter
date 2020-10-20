@@ -170,11 +170,7 @@ static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 
-	if(MENU_KEY_CONFIRM == key){
-		LCD_Menu_SetLevel(MENU_LEVEL_2);
-		LCD_Cursor_StatusSet(CURSOR_FREEZE);
-	}
-	else if(MENU_KEY_UNITCONFIRM == key){
+	if(MENU_KEY_UNITCONFIRM == key){
 		LCD_AutoMeasure_Transfer(REQ_OFF);
 		return REQ_ON;
 	}

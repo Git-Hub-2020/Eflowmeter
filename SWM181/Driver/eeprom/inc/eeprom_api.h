@@ -20,8 +20,8 @@ typedef struct Eeprom
 	uint32_t totalunit;		/* 流量积算单位 */
 	uint32_t segmanena;		/* 反向输出允许 */
 	uint32_t analogtype;	/* 电流输出类型 */
-	uint32_t plusetype;		/* 脉冲输出方式 */
-	uint32_t plusefact;		/* 脉冲单位当量 */
+	uint32_t pulsetype;		/* 脉冲输出方式 */
+	uint32_t pulsefact;		/* 脉冲单位当量 */
 	uint32_t frequemax;		/* 频率输出范围 */
 	uint32_t mtsnsrena;		/* 空管报警允许 */
 	uint32_t mtsnsrtrip;	/* 空管报警阈值 */

@@ -21,6 +21,17 @@ void Lcd_EEPSet_All(void)
 	Lcd_Set_Flowrange(lcd_flowrange.data, numof(lcd_flowrange.data));
 	Lcd_Set_Damp(lcd_damp.data, numof(lcd_damp.data));
 	Lcd_Set_Flowdirect(&lcd_flowdirect);
+	Lcd_Set_Flowzero(lcd_flowzero.data, numof(lcd_flowzero.data));
+	Lcd_Set_Flowcutoff(lcd_flowcutoff.data, numof(lcd_flowcutoff.data));
+	Lcd_Set_Cutoffena(&lcd_cutoffena);
+	Lcd_Set_Totalunit(&lcd_totalunit);
+	Lcd_Set_SegmaNena(&lcd_segmaNena);
+	Lcd_Set_Analogtype(&lcd_analogtype);
+	Lcd_Set_Pulsetype(&lcd_pulsetype);
+	Lcd_Set_Pulsefact(&lcd_pulsefact);
+	Lcd_Set_Frequemax(lcd_frequemax.data, numof(lcd_frequemax.data));
+	Lcd_Set_Mtsnsrena(&lcd_mtsnsrena);
+	Lcd_Set_Mtsnsrtrip(lcd_mtsnsrtrip.data, numof(lcd_mtsnsrtrip.data));
 }
 
 void Lcd_EEPGet_All(void)
@@ -34,6 +45,17 @@ void Lcd_EEPGet_All(void)
 	Lcd_Get_Flowrange(lcd_flowrange.data, numof(lcd_flowrange.data));
 	Lcd_Get_Damp(lcd_damp.data, numof(lcd_damp.data));
 	Lcd_Get_Flowdirect(&lcd_flowdirect);
+	Lcd_Get_Flowzero(lcd_flowzero.data, numof(lcd_flowzero.data));
+	Lcd_Get_Flowcutoff(lcd_flowcutoff.data, numof(lcd_flowcutoff.data));
+	Lcd_Get_Cutoffena(&lcd_cutoffena);
+	Lcd_Get_Totalunit(&lcd_totalunit);
+	Lcd_Get_SegmaNena(&lcd_segmaNena);
+	Lcd_Get_Analogtype(&lcd_analogtype);
+	Lcd_Get_Pulsetype(&lcd_pulsetype);
+	Lcd_Get_Pulsefact(&lcd_pulsefact);
+	Lcd_Get_Frequemax(lcd_frequemax.data, numof(lcd_frequemax.data));
+	Lcd_Get_Mtsnsrena(&lcd_mtsnsrena);
+	Lcd_Get_Mtsnsrtrip(lcd_mtsnsrtrip.data, numof(lcd_mtsnsrtrip.data));
 }
 
 void Lcd_Set_Password(uint8_t *data, uint8_t data_num)
@@ -254,6 +276,263 @@ void Lcd_Get_Flowdirect(uint8_t *data)
 	if(DIR_MAX <= *data){
 		*data = DIR_FORWARD;
 		printf("Error:Flow Direct will be set to Forward by default.\n");
+	}
+}
+
+void Lcd_Set_Flowzero(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(flowzero), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Flowzero(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+	unsigned long long value;
+
+	Eeprom_Read(MEM_EEP_ADDR(flowzero), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//流量零点修正为无效值时默认0000
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if(9999 < value){
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 0;
+		printf("Error:Flow Zero will be set to 0000 by default.\n");
+	}
+}
+
+void Lcd_Set_Flowcutoff(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(flowcutoff), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Flowcutoff(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+	unsigned long long value;
+
+	Eeprom_Read(MEM_EEP_ADDR(flowcutoff), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//小信号切除点为无效值时默认00000
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if(59999 < value){
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 0;
+		data[4] = 0;
+		printf("Error:Flow Cutoff will be set to 00000 by default.\n");
+	}
+}
+
+void Lcd_Set_Cutoffena(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(cutoffena), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Cutoffena(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(cutoffena), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	//允许切除显示为无效值时默认允许
+	if(PERMIT_MAX <= *data){
+		*data = PERMIT_ALLOW;
+		printf("Error:Cutoff Ena will be set to ALLOW by default.\n");
+	}
+}
+
+void Lcd_Set_Totalunit(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(totalunit), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Totalunit(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(totalunit), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	//流量积算单位为无效值时默认0.001L
+	if(TUNIT_MAX <= *data){
+		*data = TUNIT_0001L;
+		printf("Error:Total Unit will be set to 0.001L by default.\n");
+	}
+}
+
+void Lcd_Set_SegmaNena(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(segmanena), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_SegmaNena(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(segmanena), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	//流量积算单位为无效值时默认允许
+	if(PERMIT_MAX <= *data){
+		*data = PERMIT_ALLOW;
+		printf("Error:SegmaN Ena will be set to ALLOW by default.\n");
+	}
+}
+
+void Lcd_Set_Analogtype(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(analogtype), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Analogtype(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(analogtype), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	// 电流输出类型为无效值时默认0~10mA
+	if(ATYPE_MAX <= *data){
+		*data = ATYPE_0TO10MA;
+		printf("Error:Analog Type will be set to 0-10mA by default.\n");
+	}
+}
+
+void Lcd_Set_Pulsetype(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(pulsetype), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Pulsetype(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(pulsetype), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	// 脉冲输出方式为无效值时默认频率
+	if(PTYPE_MAX <= *data){
+		*data = PTYPE_FREQUE;
+		printf("Error:Pulse Type will be set to FREQUE by default.\n");
+	}
+}
+
+void Lcd_Set_Pulsefact(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(pulsefact), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Pulsefact(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(pulsefact), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	// 脉冲单位当量为无效值时默认0.001L
+	if(TUNIT_MAX <= *data){
+		*data = TUNIT_0001L;
+		printf("Error:Pulse Fact will be set to 0.001L by default.\n");
+	}
+}
+
+void Lcd_Set_Frequemax(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(frequemax), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Frequemax(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+	unsigned long long value;
+
+	Eeprom_Read(MEM_EEP_ADDR(frequemax), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//频率输出范围为无效值时默认0000
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if(5999 < value){
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 0;
+		printf("Error:Freque Max will be set to 0000 by default.\n");
+	}
+}
+
+void Lcd_Set_Mtsnsrena(uint8_t *data)
+{
+	uint32_t eep_buff = *data;
+
+	Eeprom_Write(MEM_EEP_ADDR(mtsnsrena), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Mtsnsrena(uint8_t *data)
+{
+	uint32_t eep_buff = 0;
+
+	Eeprom_Read(MEM_EEP_ADDR(mtsnsrena), &eep_buff, MEM_SIZE);
+	*data = (uint8_t)eep_buff;
+
+	// 空管报警允许为无效值时默认允许
+	if(PERMIT_MAX <= *data){
+		*data = PERMIT_ALLOW;
+		printf("Error:Mtsnsr Ena will be set to ALLOW by default.\n");
+	}
+}
+
+void Lcd_Set_Mtsnsrtrip(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+
+	Lcd_EEPConvert_Set(&eep_buff, data, data_num);
+	Eeprom_Write(MEM_EEP_ADDR(mtsnsrtrip), &eep_buff, MEM_SIZE);
+}
+
+void Lcd_Get_Mtsnsrtrip(uint8_t *data, uint8_t data_num)
+{
+	uint32_t eep_buff = 0;
+	unsigned long long value;
+
+	Eeprom_Read(MEM_EEP_ADDR(mtsnsrtrip), &eep_buff, MEM_SIZE);
+	Lcd_EEPConvert_Get(data, &eep_buff, data_num);
+
+	//空管报警阈值为无效值时默认00000
+	Lcd_StrToNum_Convert(data, &value, data_num);
+	if(59999 < value){
+		data[0] = 0;
+		data[1] = 0;
+		data[2] = 0;
+		data[3] = 0;
+		data[4] = 0;
+		printf("Error:Mtsnsr Trip will be set to 00000 by default.\n");
 	}
 }
 

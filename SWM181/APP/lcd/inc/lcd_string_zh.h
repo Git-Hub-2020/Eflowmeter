@@ -42,6 +42,7 @@ extern const unsigned char str_zh_hao[32];		/*"号"*/
 extern const unsigned char str_zh_ji[32];		/*"积"*/
 extern const unsigned char str_zh_ji_1[32];		/*"计"*/
 extern const unsigned char str_zh_jian[32];		/*"间"*/
+extern const unsigned char str_zh_jin[32];		/*"禁"*/
 extern const unsigned char str_zh_jing[32];		/*"径"*/
 extern const unsigned char str_zh_jing_1[32];	/*"警"*/
 /* k */
@@ -115,6 +116,7 @@ extern const unsigned char str_zh_zheng[32];	/*"正"*/
 extern const unsigned char str_zh_zhi[32];		/*"值"*/
 extern const unsigned char str_zh_zhi_1[32];	/*"置"*/
 extern const unsigned char str_zh_zhi_2[32];	/*"址"*/
+extern const unsigned char str_zh_zhi_3[32];	/*"止"*/
 extern const unsigned char str_zh_zhong[32];	/*"中"*/
 extern const unsigned char str_zh_zong[32];		/*"总"*/
 extern const unsigned char str_zh_zu[32];		/*"阻"*/
@@ -123,5 +125,7 @@ extern const unsigned char str_zh_zu[32];		/*"阻"*/
 extern const unsigned char str_pic_flowicon[32];	/*"流量标识"*/
 extern const unsigned char str_pic_alerticon[32];	/*"报警指示图标"*/
 extern const unsigned char str_pic_unit[32];		/*"单位图标m3"*/
+extern const unsigned char str_pic_plusminus[32];	/*"符号±"*/
+extern const unsigned char str_pic_curve[32];		/*"符号～"*/
 
 #endif /* LCD_STRING_ZH_H_ */

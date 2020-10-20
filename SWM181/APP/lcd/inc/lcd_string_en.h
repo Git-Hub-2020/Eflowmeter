@@ -14,6 +14,7 @@ extern const unsigned char str_en_9[16];
 extern const unsigned char str_en_dot[16];
 extern const unsigned char str_en_line[16];
 extern const unsigned char str_en_line_1[16];
+extern const unsigned char str_en_percent[16];
 extern const unsigned char str_en_a[16];
 extern const unsigned char str_en_b[16];
 extern const unsigned char str_en_c[16];

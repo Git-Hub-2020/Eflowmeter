@@ -70,6 +70,68 @@ typedef enum FlowDirect
 	DIR_MAX
 } FlowDirect_t;
 
+/* 流量零点修正 */
+typedef struct FlowZero
+{
+	uint8_t data[4];
+} FlowZero_t;
+
+/* 小信号切除点 */
+typedef struct FlowCutoff
+{
+	uint8_t data[5];
+} FlowCutoff_t;
+
+/* **_允许/禁止 */
+typedef enum PermitOpt
+{
+	PERMIT_ALLOW = 0,
+	PERMIT_FORBID,
+	PERMIT_MAX
+} PermitOpt_t;
+
+/* 流量积算单位 */
+typedef enum TotalUnit
+{
+	TUNIT_0001L = 0,
+	TUNIT_0010L,
+	TUNIT_0100L,
+	TUNIT_1000L,
+	TUNIT_0001M3,
+	TUNIT_0010M3,
+	TUNIT_0100M3,
+	TUNIT_1000M3,
+	TUNIT_MAX
+} TotalUnit_t;
+
+/* 电流输出类型 */
+typedef enum AnalogType
+{
+	ATYPE_0TO10MA = 0,
+	ATYPE_4TO20MA,
+	ATYPE_MAX
+} AnalogType_t;
+
+/* 脉冲输出方式 */
+typedef enum PulseType
+{
+	PTYPE_FREQUE = 0,
+	PTYPE_PULSE,
+	PTYPE_MAX
+} PulseType_t;
+
+/* 频率输出范围 */
+typedef struct FrequeMax
+{
+	uint8_t data[4];
+} FrequeMax_t;
+
+/* 空管报警阈值 */
+typedef struct MtsnsrTrip
+{
+	uint8_t data[5];
+} MtsnsrTrip_t;
+
 extern PWInfo_t PWInfo;
 extern Language_t lcd_Language;
 extern Commaddress_t lcd_Commaddr;
@@ -79,5 +141,16 @@ extern FlowUnit_t lcd_flowunit;
 extern FlowRange_t lcd_flowrange;
 extern Damp_t lcd_damp;
 extern FlowDirect_t lcd_flowdirect;
+extern FlowZero_t lcd_flowzero;
+extern FlowCutoff_t lcd_flowcutoff;
+extern PermitOpt_t lcd_cutoffena;
+extern TotalUnit_t lcd_totalunit;
+extern PermitOpt_t lcd_segmaNena;
+extern AnalogType_t lcd_analogtype;
+extern PulseType_t lcd_pulsetype;
+extern TotalUnit_t lcd_pulsefact;
+extern FrequeMax_t lcd_frequemax;
+extern PermitOpt_t lcd_mtsnsrena;
+extern MtsnsrTrip_t lcd_mtsnsrtrip;
 
 #endif /* MENU_TYPE_H_ */

@@ -24,6 +24,17 @@ static SubMenuInfo_t SubMenuInfo[] =
 	{MENU_L3_05, MENU_L2_PARAMSET05, numof(lcd_flowrange.data), lcd_flowrange.data, TYPE_SETNUM, 0, 99999},
 	{MENU_L3_06, MENU_L2_PARAMSET06, numof(lcd_damp.data), lcd_damp.data, TYPE_SETNUM, 1, 64},
 	{MENU_L3_07, MENU_L2_PARAMSET07, 1, (uint8_t*)&lcd_flowdirect, TYPE_SELECT, DIR_FORWARD, DIR_MAX},
+	{MENU_L3_08, MENU_L2_PARAMSET08, numof(lcd_flowzero.data), lcd_flowzero.data, TYPE_SETNUM, 0, 9999},
+	{MENU_L3_09, MENU_L2_PARAMSET09, numof(lcd_flowcutoff.data), lcd_flowcutoff.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_10, MENU_L2_PARAMSET10, 1, (uint8_t*)&lcd_cutoffena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
+	{MENU_L3_11, MENU_L2_PARAMSET11, 1, (uint8_t*)&lcd_totalunit, TYPE_SELECT, TUNIT_0001L, TUNIT_MAX},
+	{MENU_L3_12, MENU_L2_PARAMSET12, 1, (uint8_t*)&lcd_segmaNena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
+	{MENU_L3_13, MENU_L2_PARAMSET13, 1, (uint8_t*)&lcd_analogtype, TYPE_SELECT, ATYPE_0TO10MA, ATYPE_MAX},
+	{MENU_L3_14, MENU_L2_PARAMSET14, 1, (uint8_t*)&lcd_pulsetype, TYPE_SELECT, PTYPE_FREQUE, PTYPE_MAX},
+	{MENU_L3_15, MENU_L2_PARAMSET15, 1, (uint8_t*)&lcd_pulsefact, TYPE_SELECT, TUNIT_0001L, TUNIT_MAX},
+	{MENU_L3_16, MENU_L2_PARAMSET16, numof(lcd_frequemax.data), lcd_frequemax.data, TYPE_SETNUM, 0, 5999},
+	{MENU_L3_17, MENU_L2_PARAMSET17, 1, (uint8_t*)&lcd_mtsnsrena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
+	{MENU_L3_18, MENU_L2_PARAMSET18, numof(lcd_mtsnsrtrip.data), lcd_mtsnsrtrip.data, TYPE_SETNUM, 0, 59999},
 };
 
 void LCD_Sub_Menu_Init(void)
@@ -146,6 +157,7 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 		break;
 	case MENU_KEY_CONFIRM:
 		Lcd_EEPSet_All();
+		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Menu_SetID(pre_menu);
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
@@ -190,6 +202,7 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		break;
 	case MENU_KEY_CONFIRM:
 		Lcd_EEPSet_All();
+		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Menu_SetID(pre_menu);
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
