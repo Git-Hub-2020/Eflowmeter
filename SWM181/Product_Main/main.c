@@ -4,6 +4,7 @@
 #include "timer.h"
 #include "uart.h"
 #include "common.h"
+#include "eeprom_api.h"
 #include "lcd_control.h"
 #include "key_control.h"
 
@@ -14,6 +15,7 @@ int main(void)
  	SystemInit();
 	SerialInit();
 
+	Eeprom_Init();
 	Timer_init();
 	Key_init();
 	LCD_init();

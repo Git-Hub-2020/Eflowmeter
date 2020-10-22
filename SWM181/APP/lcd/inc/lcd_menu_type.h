@@ -3,12 +3,6 @@
 
 #include "SWM181.h"
 
-/* 密码 */
-typedef struct PWInfo
-{
-	uint8_t pw[5];
-} PWInfo_t;
-
 /* 语言 */
 typedef enum Language
 {
@@ -16,12 +10,6 @@ typedef enum Language
 	LANG_EN,
 	LANG_MAX
 } Language_t;
-
-/* 仪表通讯地址 */
-typedef struct Commaddress
-{
-	uint8_t data[2];
-} Commaddress_t;
 
 /* 仪表通讯速度 */
 typedef enum BaudRate
@@ -32,12 +20,6 @@ typedef enum BaudRate
 	RATE_19200,
 	RATE_MAX
 } BaudRate_t;
-
-/* 测量管道口径 */
-typedef struct SnsrSize
-{
-	uint8_t data[4];
-} SnsrSize_t;
 
 /* 流量单位 */
 typedef enum FlowUnit
@@ -50,18 +32,6 @@ typedef enum FlowUnit
 	UNIT_MAX
 } FlowUnit_t;
 
-/* 仪表量程设置 */
-typedef struct FlowRange
-{
-	uint8_t data[5];
-} FlowRange_t;
-
-/* 测量阻尼时间 */
-typedef struct Damp
-{
-	uint8_t data[2];
-} Damp_t;
-
 /* 流量方向择项 */
 typedef enum FlowDirect
 {
@@ -69,18 +39,6 @@ typedef enum FlowDirect
 	DIR_BACKWARD,
 	DIR_MAX
 } FlowDirect_t;
-
-/* 流量零点修正 */
-typedef struct FlowZero
-{
-	uint8_t data[4];
-} FlowZero_t;
-
-/* 小信号切除点 */
-typedef struct FlowCutoff
-{
-	uint8_t data[5];
-} FlowCutoff_t;
 
 /* **_允许/禁止 */
 typedef enum PermitOpt
@@ -120,37 +78,45 @@ typedef enum PulseType
 	PTYPE_MAX
 } PulseType_t;
 
-/* 频率输出范围 */
-typedef struct FrequeMax
+typedef struct DataSize2
+{
+	uint8_t data[2];
+} DataSize2_t;
+
+typedef struct DataSize4
 {
 	uint8_t data[4];
-} FrequeMax_t;
+} DataSize4_t;
 
-/* 空管报警阈值 */
-typedef struct MtsnsrTrip
+typedef struct DataSize5
 {
 	uint8_t data[5];
-} MtsnsrTrip_t;
+} DataSize5_t;
 
-extern PWInfo_t PWInfo;
-extern Language_t lcd_Language;
-extern Commaddress_t lcd_Commaddr;
-extern BaudRate_t lcd_baudrate;
-extern SnsrSize_t lcd_snsrsize;
-extern FlowUnit_t lcd_flowunit;
-extern FlowRange_t lcd_flowrange;
-extern Damp_t lcd_damp;
-extern FlowDirect_t lcd_flowdirect;
-extern FlowZero_t lcd_flowzero;
-extern FlowCutoff_t lcd_flowcutoff;
-extern PermitOpt_t lcd_cutoffena;
-extern TotalUnit_t lcd_totalunit;
-extern PermitOpt_t lcd_segmaNena;
-extern AnalogType_t lcd_analogtype;
-extern PulseType_t lcd_pulsetype;
-extern TotalUnit_t lcd_pulsefact;
-extern FrequeMax_t lcd_frequemax;
-extern PermitOpt_t lcd_mtsnsrena;
-extern MtsnsrTrip_t lcd_mtsnsrtrip;
+extern Language_t lcd_Language;		/* 语言 */
+extern DataSize2_t lcd_Commaddr;	/* 仪表通讯地址 */
+extern BaudRate_t lcd_baudrate;		/* 仪表通讯速度 */
+extern DataSize4_t lcd_snsrsize;	/* 测量管道口径 */
+extern FlowUnit_t lcd_flowunit;		/* 流量单位 */
+extern DataSize5_t lcd_flowrange;	/* 仪表量程设置 */
+extern DataSize2_t lcd_damp;		/* 测量阻尼时间 */
+extern FlowDirect_t lcd_flowdirect;	/* 流量方向择项 */
+extern DataSize4_t lcd_flowzero;	/* 流量零点修正 */
+extern DataSize5_t lcd_flowcutoff;	/* 小信号切除点 */
+extern PermitOpt_t lcd_cutoffena;	/* 允许切除显示 */
+extern TotalUnit_t lcd_totalunit;	/* 流量积算单位 */
+extern PermitOpt_t lcd_segmaNena;	/* 反向输出允许 */
+extern AnalogType_t lcd_analogtype;	/* 电流输出类型 */
+extern PulseType_t lcd_pulsetype;	/* 脉冲输出方式 */
+extern TotalUnit_t lcd_pulsefact;	/* 脉冲当量 */
+extern DataSize4_t lcd_frequemax;	/* 频率范围 */
+extern PermitOpt_t lcd_mtsnsrena;	/* 空管报警允许 */
+extern DataSize5_t lcd_mtsnsrtrip;	/* 空管报警阈值 */
+extern PermitOpt_t lcd_almhiena;	/* 上限报警允许 */
+extern DataSize5_t lcd_almhival;	/* 上限报警数值 */
+extern PermitOpt_t lcd_almlowena;	/* 下限报警允许 */
+extern DataSize5_t lcd_almlowval;	/* 下限报警数值 */
+extern PermitOpt_t lcd_coilalmena;	/* 励磁报警允许 */
+extern DataSize5_t PWInfo;			/* 总量清零密码 */
 
 #endif /* MENU_TYPE_H_ */

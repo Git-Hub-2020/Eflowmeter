@@ -1,21 +1,34 @@
 #include "eeprom.h"
+#include "eeprom_api.h"
 
-void Eeprom_Erase(uint32_t addr)
+static uint32_t FlashBuffer[EEP_ID_MAX] = {0};
+
+static void Eeprom_Prepare_Value(EepromId_t eep_id, uint32_t *value);
+static void Eeprom_Write_All(void);
+
+void Eeprom_Init(void)
 {
-	FLASH_Erase(addr);
+	FLASH_Read(EEPROM_ADDR, FlashBuffer, EEP_ID_MAX);
 }
 
-void Eeprom_Write(uint32_t addr, uint32_t *value,uint32_t size)
+void Eeprom_Write_Value(EepromId_t eep_id, uint32_t *value)
 {
-	FLASH_Write(addr, value, size);
-
-	printf("%s:addr[0x%X],value[0x%X], size[%d]\n", __FUNCTION__, addr, *value, size);
+	Eeprom_Prepare_Value(eep_id, value);
+	Eeprom_Write_All();
 }
 
-void Eeprom_Read(uint32_t addr, uint32_t *value,uint32_t size)
+void Eeprom_Read_Value(EepromId_t eep_id, uint32_t *value)
 {
-	FLASH_Read(addr, value, size);
-
-	printf("%s:addr[0x%X],value[0x%X], size[%d]\n", __FUNCTION__, addr, *value, size);
+	*value = FlashBuffer[eep_id];
 }
 
+static void Eeprom_Prepare_Value(EepromId_t eep_id, uint32_t *value)
+{
+	FlashBuffer[eep_id] = *value;
+}
+
+static void Eeprom_Write_All(void)
+{
+	FLASH_Erase(EEPROM_ADDR);
+	FLASH_Write(EEPROM_ADDR, FlashBuffer, EEP_ID_MAX);
+}

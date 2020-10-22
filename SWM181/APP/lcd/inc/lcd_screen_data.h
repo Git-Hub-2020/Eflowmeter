@@ -118,8 +118,7 @@
 /* MENU_LEVEL_4 */
 #define MENU_L4_00			0	/* 参数设置密码 */
 #define MENU_L4_01			1	/* 总量清零密码 */
-#define MENU_L4_02			2	/* 总量清零密码设置 */
-#define MENU_L4_MAX			3
+#define MENU_L4_MAX			2
 
 typedef enum StringType
 {

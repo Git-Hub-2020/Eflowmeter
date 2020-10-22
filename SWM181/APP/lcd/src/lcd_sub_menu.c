@@ -5,16 +5,17 @@
 #include "lcd_menu_type.h"
 #include "lcd_screen_data.h"
 #include "lcd_setup.h"
+#include "lcd_draw.h"
 
 extern MenuList_t *Current_Menu_Info;
 extern uint8_t lcd_cursor_pos;
 static uint8_t lcd_submenu_idx = 0;
 static DisplayReq_t LCD_Menu_L2_Select(uint8_t, uint8_t*);
 static DisplayReq_t LCD_Menu_L2_SetNum(uint8_t, uint8_t, uint8_t*);
-static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t,uint8_t,uint8_t,uint8_t*,unsigned long long,unsigned long long);
-static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t,uint8_t,uint8_t,uint8_t,uint8_t*,unsigned long long,unsigned long long);
+static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t,uint8_t,uint8_t,uint8_t*,uint32_t,uint32_t);
+static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t,uint8_t,uint8_t,uint8_t,uint8_t*,uint32_t,uint32_t);
 
-static SubMenuInfo_t SubMenuInfo[] =
+SubMenuInfo_t SubMenuInfo[MENU_L3_MAX] =
 {
 	{MENU_L3_00, MENU_L2_PARAMSET00, 1, (uint8_t*)&lcd_Language, TYPE_SELECT, LANG_ZH, LANG_MAX},
 	{MENU_L3_01, MENU_L2_PARAMSET01, numof(lcd_Commaddr.data), lcd_Commaddr.data, TYPE_SETNUM, 1, 99},
@@ -35,12 +36,57 @@ static SubMenuInfo_t SubMenuInfo[] =
 	{MENU_L3_16, MENU_L2_PARAMSET16, numof(lcd_frequemax.data), lcd_frequemax.data, TYPE_SETNUM, 0, 5999},
 	{MENU_L3_17, MENU_L2_PARAMSET17, 1, (uint8_t*)&lcd_mtsnsrena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
 	{MENU_L3_18, MENU_L2_PARAMSET18, numof(lcd_mtsnsrtrip.data), lcd_mtsnsrtrip.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_19, MENU_L2_PARAMSET19, 1, (uint8_t*)&lcd_almhiena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
+	{MENU_L3_20, MENU_L2_PARAMSET20, numof(lcd_almhival.data), lcd_almhival.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_21, MENU_L2_PARAMSET21, 1, (uint8_t*)&lcd_almlowena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
+	{MENU_L3_22, MENU_L2_PARAMSET22, numof(lcd_almlowval.data), lcd_almlowval.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_23, MENU_L2_PARAMSET23, 1, (uint8_t*)&lcd_coilalmena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
+	{MENU_L3_24, MENU_L2_PARAMSET24, numof(PWInfo.data), PWInfo.data, TYPE_SETNUM, 0, 99999},
+	{MENU_L3_25, MENU_L2_PARAMSET25, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_26, MENU_L2_PARAMSET26, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_27, MENU_L2_PARAMSET27, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_28, MENU_L2_PARAMSET28, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_29, MENU_L2_PARAMSET29, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_30, MENU_L2_PARAMSET30, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_31, MENU_L2_PARAMSET31, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_32, MENU_L2_PARAMSET32, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_33, MENU_L2_PARAMSET33, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_34, MENU_L2_PARAMSET34, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_35, MENU_L2_PARAMSET35, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_36, MENU_L2_PARAMSET36, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_37, MENU_L2_PARAMSET37, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_38, MENU_L2_PARAMSET38, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_39, MENU_L2_PARAMSET39, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_40, MENU_L2_PARAMSET40, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_41, MENU_L2_PARAMSET41, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_42, MENU_L2_PARAMSET42, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_43, MENU_L2_PARAMSET43, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_44, MENU_L2_PARAMSET44, 0, NULL, TYPE_SETNUM, 0, 0},
 };
 
 void LCD_Sub_Menu_Init(void)
 {
-	Lcd_EEPGet_All(); //获取所有菜单当前存储值并校验
-	Lcd_EEPSet_All(); //将校验结果重新设定
+	uint8_t sub_menu = 0;
+	uint32_t value = 0;
+	uint32_t *p;
+
+	for(sub_menu = 0; sub_menu < numof(SubMenuInfo); sub_menu++){
+		if(NULL != SubMenuInfo[sub_menu].obj){
+			Lcd_Setting_GetValue(MENU_LEVEL_3, sub_menu, &value);
+			if((SubMenuInfo[sub_menu].obj_min > value)&&(SubMenuInfo[sub_menu].obj_max < value)){
+				value = SubMenuInfo[sub_menu].obj_min;
+				Lcd_Setting_SetValue(MENU_LEVEL_3, sub_menu, &value);
+				printf("Error:SubMenu[%d] setting is reset to the default value\n", sub_menu+1);
+			}
+			if(TYPE_SETNUM == SubMenuInfo[sub_menu].type){
+				Lcd_NumToStr_Convert(SubMenuInfo[sub_menu].obj, &value, SubMenuInfo[sub_menu].obj_num);
+			}
+			else{
+				p = (uint32_t*)SubMenuInfo[sub_menu].obj;
+				*p = value;
+			}
+		}
+	}
 }
 
 uint8_t LCD_SubMenu_IdxGet(void)
@@ -64,38 +110,8 @@ DisplayReq_t LCD_Sub_Menu_L2(uint8_t menu, MenuKey_t key)
 											SubMenuInfo[menu].obj);
 		}
 	}
-	else if(MENU_L2_PARAMSET24 == menu){
-		LCD_Menu_SetLevel(MENU_LEVEL_4);
-		LCD_Menu_SetID(MENU_L4_02);
-		memset(&PWInfo, 0, sizeof(PWInfo));
-		LCD_Cursor_StatusSet(CURSOR_VALID);
-		lcd_cursor_pos = 0;
-		disp_req = REQ_ON;
-	}
 
 	return disp_req;
-}
-
-static DisplayReq_t LCD_Menu_L2_Select(uint8_t menu_id, uint8_t* obj)
-{
-	lcd_submenu_idx = *obj;
-	LCD_Menu_SetID(menu_id);
-	LCD_Cursor_StatusSet(CURSOR_FREEZE);
-	return REQ_ON;
-}
-
-static DisplayReq_t LCD_Menu_L2_SetNum(uint8_t menu_id, uint8_t obj_num, uint8_t* obj)
-{
-	uint8_t idx = 0;
-
-	lcd_submenu_idx = 0;
-	LCD_Menu_SetID(menu_id);
-	LCD_Cursor_StatusSet(CURSOR_VALID);
-	for(idx = 0; idx < obj_num; idx++){
-		(((Stringinfo_t*)Current_Menu_Info->p_menu)[idx]).pstr = Menu_Number_Tbl[obj[idx]];
-	}
-	lcd_cursor_pos = obj_num - 1;
-	return REQ_ON;
 }
 
 DisplayReq_t LCD_Sub_Menu_L3(uint8_t menu, MenuKey_t key)
@@ -128,12 +144,53 @@ DisplayReq_t LCD_Sub_Menu_L3(uint8_t menu, MenuKey_t key)
 	return disp_req;
 }
 
+void LCD_Menu_L3_Anime(uint8_t menu_id)
+{
+	Stringinfo_t str;
+
+	if (menu_id >= numof(SubMenuInfo)) return;
+
+	if ((NULL != SubMenuInfo[menu_id].obj)
+	&& (menu_id == SubMenuInfo[menu_id].menu_id)
+	&& (TYPE_SETNUM == SubMenuInfo[menu_id].type)){
+		str.str_x = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_x;
+		str.str_y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_y;
+		str.str_type = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_type;
+		str.pstr = Menu_Number_Tbl[SubMenuInfo[menu_id].obj[lcd_cursor_pos]];
+		LCD_Str_Draw(&str);
+	}
+}
+
+static DisplayReq_t LCD_Menu_L2_Select(uint8_t menu_id, uint8_t* obj)
+{
+	lcd_submenu_idx = *obj;
+	LCD_Menu_SetLevel(MENU_LEVEL_3);
+	LCD_Menu_SetID(menu_id);
+	LCD_Cursor_StatusSet(CURSOR_FREEZE);
+	return REQ_ON;
+}
+
+static DisplayReq_t LCD_Menu_L2_SetNum(uint8_t menu_id, uint8_t obj_num, uint8_t* obj)
+{
+	uint8_t idx = 0;
+
+	lcd_submenu_idx = 0;
+	LCD_Menu_SetLevel(MENU_LEVEL_3);
+	LCD_Menu_SetID(menu_id);
+	LCD_Cursor_StatusSet(CURSOR_VALID);
+	for(idx = 0; idx < obj_num; idx++){
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[idx]).pstr = Menu_Number_Tbl[obj[idx]];
+	}
+	lcd_cursor_pos = obj_num - 1;
+	return REQ_ON;
+}
+
 static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 										uint8_t menu_id,
 										uint8_t pre_menu,
 										uint8_t* obj,
-										unsigned long long obj_min,
-										unsigned long long obj_max)
+										uint32_t obj_min,
+										uint32_t obj_max)
 {
 	DisplayReq_t disp_req = REQ_ON;
 
@@ -156,7 +213,7 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 		LCD_Menu_SetID(menu_id);
 		break;
 	case MENU_KEY_CONFIRM:
-		Lcd_EEPSet_All();
+		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, (uint32_t*)obj);
 		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Menu_SetID(pre_menu);
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);
@@ -174,17 +231,17 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 										uint8_t pre_menu,
 										uint8_t obj_num,
 										uint8_t* obj,
-										unsigned long long obj_min,
-										unsigned long long obj_max)
+										uint32_t obj_min,
+										uint32_t obj_max)
 {
 	DisplayReq_t disp_req = REQ_ON;
-	unsigned long long check_num = 0;
+	uint32_t check_num = 0;
 
 	switch(key)
 	{
 	case MENU_KEY_DOWN:
 		Lcd_StrToNum_Convert(obj, &check_num, obj_num);
-		if(obj_min < check_num){
+		if((0 < obj[lcd_cursor_pos]) && (obj_min < check_num)){
 			obj[lcd_cursor_pos]--;
 		}
 		else{
@@ -193,7 +250,7 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		break;
 	case MENU_KEY_UP:
 		Lcd_StrToNum_Convert(obj, &check_num, obj_num);
-		if(obj_max > check_num){
+		if((9 > obj[lcd_cursor_pos]) && (obj_max > check_num)){
 			obj[lcd_cursor_pos]++;
 		}
 		else{
@@ -201,7 +258,8 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		}
 		break;
 	case MENU_KEY_CONFIRM:
-		Lcd_EEPSet_All();
+		Lcd_StrToNum_Convert(obj, &check_num, obj_num);
+		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &check_num);
 		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Menu_SetID(pre_menu);
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);

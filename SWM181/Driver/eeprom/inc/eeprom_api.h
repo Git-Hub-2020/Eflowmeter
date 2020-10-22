@@ -1,38 +1,60 @@
 #ifndef EEPROM_API_H_
 #define EEPROM_API_H_
 
-#include "eeprom.h"
+#include "SWM181.h"
 
-typedef struct Eeprom
+typedef enum EepromId
 {
-	uint32_t password;		/* 密码 */
-	uint32_t language;		/* 语言 */
-	uint32_t commaddress;	/* 仪表通讯地址 */
-	uint32_t baudrate;		/* 仪表通讯速度 */
-	uint32_t snsrsize;		/* 测量管道口径 */
-	uint32_t flowunit;		/* 流量单位 */
-	uint32_t flowrange;		/* 仪表量程设置 */
-	uint32_t damp;			/* 测量阻尼时间 */
-	uint32_t flowdirect;	/* 流量方向择项 */
-	uint32_t flowzero;		/* 流量零点修正 */
-	uint32_t flowcutoff;	/* 小信号切除点 */
-	uint32_t cutoffena;		/* 允许切除显示 */
-	uint32_t totalunit;		/* 流量积算单位 */
-	uint32_t segmanena;		/* 反向输出允许 */
-	uint32_t analogtype;	/* 电流输出类型 */
-	uint32_t pulsetype;		/* 脉冲输出方式 */
-	uint32_t pulsefact;		/* 脉冲单位当量 */
-	uint32_t frequemax;		/* 频率输出范围 */
-	uint32_t mtsnsrena;		/* 空管报警允许 */
-	uint32_t mtsnsrtrip;	/* 空管报警阈值 */
-} Eeprom_t;
+	EEP_ID_language,		/* 语言 */
+	EEP_ID_commaddress,		/* 仪表通讯地址 */
+	EEP_ID_baudrate,		/* 仪表通讯速度 */
+	EEP_ID_snsrsize,		/* 测量管道口径 */
+	EEP_ID_flowunit,		/* 流量单位 */
+	EEP_ID_flowrange,		/* 仪表量程设置 */
+	EEP_ID_damp,			/* 测量阻尼时间 */
+	EEP_ID_flowdirect,		/* 流量方向择项 */
+	EEP_ID_flowzero,		/* 流量零点修正 */
+	EEP_ID_flowcutoff,		/* 小信号切除点 */
+	EEP_ID_cutoffena,		/* 允许切除显示 */
+	EEP_ID_totalunit,		/* 流量积算单位 */
+	EEP_ID_segmanena,		/* 反向输出允许 */
+	EEP_ID_analogtype,		/* 电流输出类型 */
+	EEP_ID_pulsetype,		/* 脉冲输出方式 */
+	EEP_ID_pulsefact,		/* 脉冲单位当量 */
+	EEP_ID_frequemax,		/* 频率输出范围 */
+	EEP_ID_mtsnsrena,		/* 空管报警允许 */
+	EEP_ID_mtsnsrtrip,		/* 空管报警阈值 */
+	EEP_ID_almhiena,		/* 上限报警允许 */
+	EEP_ID_almhival,		/* 上限报警数值 */
+	EEP_ID_almlowena,		/* 下限报警允许 */
+	EEP_ID_almlowval,		/* 下限报警数值 */
+	EEP_ID_coilalmena,		/* 励磁报警允许 */
+	EEP_ID_clrsumkey,		/* 总量清零密码 */
+	EEP_ID_sensorcode1,		/* 传感器编码1 */
+	EEP_ID_sensorcode2,		/* 传感器编码2 */
+	EEP_ID_fieldtype,		/* 励磁方式选择 */
+	EEP_ID_sensorfact,		/* 传感器系数值 */
+	EEP_ID_correctfact0,	/* 修正系数0 */
+	EEP_ID_correctvalu0,	/* 流量修正点0 */
+	EEP_ID_correctfact1,	/* 修正系数1 */
+	EEP_ID_correctvalu1,	/* 流量修正点1 */
+	EEP_ID_correctfact2,	/* 修正系数2 */
+	EEP_ID_correctvalu2,	/* 流量修正点2 */
+	EEP_ID_correctfact3,	/* 修正系数3 */
+	EEP_ID_correctvalu3,	/* 流量修正点3 */
+	EEP_ID_correctfact4,	/* 修正系数4 */
+	EEP_ID_fwdtotal,		/* 正向累计设定 */
+	EEP_ID_revtotal,		/* 反向累计设定 */
+	EEP_ID_analogzero,		/* 电流零点修正 */
+	EEP_ID_analogrange,		/* 电流满度修正 */
+	EEP_ID_meterfact,		/* 出厂标定系数 */
+	EEP_ID_setdensity,		/* 设定密度 */
+	EEP_ID_sendint,			/* 远传间隔时间 */
+	EEP_ID_MAX
+} EepromId_t;
 
-#define OFFSET_OF(type, member) (uint32_t)(&(((type *)0)->member))
-#define MEM_EEP_ADDR(member) (uint32_t)(EEPROM_ADDR+OFFSET_OF(Eeprom_t, member))
-#define MEM_SIZE (uint32_t)1
-
-extern void Eeprom_Erase(uint32_t addr);
-extern void Eeprom_Write(uint32_t addr, uint32_t *value,uint32_t size);
-extern void Eeprom_Read(uint32_t addr, uint32_t *value,uint32_t size);
+extern void Eeprom_Init(void);
+extern void Eeprom_Write_Value(EepromId_t eep_id, uint32_t *value);
+extern void Eeprom_Read_Value(EepromId_t eep_id, uint32_t *value);
 
 #endif /* EEPROM_API_H_ */

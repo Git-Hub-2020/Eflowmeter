@@ -1154,8 +1154,8 @@ Stringinfo_t Menu_L3_08_Flowzero[] =
 	{40, 2, STR_ZH, (uint8_t*)str_pic_plusminus},
 };
 
-/* 小信号切除点000.00% */
-Stringinfo_t Menu_L3_09_Cutoff[] =
+/* 置数000.00% */
+Stringinfo_t Menu_L3_NumPercent[] =
 {
 	{32, 2, STR_EN, (uint8_t*)str_en_0},
 	{40, 2, STR_EN, (uint8_t*)str_en_0},
@@ -1336,7 +1336,7 @@ MenuList_t Menu_level3_00_zh[] =
 /* 2.仪表通讯地址 */
 MenuList_t Menu_level3_01_zh[] =
 {
-	{numof(Menu_L3_01_Adr), Menu_L3_01_Adr},	/* 仪表通讯地址 */
+	{numof(Menu_L3_01_Adr), Menu_L3_01_Adr},	/* 01 */
 };
 
 /* 3.仪表通讯速度 */
@@ -1351,7 +1351,7 @@ MenuList_t Menu_level3_02_zh[] =
 /* 4.测量管道口径 */
 MenuList_t Menu_level3_03_zh[] =
 {
-	{numof(Menu_L3_03_Size), Menu_L3_03_Size},	/* 测量管道口径 */
+	{numof(Menu_L3_03_Size), Menu_L3_03_Size},	/* 0003 */
 };
 
 /* 5.流量单位 */
@@ -1367,13 +1367,13 @@ MenuList_t Menu_level3_04_zh[] =
 /* 6.仪表量程设置 */
 MenuList_t Menu_level3_05_zh[] =
 {
-	{numof(Menu_L3_05_Range), Menu_L3_05_Range},	/* 仪表量程设置 */
+	{numof(Menu_L3_05_Range), Menu_L3_05_Range},	/* 00000 */
 };
 
 /* 7.测量阻尼时间 */
 MenuList_t Menu_level3_06_zh[] =
 {
-	{numof(Menu_L3_06_Damp), Menu_L3_06_Damp},		/* 测量阻尼时间 */
+	{numof(Menu_L3_06_Damp), Menu_L3_06_Damp},		/* 01 */
 };
 
 /* 8.流量方向择项 */
@@ -1386,13 +1386,13 @@ MenuList_t Menu_level3_07_zh[] =
 /* 9.流量零点修正 */
 MenuList_t Menu_level3_08_zh[] =
 {
-	{numof(Menu_L3_08_Flowzero), Menu_L3_08_Flowzero},	/* 流量零点修正 */
+	{numof(Menu_L3_08_Flowzero), Menu_L3_08_Flowzero},	/* ±0000 */
 };
 
 /* 10.小信号切除点 */
 MenuList_t Menu_level3_09_zh[] =
 {
-	{numof(Menu_L3_09_Cutoff), Menu_L3_09_Cutoff},	/* 小信号切除点 */
+	{numof(Menu_L3_NumPercent), Menu_L3_NumPercent},	/* 000.00% */
 };
 
 /* 11.允许切除显示 */
@@ -1452,7 +1452,7 @@ MenuList_t Menu_level3_15_zh[] =
 /* 17.频率输出范围 */
 MenuList_t Menu_level3_16_zh[] =
 {
-	{numof(Menu_L3_16_Freque), Menu_L3_16_Freque},	/* 频率输出范围 */
+	{numof(Menu_L3_16_Freque), Menu_L3_16_Freque},	/* 0001Hz */
 };
 
 /* 18.空管报警允许 */
@@ -1465,9 +1465,47 @@ MenuList_t Menu_level3_17_zh[] =
 /* 19.空管报警阈值 */
 MenuList_t Menu_level3_18_zh[] =
 {
-	{numof(Menu_L3_18_Mtsnsr), Menu_L3_18_Mtsnsr},	/* 空管报警阈值 */
+	{numof(Menu_L3_18_Mtsnsr), Menu_L3_18_Mtsnsr},	/* 59999 */
 };
 
+/* 20.上限报警允许 */
+MenuList_t Menu_level3_19_zh[] =
+{
+	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
+	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
+};
+
+/* 21.上限报警数值 */
+MenuList_t Menu_level3_20_zh[] =
+{
+	{numof(Menu_L3_NumPercent), Menu_L3_NumPercent},	/* 000.00% */
+};
+
+/* 22.下限报警允许 */
+MenuList_t Menu_level3_21_zh[] =
+{
+	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
+	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
+};
+
+/* 23.下限报警数值 */
+MenuList_t Menu_level3_22_zh[] =
+{
+	{numof(Menu_L3_NumPercent), Menu_L3_NumPercent},	/* 000.00% */
+};
+
+/* 24.励磁报警允许 */
+MenuList_t Menu_level3_23_zh[] =
+{
+	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
+	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
+};
+
+/* 25.总量清零密码 */
+MenuList_t Menu_level3_24_zh[] =
+{
+	{numof(Menu_PasswordSet_zh), Menu_PasswordSet_zh},	/* 00000 */
+};
 
 /********************************************
  *      各层级菜单构成信息
@@ -1604,13 +1642,18 @@ MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 	{numof(Menu_level3_16_zh), Menu_level3_16_zh},	/* 频率输出范围_1～ 5999 Hz */
 	{numof(Menu_level3_17_zh), Menu_level3_17_zh},	/* 空管报警允许_允许/禁止 */
 	{numof(Menu_level3_18_zh), Menu_level3_18_zh},	/* 空管报警阈值_59999 */
+	{numof(Menu_level3_19_zh), Menu_level3_19_zh},	/* 上限报警允许_允许/禁止 */
+	{numof(Menu_level3_20_zh), Menu_level3_20_zh},	/* 上限报警数值_0～599.99% */
+	{numof(Menu_level3_21_zh), Menu_level3_21_zh},	/* 下限报警允许_允许/禁止 */
+	{numof(Menu_level3_22_zh), Menu_level3_22_zh},	/* 下限报警数值_0～599.99% */
+	{numof(Menu_level3_23_zh), Menu_level3_23_zh},	/* 励磁报警允许_允许/禁止 */
+	{numof(Menu_level3_24_zh), Menu_level3_24_zh},	/* 总量清零密码_0-99999 */
 };
 
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
 {
 	{numof(Menu_Password_zh), Menu_Password_zh},		/* 参数设置密码 */
 	{numof(Menu_Password_zh), Menu_Password_zh},		/* 总量清零密码 */
-	{numof(Menu_PasswordSet_zh), Menu_PasswordSet_zh},	/* 密码设定 */
 };
 
 /********************************************
