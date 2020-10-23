@@ -27,4 +27,23 @@ PermitOpt_t lcd_almlowena;		/* 下限报警允许 */
 DataSize5_t lcd_almlowval;		/* 下限报警数值 */
 PermitOpt_t lcd_coilalmena;		/* 励磁报警允许 */
 DataSize5_t PWInfo;				/* 总量清零密码 */
-
+DataSize5_t lcd_sensorcode1;	/* 传感器编码1 */
+DataSize5_t lcd_sensorcode2;	/* 传感器编码2 */
+FieldType_t lcd_fieldtype;		/* 励磁方式选择 */
+DataSize5_t lcd_sensorfact;		/* 传感器系数值 */
+DataSize5_t lcd_correctfact0;	/* 修正系数0 */
+DataSize3_t lcd_correctvalu0;	/* 流量修正点0 */
+DataSize5_t lcd_correctfact1;	/* 修正系数1 */
+DataSize3_t lcd_correctvalu1;	/* 流量修正点1 */
+DataSize5_t lcd_correctfact2;	/* 修正系数2 */
+DataSize3_t lcd_correctvalu2;	/* 流量修正点2 */
+DataSize5_t lcd_correctfact3;	/* 修正系数3 */
+DataSize3_t lcd_correctvalu3;	/* 流量修正点3 */
+DataSize5_t lcd_correctfact4;	/* 修正系数4 */
+DataSize9_t lcd_fwdtotal;		/* 正向累计设定 */
+DataSize9_t lcd_revtotal;		/* 反向累计设定 */
+DataSize5_t lcd_analogzero;		/* 电流零点修正 */
+DataSize5_t lcd_analogrange;	/* 电流满度修正 */
+DataSize5_t lcd_meterfact;		/* 出厂标定系数 */
+DataSize5_t lcd_setdensity;		/* 设定密度 */
+DataSize4_t lcd_sendint;		/* 远传间隔时间 */

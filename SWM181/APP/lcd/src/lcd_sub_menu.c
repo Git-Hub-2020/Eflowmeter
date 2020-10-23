@@ -15,7 +15,7 @@ static DisplayReq_t LCD_Menu_L2_SetNum(uint8_t, uint8_t, uint8_t*);
 static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t,uint8_t,uint8_t,uint8_t*,uint32_t,uint32_t);
 static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t,uint8_t,uint8_t,uint8_t,uint8_t*,uint32_t,uint32_t);
 
-SubMenuInfo_t SubMenuInfo[MENU_L3_MAX] =
+static SubMenuInfo_t SubMenuInfo[MENU_L3_MAX] =
 {
 	{MENU_L3_00, MENU_L2_PARAMSET00, 1, (uint8_t*)&lcd_Language, TYPE_SELECT, LANG_ZH, LANG_MAX},
 	{MENU_L3_01, MENU_L2_PARAMSET01, numof(lcd_Commaddr.data), lcd_Commaddr.data, TYPE_SETNUM, 1, 99},
@@ -42,26 +42,26 @@ SubMenuInfo_t SubMenuInfo[MENU_L3_MAX] =
 	{MENU_L3_22, MENU_L2_PARAMSET22, numof(lcd_almlowval.data), lcd_almlowval.data, TYPE_SETNUM, 0, 59999},
 	{MENU_L3_23, MENU_L2_PARAMSET23, 1, (uint8_t*)&lcd_coilalmena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
 	{MENU_L3_24, MENU_L2_PARAMSET24, numof(PWInfo.data), PWInfo.data, TYPE_SETNUM, 0, 99999},
-	{MENU_L3_25, MENU_L2_PARAMSET25, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_26, MENU_L2_PARAMSET26, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_27, MENU_L2_PARAMSET27, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_28, MENU_L2_PARAMSET28, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_29, MENU_L2_PARAMSET29, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_30, MENU_L2_PARAMSET30, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_31, MENU_L2_PARAMSET31, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_32, MENU_L2_PARAMSET32, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_33, MENU_L2_PARAMSET33, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_34, MENU_L2_PARAMSET34, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_35, MENU_L2_PARAMSET35, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_36, MENU_L2_PARAMSET36, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_37, MENU_L2_PARAMSET37, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_38, MENU_L2_PARAMSET38, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_39, MENU_L2_PARAMSET39, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_40, MENU_L2_PARAMSET40, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_41, MENU_L2_PARAMSET41, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_42, MENU_L2_PARAMSET42, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_43, MENU_L2_PARAMSET43, 0, NULL, TYPE_SETNUM, 0, 0},
-	{MENU_L3_44, MENU_L2_PARAMSET44, 0, NULL, TYPE_SETNUM, 0, 0},
+	{MENU_L3_25, MENU_L2_PARAMSET25, numof(lcd_sensorcode1.data), lcd_sensorcode1.data, TYPE_SETNUM, 0, 99999},
+	{MENU_L3_26, MENU_L2_PARAMSET26, numof(lcd_sensorcode2.data), lcd_sensorcode2.data, TYPE_SETNUM, 0, 99999},
+	{MENU_L3_27, MENU_L2_PARAMSET27, 1, (uint8_t*)&lcd_fieldtype, TYPE_SELECT, FTYPE_1, FTYPE_MAX},
+	{MENU_L3_28, MENU_L2_PARAMSET28, numof(lcd_sensorfact.data), lcd_sensorfact.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_29, MENU_L2_PARAMSET29, numof(lcd_correctfact0.data), lcd_correctfact0.data, TYPE_SETNUM, 0, 20000},
+	{MENU_L3_30, MENU_L2_PARAMSET30, numof(lcd_correctvalu0.data), lcd_correctvalu0.data, TYPE_SETNUM, 0, 100},
+	{MENU_L3_31, MENU_L2_PARAMSET31, numof(lcd_correctfact1.data), lcd_correctfact1.data, TYPE_SETNUM, 0, 20000},
+	{MENU_L3_32, MENU_L2_PARAMSET32, numof(lcd_correctvalu1.data), lcd_correctvalu1.data, TYPE_SETNUM, 0, 100},
+	{MENU_L3_33, MENU_L2_PARAMSET33, numof(lcd_correctfact2.data), lcd_correctfact2.data, TYPE_SETNUM, 0, 20000},
+	{MENU_L3_34, MENU_L2_PARAMSET34, numof(lcd_correctvalu2.data), lcd_correctvalu2.data, TYPE_SETNUM, 0, 100},
+	{MENU_L3_35, MENU_L2_PARAMSET35, numof(lcd_correctfact3.data), lcd_correctfact3.data, TYPE_SETNUM, 0, 20000},
+	{MENU_L3_36, MENU_L2_PARAMSET36, numof(lcd_correctvalu3.data), lcd_correctvalu3.data, TYPE_SETNUM, 0, 100},
+	{MENU_L3_37, MENU_L2_PARAMSET37, numof(lcd_correctfact4.data), lcd_correctfact4.data, TYPE_SETNUM, 0, 20000},
+	{MENU_L3_38, MENU_L2_PARAMSET38, numof(lcd_fwdtotal.data), lcd_fwdtotal.data, TYPE_SETNUM, 0, 999999999},
+	{MENU_L3_39, MENU_L2_PARAMSET39, numof(lcd_revtotal.data), lcd_revtotal.data, TYPE_SETNUM, 0, 999999999},
+	{MENU_L3_40, MENU_L2_PARAMSET40, numof(lcd_analogzero.data), lcd_analogzero.data, TYPE_SETNUM, 0, 19999},
+	{MENU_L3_41, MENU_L2_PARAMSET41, numof(lcd_analogrange.data), lcd_analogrange.data, TYPE_SETNUM, 0, 39999},
+	{MENU_L3_42, MENU_L2_PARAMSET42, numof(lcd_meterfact.data), lcd_meterfact.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_43, MENU_L2_PARAMSET43, numof(lcd_setdensity.data), lcd_setdensity.data, TYPE_SETNUM, 0, 59999},
+	{MENU_L3_44, MENU_L2_PARAMSET44, numof(lcd_sendint.data), lcd_sendint.data, TYPE_SETNUM, 5, 1440},
 };
 
 void LCD_Sub_Menu_Init(void)

@@ -69,16 +69,6 @@ Stringinfo_t Menu_Password_zh[] =
 	{64, 2, STR_ZH, (uint8_t*)str_zh_ma}
 };
 
-/* 密码设定 */
-Stringinfo_t Menu_PasswordSet_zh[] =
-{
-	{44, 2, STR_EN, (uint8_t*)str_en_0},
-	{52, 2, STR_EN, (uint8_t*)str_en_0},
-	{60, 2, STR_EN, (uint8_t*)str_en_0},
-	{68, 2, STR_EN, (uint8_t*)str_en_0},
-	{76, 2, STR_EN, (uint8_t*)str_en_0}
-};
-
 /* 参数设置 */
 Stringinfo_t Menu_ParamSet_zh[] =
 {
@@ -1020,13 +1010,6 @@ Stringinfo_t Menu_L3_00_Eng_en[] =
 	{80, 2, STR_EN, (uint8_t*)str_en_h},
 };
 
-/* 仪表通讯地址_01 */
-Stringinfo_t Menu_L3_01_Adr[] =
-{
-	{56, 2, STR_EN, (uint8_t*)str_en_0},
-	{64, 2, STR_EN, (uint8_t*)str_en_1},
-};
-
 /* 仪表通讯速度_2400 */
 Stringinfo_t Menu_L3_02_2400[] =
 {
@@ -1062,15 +1045,6 @@ Stringinfo_t Menu_L3_02_19200[] =
 	{64, 2, STR_EN, (uint8_t*)str_en_2},
 	{72, 2, STR_EN, (uint8_t*)str_en_0},
 	{80, 2, STR_EN, (uint8_t*)str_en_0},
-};
-
-/* 测量管道口径_0003 */
-Stringinfo_t Menu_L3_03_Size[] =
-{
-	{48, 2, STR_EN, (uint8_t*)str_en_0},
-	{56, 2, STR_EN, (uint8_t*)str_en_0},
-	{64, 2, STR_EN, (uint8_t*)str_en_0},
-	{72, 2, STR_EN, (uint8_t*)str_en_3},
 };
 
 /* 流量单位_L/s */
@@ -1111,23 +1085,6 @@ Stringinfo_t Menu_L3_04_m3m[] =
 	{48, 2, STR_ZH, (uint8_t*)str_pic_unit},
 	{64, 2, STR_EN, (uint8_t*)str_en_line_1},
 	{72, 2, STR_EN, (uint8_t*)str_en_m},
-};
-
-/* 仪表量程设置_00000 */
-Stringinfo_t Menu_L3_05_Range[] =
-{
-	{48, 2, STR_EN, (uint8_t*)str_en_0},
-	{56, 2, STR_EN, (uint8_t*)str_en_0},
-	{64, 2, STR_EN, (uint8_t*)str_en_0},
-	{72, 2, STR_EN, (uint8_t*)str_en_0},
-	{80, 2, STR_EN, (uint8_t*)str_en_0},
-};
-
-/* 测量阻尼时间_01 */
-Stringinfo_t Menu_L3_06_Damp[] =
-{
-	{56, 2, STR_EN, (uint8_t*)str_en_0},
-	{64, 2, STR_EN, (uint8_t*)str_en_1},
 };
 
 /* 流量方向择项_正向 */
@@ -1315,32 +1272,106 @@ Stringinfo_t Menu_L3_16_Freque[] =
 	{80, 2, STR_EN, (uint8_t*)str_en_z},
 };
 
-/* 空管报警阈值59999 */
-Stringinfo_t Menu_L3_18_Mtsnsr[] =
+/* 励磁方式选择_方式1 */
+Stringinfo_t Menu_L3_Fieldtype1_zh[] =
 {
-	{48, 2, STR_EN, (uint8_t*)str_en_5},
-	{56, 2, STR_EN, (uint8_t*)str_en_9},
-	{64, 2, STR_EN, (uint8_t*)str_en_9},
-	{72, 2, STR_EN, (uint8_t*)str_en_9},
-	{80, 2, STR_EN, (uint8_t*)str_en_9},
+	{48, 2, STR_ZH, (uint8_t*)str_zh_fang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_shi_2},
+	{80, 2, STR_EN, (uint8_t*)str_en_1}
+};
+
+/* 励磁方式选择_方式2 */
+Stringinfo_t Menu_L3_Fieldtype2_zh[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_zh_fang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_shi_2},
+	{80, 2, STR_EN, (uint8_t*)str_en_2}
+};
+
+/* 励磁方式选择_方式3 */
+Stringinfo_t Menu_L3_Fieldtype3_zh[] =
+{
+	{48, 2, STR_ZH, (uint8_t*)str_zh_fang},
+	{64, 2, STR_ZH, (uint8_t*)str_zh_shi_2},
+	{80, 2, STR_EN, (uint8_t*)str_en_3}
+};
+
+/* XX纯数字置数型菜单 */
+Stringinfo_t Menu_L3_Digit_XX[] =
+{
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/* XX.X置数型菜单 */
+Stringinfo_t Menu_L3_Digit_XXpX[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_0},
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_dot},
+};
+
+/* XXXX纯数字置数型菜单 */
+Stringinfo_t Menu_L3_Digit_XXXX[] =
+{
+	{48, 2, STR_EN, (uint8_t*)str_en_0},
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+};
+
+/* XXXXX纯数字置数型菜单 */
+Stringinfo_t Menu_L3_Digit_XXXXX[] =
+{
+	{44, 2, STR_EN, (uint8_t*)str_en_0},
+	{52, 2, STR_EN, (uint8_t*)str_en_0},
+	{60, 2, STR_EN, (uint8_t*)str_en_0},
+	{68, 2, STR_EN, (uint8_t*)str_en_0},
+	{76, 2, STR_EN, (uint8_t*)str_en_0}
+};
+
+/* X.XXXX置数型菜单 */
+Stringinfo_t Menu_L3_Digit_XpXXXX[] =
+{
+	{40, 2, STR_EN, (uint8_t*)str_en_0},
+	{56, 2, STR_EN, (uint8_t*)str_en_0},
+	{64, 2, STR_EN, (uint8_t*)str_en_0},
+	{72, 2, STR_EN, (uint8_t*)str_en_0},
+	{80, 2, STR_EN, (uint8_t*)str_en_0},
+	{48, 2, STR_EN, (uint8_t*)str_en_dot}
+};
+
+/* XXXXXXXXX纯数字置数型菜单 */
+Stringinfo_t Menu_L3_Digit_XXXXXXXXX[] =
+{
+	{28, 2, STR_EN, (uint8_t*)str_en_0},
+	{36, 2, STR_EN, (uint8_t*)str_en_0},
+	{44, 2, STR_EN, (uint8_t*)str_en_0},
+	{52, 2, STR_EN, (uint8_t*)str_en_0},
+	{60, 2, STR_EN, (uint8_t*)str_en_0},
+	{68, 2, STR_EN, (uint8_t*)str_en_0},
+	{76, 2, STR_EN, (uint8_t*)str_en_0},
+	{84, 2, STR_EN, (uint8_t*)str_en_0},
+	{92, 2, STR_EN, (uint8_t*)str_en_0}
 };
 
 /********** 参数设置子菜单画面构成信息 ********/
 /* 1.语言 */
-MenuList_t Menu_level3_00_zh[] =
+MenuList_t Menu_level3_01_zh[] =
 {
 	{numof(Menu_L3_00_Chn_zh), Menu_L3_00_Chn_zh},	/* 中文 */
 	{numof(Menu_L3_00_Eng_en), Menu_L3_00_Eng_en},	/* English */
 };
 
 /* 2.仪表通讯地址 */
-MenuList_t Menu_level3_01_zh[] =
+MenuList_t Menu_level3_02_zh[] =
 {
-	{numof(Menu_L3_01_Adr), Menu_L3_01_Adr},	/* 01 */
+	{numof(Menu_L3_Digit_XX), Menu_L3_Digit_XX},	/* 00 */
 };
 
 /* 3.仪表通讯速度 */
-MenuList_t Menu_level3_02_zh[] =
+MenuList_t Menu_level3_03_zh[] =
 {
 	{numof(Menu_L3_02_2400), Menu_L3_02_2400},		/* 2400 */
 	{numof(Menu_L3_02_4800), Menu_L3_02_4800},		/* 4800 */
@@ -1349,13 +1380,13 @@ MenuList_t Menu_level3_02_zh[] =
 };
 
 /* 4.测量管道口径 */
-MenuList_t Menu_level3_03_zh[] =
+MenuList_t Menu_level3_04_zh[] =
 {
-	{numof(Menu_L3_03_Size), Menu_L3_03_Size},	/* 0003 */
+	{numof(Menu_L3_Digit_XXXX), Menu_L3_Digit_XXXX},	/* 0000 */
 };
 
 /* 5.流量单位 */
-MenuList_t Menu_level3_04_zh[] =
+MenuList_t Menu_level3_05_zh[] =
 {
 	{numof(Menu_L3_04_Ls), Menu_L3_04_Ls},		/* L/s */
 	{numof(Menu_L3_04_Lm), Menu_L3_04_Lm},		/* L/m */
@@ -1365,45 +1396,45 @@ MenuList_t Menu_level3_04_zh[] =
 };
 
 /* 6.仪表量程设置 */
-MenuList_t Menu_level3_05_zh[] =
+MenuList_t Menu_level3_06_zh[] =
 {
-	{numof(Menu_L3_05_Range), Menu_L3_05_Range},	/* 00000 */
+	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
 };
 
 /* 7.测量阻尼时间 */
-MenuList_t Menu_level3_06_zh[] =
+MenuList_t Menu_level3_07_zh[] =
 {
-	{numof(Menu_L3_06_Damp), Menu_L3_06_Damp},		/* 01 */
+	{numof(Menu_L3_Digit_XX), Menu_L3_Digit_XX},		/* 00 */
 };
 
 /* 8.流量方向择项 */
-MenuList_t Menu_level3_07_zh[] =
+MenuList_t Menu_level3_08_zh[] =
 {
 	{numof(Menu_L3_07_Forward_zh), Menu_L3_07_Forward_zh},		/* 正向 */
 	{numof(Menu_L3_07_Backward_zh), Menu_L3_07_Backward_zh},	/* 反向 */
 };
 
 /* 9.流量零点修正 */
-MenuList_t Menu_level3_08_zh[] =
+MenuList_t Menu_level3_09_zh[] =
 {
 	{numof(Menu_L3_08_Flowzero), Menu_L3_08_Flowzero},	/* ±0000 */
 };
 
 /* 10.小信号切除点 */
-MenuList_t Menu_level3_09_zh[] =
+MenuList_t Menu_level3_10_zh[] =
 {
 	{numof(Menu_L3_NumPercent), Menu_L3_NumPercent},	/* 000.00% */
 };
 
 /* 11.允许切除显示 */
-MenuList_t Menu_level3_10_zh[] =
+MenuList_t Menu_level3_11_zh[] =
 {
 	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
 	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
 };
 
 /* 12.流量积算单位 */
-MenuList_t Menu_level3_11_zh[] =
+MenuList_t Menu_level3_12_zh[] =
 {
 	{numof(Menu_L3_0001L), Menu_L3_0001L},		/* 0.001L */
 	{numof(Menu_L3_0010L), Menu_L3_0010L},		/* 0.010L */
@@ -1416,28 +1447,28 @@ MenuList_t Menu_level3_11_zh[] =
 };
 
 /* 13.反向输出允许 */
-MenuList_t Menu_level3_12_zh[] =
+MenuList_t Menu_level3_13_zh[] =
 {
 	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
 	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
 };
 
 /* 14.电流输出类型 */
-MenuList_t Menu_level3_13_zh[] =
+MenuList_t Menu_level3_14_zh[] =
 {
 	{numof(Menu_L3_0to10mA), Menu_L3_0to10mA},		/* 0～10mA */
 	{numof(Menu_L3_4to20mA), Menu_L3_4to20mA},		/* 4～20mA */
 };
 
 /* 15.脉冲输出方式 */
-MenuList_t Menu_level3_14_zh[] =
+MenuList_t Menu_level3_15_zh[] =
 {
 	{numof(Menu_L3_Frequency_zh), Menu_L3_Frequency_zh},	/* 频率 */
 	{numof(Menu_L3_Pulse_zh), Menu_L3_Pulse_zh},			/* 脉冲 */
 };
 
 /* 16.脉冲单位当量 */
-MenuList_t Menu_level3_15_zh[] =
+MenuList_t Menu_level3_16_zh[] =
 {
 	{numof(Menu_L3_0001L), Menu_L3_0001L},		/* 0.001L */
 	{numof(Menu_L3_0010L), Menu_L3_0010L},		/* 0.010L */
@@ -1450,61 +1481,183 @@ MenuList_t Menu_level3_15_zh[] =
 };
 
 /* 17.频率输出范围 */
-MenuList_t Menu_level3_16_zh[] =
+MenuList_t Menu_level3_17_zh[] =
 {
 	{numof(Menu_L3_16_Freque), Menu_L3_16_Freque},	/* 0001Hz */
 };
 
 /* 18.空管报警允许 */
-MenuList_t Menu_level3_17_zh[] =
+MenuList_t Menu_level3_18_zh[] =
 {
 	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
 	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
 };
 
 /* 19.空管报警阈值 */
-MenuList_t Menu_level3_18_zh[] =
+MenuList_t Menu_level3_19_zh[] =
 {
-	{numof(Menu_L3_18_Mtsnsr), Menu_L3_18_Mtsnsr},	/* 59999 */
+	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
 };
 
 /* 20.上限报警允许 */
-MenuList_t Menu_level3_19_zh[] =
+MenuList_t Menu_level3_20_zh[] =
 {
 	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
 	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
 };
 
 /* 21.上限报警数值 */
-MenuList_t Menu_level3_20_zh[] =
+MenuList_t Menu_level3_21_zh[] =
 {
 	{numof(Menu_L3_NumPercent), Menu_L3_NumPercent},	/* 000.00% */
 };
 
 /* 22.下限报警允许 */
-MenuList_t Menu_level3_21_zh[] =
+MenuList_t Menu_level3_22_zh[] =
 {
 	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
 	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
 };
 
 /* 23.下限报警数值 */
-MenuList_t Menu_level3_22_zh[] =
+MenuList_t Menu_level3_23_zh[] =
 {
 	{numof(Menu_L3_NumPercent), Menu_L3_NumPercent},	/* 000.00% */
 };
 
 /* 24.励磁报警允许 */
-MenuList_t Menu_level3_23_zh[] =
+MenuList_t Menu_level3_24_zh[] =
 {
 	{numof(Menu_L3_Allow_zh), Menu_L3_Allow_zh},	/* 允许 */
 	{numof(Menu_L3_Forbid_zh), Menu_L3_Forbid_zh},	/* 禁止 */
 };
 
 /* 25.总量清零密码 */
-MenuList_t Menu_level3_24_zh[] =
+MenuList_t Menu_level3_25_zh[] =
 {
-	{numof(Menu_PasswordSet_zh), Menu_PasswordSet_zh},	/* 00000 */
+	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
+};
+
+/* 26.传感器编码1 */
+MenuList_t Menu_level3_26_zh[] =
+{
+	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
+};
+
+/* 27.传感器编码2 */
+MenuList_t Menu_level3_27_zh[] =
+{
+	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
+};
+
+/* 28.励磁方式选择 */
+MenuList_t Menu_level3_28_zh[] =
+{
+	{numof(Menu_L3_Fieldtype1_zh), Menu_L3_Fieldtype1_zh},	/* 方式1 */
+	{numof(Menu_L3_Fieldtype2_zh), Menu_L3_Fieldtype2_zh},	/* 方式2 */
+	{numof(Menu_L3_Fieldtype3_zh), Menu_L3_Fieldtype3_zh},	/* 方式3 */
+};
+
+/* 29.传感器系数值 */
+MenuList_t Menu_level3_29_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 30.修正系数0 */
+MenuList_t Menu_level3_30_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 31.流量修正点0 */
+MenuList_t Menu_level3_31_zh[] =
+{
+	{numof(Menu_L3_Digit_XXpX), Menu_L3_Digit_XXpX},	/* 00.0 */
+};
+
+/* 32.修正系数1 */
+MenuList_t Menu_level3_32_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 33.流量修正点1 */
+MenuList_t Menu_level3_33_zh[] =
+{
+	{numof(Menu_L3_Digit_XXpX), Menu_L3_Digit_XXpX},	/* 00.0 */
+};
+
+/* 34.修正系数2 */
+MenuList_t Menu_level3_34_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 35.流量修正点2 */
+MenuList_t Menu_level3_35_zh[] =
+{
+	{numof(Menu_L3_Digit_XXpX), Menu_L3_Digit_XXpX},	/* 00.0 */
+};
+
+/* 36.修正系数3 */
+MenuList_t Menu_level3_36_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 37.流量修正点3 */
+MenuList_t Menu_level3_37_zh[] =
+{
+	{numof(Menu_L3_Digit_XXpX), Menu_L3_Digit_XXpX},	/* 00.0 */
+};
+
+/* 38.修正系数4 */
+MenuList_t Menu_level3_38_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 39.正向累计设定 */
+MenuList_t Menu_level3_39_zh[] =
+{
+	{numof(Menu_L3_Digit_XXXXXXXXX), Menu_L3_Digit_XXXXXXXXX},	/* 000000000 */
+};
+
+/* 40.反向累计设定 */
+MenuList_t Menu_level3_40_zh[] =
+{
+	{numof(Menu_L3_Digit_XXXXXXXXX), Menu_L3_Digit_XXXXXXXXX},	/* 000000000 */
+};
+
+/* 41.电流零点修正 */
+MenuList_t Menu_level3_41_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 42.电流满度修正 */
+MenuList_t Menu_level3_42_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 43.出厂标定系数 */
+MenuList_t Menu_level3_43_zh[] =
+{
+	{numof(Menu_L3_Digit_XpXXXX), Menu_L3_Digit_XpXXXX},	/* 0.0000 */
+};
+
+/* 44.设定密度 */
+MenuList_t Menu_level3_44_zh[] =
+{
+	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
+};
+
+/* 45.远传间隔时间 */
+MenuList_t Menu_level3_45_zh[] =
+{
+	{numof(Menu_L3_Digit_XXXX), Menu_L3_Digit_XXXX},	/* 0000 */
 };
 
 /********************************************
@@ -1623,31 +1776,51 @@ MenuList_t Menu_level2_list_en[MENU_L2_MAX] =
 
 MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 {
-	{numof(Menu_level3_00_zh), Menu_level3_00_zh},	/* 语言_中文/English */
-	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 仪表通讯地址_0～99 */
-	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯速度_300～38400 */
-	{numof(Menu_level3_03_zh), Menu_level3_03_zh},	/* 测量管道口径_3～3000 */
-	{numof(Menu_level3_04_zh), Menu_level3_04_zh},	/* 流量单位 */
-	{numof(Menu_level3_05_zh), Menu_level3_05_zh},	/* 仪表量程设置_0～99999 */
-	{numof(Menu_level3_06_zh), Menu_level3_06_zh},	/* 测量阻尼时间_1～64 */
-	{numof(Menu_level3_07_zh), Menu_level3_07_zh},	/* 流量方向择项_正向/反向 */
-	{numof(Menu_level3_08_zh), Menu_level3_08_zh},	/* 流量零点修正_0～±9999 */
-	{numof(Menu_level3_09_zh), Menu_level3_09_zh},	/* 小信号切除点_0～599.99% */
-	{numof(Menu_level3_10_zh), Menu_level3_10_zh},	/* 允许切除显示_允许/禁止 */
-	{numof(Menu_level3_11_zh), Menu_level3_11_zh},	/* 流量积算单位_0.001m3～1m3/0.001L～1L */
-	{numof(Menu_level3_12_zh), Menu_level3_12_zh},	/* 反向输出允许_允许/禁止 */
-	{numof(Menu_level3_13_zh), Menu_level3_13_zh},	/* 电流输出类型_0～10mA/4～20mA */
-	{numof(Menu_level3_14_zh), Menu_level3_14_zh},	/* 脉冲输出方式_频率/脉冲 */
-	{numof(Menu_level3_15_zh), Menu_level3_15_zh},	/* 脉冲单位当量_0.001m3～1m3/0.001L～1L */
-	{numof(Menu_level3_16_zh), Menu_level3_16_zh},	/* 频率输出范围_1～ 5999 Hz */
-	{numof(Menu_level3_17_zh), Menu_level3_17_zh},	/* 空管报警允许_允许/禁止 */
-	{numof(Menu_level3_18_zh), Menu_level3_18_zh},	/* 空管报警阈值_59999 */
-	{numof(Menu_level3_19_zh), Menu_level3_19_zh},	/* 上限报警允许_允许/禁止 */
-	{numof(Menu_level3_20_zh), Menu_level3_20_zh},	/* 上限报警数值_0～599.99% */
-	{numof(Menu_level3_21_zh), Menu_level3_21_zh},	/* 下限报警允许_允许/禁止 */
-	{numof(Menu_level3_22_zh), Menu_level3_22_zh},	/* 下限报警数值_0～599.99% */
-	{numof(Menu_level3_23_zh), Menu_level3_23_zh},	/* 励磁报警允许_允许/禁止 */
-	{numof(Menu_level3_24_zh), Menu_level3_24_zh},	/* 总量清零密码_0-99999 */
+	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 语言_中文/English */
+	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯地址_0～99 */
+	{numof(Menu_level3_03_zh), Menu_level3_03_zh},	/* 仪表通讯速度_300～38400 */
+	{numof(Menu_level3_04_zh), Menu_level3_04_zh},	/* 测量管道口径_3～3000 */
+	{numof(Menu_level3_05_zh), Menu_level3_05_zh},	/* 流量单位 */
+	{numof(Menu_level3_06_zh), Menu_level3_06_zh},	/* 仪表量程设置_0～99999 */
+	{numof(Menu_level3_07_zh), Menu_level3_07_zh},	/* 测量阻尼时间_1～64 */
+	{numof(Menu_level3_08_zh), Menu_level3_08_zh},	/* 流量方向择项_正向/反向 */
+	{numof(Menu_level3_09_zh), Menu_level3_09_zh},	/* 流量零点修正_0～±9999 */
+	{numof(Menu_level3_10_zh), Menu_level3_10_zh},	/* 小信号切除点_0～599.99% */
+	{numof(Menu_level3_11_zh), Menu_level3_11_zh},	/* 允许切除显示_允许/禁止 */
+	{numof(Menu_level3_12_zh), Menu_level3_12_zh},	/* 流量积算单位_0.001m3～1m3/0.001L～1L */
+	{numof(Menu_level3_13_zh), Menu_level3_13_zh},	/* 反向输出允许_允许/禁止 */
+	{numof(Menu_level3_14_zh), Menu_level3_14_zh},	/* 电流输出类型_0～10mA/4～20mA */
+	{numof(Menu_level3_15_zh), Menu_level3_15_zh},	/* 脉冲输出方式_频率/脉冲 */
+	{numof(Menu_level3_16_zh), Menu_level3_16_zh},	/* 脉冲单位当量_0.001m3～1m3/0.001L～1L */
+	{numof(Menu_level3_17_zh), Menu_level3_17_zh},	/* 频率输出范围_1～ 5999 Hz */
+	{numof(Menu_level3_18_zh), Menu_level3_18_zh},	/* 空管报警允许_允许/禁止 */
+	{numof(Menu_level3_19_zh), Menu_level3_19_zh},	/* 空管报警阈值_59999 */
+	{numof(Menu_level3_20_zh), Menu_level3_20_zh},	/* 上限报警允许_允许/禁止 */
+	{numof(Menu_level3_21_zh), Menu_level3_21_zh},	/* 上限报警数值_0～599.99% */
+	{numof(Menu_level3_22_zh), Menu_level3_22_zh},	/* 下限报警允许_允许/禁止 */
+	{numof(Menu_level3_23_zh), Menu_level3_23_zh},	/* 下限报警数值_0～599.99% */
+	{numof(Menu_level3_24_zh), Menu_level3_24_zh},	/* 励磁报警允许_允许/禁止 */
+	{numof(Menu_level3_25_zh), Menu_level3_25_zh},	/* 总量清零密码_0-99999 */
+	{numof(Menu_level3_26_zh), Menu_level3_26_zh},	/* 传感器编码1_0-99999 */
+	{numof(Menu_level3_27_zh), Menu_level3_27_zh},	/* 传感器编码2_0-99999 */
+	{numof(Menu_level3_28_zh), Menu_level3_28_zh},	/* 励磁方式选择_方式1、2、3 */
+	{numof(Menu_level3_29_zh), Menu_level3_29_zh},	/* 传感器系数值_0.0000～5.9999 */
+	{numof(Menu_level3_30_zh), Menu_level3_30_zh},	/* 修正系数0_0.0000～2.0000 */
+	{numof(Menu_level3_31_zh), Menu_level3_31_zh},	/* 流量修正点0_00.0~10.0 */
+	{numof(Menu_level3_32_zh), Menu_level3_32_zh},	/* 修正系数1_0.0000～2.0000 */
+	{numof(Menu_level3_33_zh), Menu_level3_33_zh},	/* 流量修正点1_00.0~10.0 */
+	{numof(Menu_level3_34_zh), Menu_level3_34_zh},	/* 修正系数2_0.0000～2.0000 */
+	{numof(Menu_level3_35_zh), Menu_level3_35_zh},	/* 流量修正点2_00.0~10.0 */
+	{numof(Menu_level3_36_zh), Menu_level3_36_zh},	/* 修正系数3_0.0000～2.0000 */
+	{numof(Menu_level3_37_zh), Menu_level3_37_zh},	/* 流量修正点3_00.0~10.0 */
+	{numof(Menu_level3_38_zh), Menu_level3_38_zh},	/* 修正系数4_0.0000～2.0000 */
+	{numof(Menu_level3_39_zh), Menu_level3_39_zh},	/* 正向累计设定_0～999999999 */
+	{numof(Menu_level3_40_zh), Menu_level3_40_zh},	/* 反向累计设定_0～999999999 */
+	{numof(Menu_level3_41_zh), Menu_level3_41_zh},	/* 电流零点修正_0.0000～1.9999 */
+	{numof(Menu_level3_42_zh), Menu_level3_42_zh},	/* 电流满度修正_0.0000～3.9999 */
+	{numof(Menu_level3_43_zh), Menu_level3_43_zh},	/* 出厂标定系数_0.0000～5.9999 */
+	{numof(Menu_level3_44_zh), Menu_level3_44_zh},	/* 设定密度_0～59999 */
+	{numof(Menu_level3_45_zh), Menu_level3_45_zh},	/* 远传间隔时间_5~1440 */
 };
 
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
