@@ -132,7 +132,7 @@ typedef struct Stringinfo
 	uint8_t			str_x;
 	uint8_t			str_y;
 	StringType_t	str_type;
-	uint8_t*		pstr;
+	const uint8_t*	pstr;
 } Stringinfo_t;
 
 typedef struct MenuList
@@ -141,13 +141,13 @@ typedef struct MenuList
 	void*			p_menu;
 } MenuList_t;
 
-extern MenuList_t* Menu_level0_list[];
-extern MenuList_t* Menu_level1_list[];
-extern MenuList_t* Menu_level2_list[];
-extern MenuList_t* Menu_level3_list[];
-extern MenuList_t* Menu_level4_list[];
-extern uint8_t* Menu_Number_Tbl[];
-extern Stringinfo_t Menu_Init_Dot[];
-extern Stringinfo_t Menu_Cursor_default;
+extern const MenuList_t* Menu_level0_list[];
+extern const MenuList_t* Menu_level1_list[];
+extern const MenuList_t* Menu_level2_list[];
+extern const MenuList_t* Menu_level3_list[];
+extern const MenuList_t* Menu_level4_list[];
+extern const uint8_t* Menu_Number_Tbl[];
+extern const Stringinfo_t Menu_Init_Dot[];
+extern const Stringinfo_t Menu_Cursor_default;
 
 #endif /* LCD_SCREEN_DATA_H_ */

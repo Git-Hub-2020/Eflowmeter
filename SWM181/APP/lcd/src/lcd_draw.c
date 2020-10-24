@@ -10,9 +10,9 @@
 #define SCL			GPIOB,PIN6
 
 static void LCD_Mst_Init(void);
-static void LCD_P8x16Str(uint8_t x, uint8_t y, uint8_t* pstr);
-static void LCD_P16x16Str(uint8_t x, uint8_t y, uint8_t* pstr);
-static void LCD_P16x32Str(uint8_t x, uint8_t y, uint8_t* pstr);
+static void LCD_P8x16Str(const uint8_t x, const uint8_t y, const uint8_t* pstr);
+static void LCD_P16x16Str(const uint8_t x, const uint8_t y, const uint8_t* pstr);
+static void LCD_P16x32Str(const uint8_t x, const uint8_t y, const uint8_t* pstr);
 static void Setadd(uint8_t xl,uint8_t yl);
 static void write_data(uint8_t para);
 static void write_com(uint8_t para);
@@ -46,7 +46,7 @@ void LCD_Draw_Init(void)
 	delay(5);
 }
 
-void LCD_Str_Draw(Stringinfo_t *str)
+void LCD_Str_Draw(const Stringinfo_t *str)
 {
 	if(NULL == str->pstr) return;
 
@@ -66,7 +66,7 @@ void LCD_Str_Draw(Stringinfo_t *str)
 	}
 }
 
-void LCD_Str_Clear(Stringinfo_t *str)
+void LCD_Str_Clear(const Stringinfo_t *str)
 {
 	if(NULL == str->pstr) return;
 
@@ -132,7 +132,7 @@ static void write_com(uint8_t para)
 	GPIO_SetBit(CS1);//CS1=1;
 }
 
-static void LCD_P8x16Str(uint8_t x, uint8_t y, uint8_t* pstr)
+static void LCD_P8x16Str(const uint8_t x, const uint8_t y, const uint8_t* pstr)
 {
 	uint8_t i = 0;
 
@@ -151,7 +151,7 @@ static void LCD_P8x16Str(uint8_t x, uint8_t y, uint8_t* pstr)
 	}
 }
 
-static void LCD_P16x16Str(uint8_t x, uint8_t y, uint8_t* pstr)
+static void LCD_P16x16Str(const uint8_t x, const uint8_t y, const uint8_t* pstr)
 {
 	uint8_t i = 0, j = 0;
 
@@ -166,7 +166,7 @@ static void LCD_P16x16Str(uint8_t x, uint8_t y, uint8_t* pstr)
 	}
 }
 
-static void LCD_P16x32Str(uint8_t x, uint8_t y, uint8_t* pstr)
+static void LCD_P16x32Str(const uint8_t x, const uint8_t y, const uint8_t* pstr)
 {
 	uint8_t i = 0, j = 0;
 
