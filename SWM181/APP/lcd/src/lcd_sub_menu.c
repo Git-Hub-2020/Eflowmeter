@@ -15,7 +15,7 @@ static DisplayReq_t LCD_Menu_L2_SetNum(uint8_t, uint8_t, uint8_t*);
 static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t,uint8_t,uint8_t,uint8_t*,uint32_t,uint32_t);
 static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t,uint8_t,uint8_t,uint8_t,uint8_t*,uint32_t,uint32_t);
 
-static SubMenuInfo_t SubMenuInfo[MENU_L3_MAX] =
+static SubMenuInfo_t SubMenuInfo[] =
 {
 	{MENU_L3_00, MENU_L2_PARAMSET00, 1, (uint8_t*)&lcd_Language, TYPE_SELECT, LANG_ZH, LANG_MAX},
 	{MENU_L3_01, MENU_L2_PARAMSET01, numof(lcd_Commaddr.data), lcd_Commaddr.data, TYPE_SETNUM, 1, 99},
@@ -73,7 +73,7 @@ void LCD_Sub_Menu_Init(void)
 	for(sub_menu = 0; sub_menu < numof(SubMenuInfo); sub_menu++){
 		if(NULL != SubMenuInfo[sub_menu].obj){
 			Lcd_Setting_GetValue(MENU_LEVEL_3, sub_menu, &value);
-			if((SubMenuInfo[sub_menu].obj_min > value)&&(SubMenuInfo[sub_menu].obj_max < value)){
+			if((SubMenuInfo[sub_menu].obj_min > value)||(SubMenuInfo[sub_menu].obj_max < value)){
 				value = SubMenuInfo[sub_menu].obj_min;
 				Lcd_Setting_SetValue(MENU_LEVEL_3, sub_menu, &value);
 				printf("Error:SubMenu[%d] setting is reset to the default value\n", sub_menu+1);
