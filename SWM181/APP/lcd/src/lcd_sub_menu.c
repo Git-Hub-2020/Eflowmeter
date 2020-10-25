@@ -196,6 +196,7 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 										uint32_t obj_max)
 {
 	DisplayReq_t disp_req = REQ_ON;
+	uint32_t value = 0;
 
 	switch(key)
 	{
@@ -205,7 +206,10 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 		}
 		*obj -= 1;
 		lcd_submenu_idx = *obj;
+		value = *obj;
 		LCD_Menu_SetID(menu_id);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
+		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &value);
 		break;
 	case MENU_KEY_UP:
 		*obj += 1;
@@ -213,13 +217,16 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 			*obj = obj_min;
 		}
 		lcd_submenu_idx = *obj;
+		value = *obj;
 		LCD_Menu_SetID(menu_id);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
+		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &value);
 		break;
 	case MENU_KEY_CONFIRM:
-		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, (uint32_t*)obj);
 		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Menu_SetID(pre_menu);
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);
+		//Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &lcd_submenu_idx);
 		break;
 	default:
 		disp_req = REQ_OFF;
@@ -246,6 +253,8 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		Lcd_StrToNum_Convert(obj, &check_num, obj_num);
 		if((0 < obj[lcd_cursor_pos]) && (obj_min < check_num)){
 			obj[lcd_cursor_pos]--;
+			check_num--;
+			Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &check_num);
 		}
 		else{
 			disp_req = REQ_OFF;
@@ -255,6 +264,8 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		Lcd_StrToNum_Convert(obj, &check_num, obj_num);
 		if((9 > obj[lcd_cursor_pos]) && (obj_max > check_num)){
 			obj[lcd_cursor_pos]++;
+			check_num++;
+			Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &check_num);
 		}
 		else{
 			disp_req = REQ_OFF;
