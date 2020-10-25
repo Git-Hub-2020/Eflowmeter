@@ -365,19 +365,19 @@ void LCD_Menu_SetID(uint8_t menu_id)
 	switch(LCD_Menu_GetLevel())
 	{
 		case MENU_LEVEL_0:
-			Current_Menu_Info = (MenuList_t*)&(Menu_level0_list[lcd_Language])[menu_id];
+			Current_Menu_Info = &(Menu_level0_list[lcd_Language])[menu_id];
 			break;
 		case MENU_LEVEL_1:
-			Current_Menu_Info = (MenuList_t*)&(Menu_level1_list[lcd_Language])[menu_id];
+			Current_Menu_Info = &(Menu_level1_list[lcd_Language])[menu_id];
 			break;
 		case MENU_LEVEL_2:
-			Current_Menu_Info = (MenuList_t*)&(Menu_level2_list[lcd_Language])[menu_id];
+			Current_Menu_Info = &(Menu_level2_list[lcd_Language])[menu_id];
 			break;
 		case MENU_LEVEL_3:
-			Current_Menu_Info = (MenuList_t*)&(((MenuList_t*)((Menu_level3_list[lcd_Language])[menu_id]).p_menu)[LCD_SubMenu_IdxGet()]);
+			Current_Menu_Info = &(((MenuList_t*)((Menu_level3_list[lcd_Language])[menu_id]).p_menu)[LCD_SubMenu_IdxGet()]);
 			break;
 		case MENU_LEVEL_4:
-			Current_Menu_Info = (MenuList_t*)&(Menu_level4_list[lcd_Language])[menu_id];
+			Current_Menu_Info = &(Menu_level4_list[lcd_Language])[menu_id];
 			break;
 		default:
 			break;

@@ -1,4 +1,3 @@
-#include <string.h>
 #include "common.h"
 #include "lcd_sub_menu.h"
 #include "lcd_menu.h"
@@ -68,7 +67,6 @@ void LCD_Sub_Menu_Init(void)
 {
 	uint8_t sub_menu = 0;
 	uint32_t value = 0;
-	uint32_t *p;
 
 	for(sub_menu = 0; sub_menu < numof(SubMenuInfo); sub_menu++){
 		if(NULL != SubMenuInfo[sub_menu].obj){
@@ -82,8 +80,7 @@ void LCD_Sub_Menu_Init(void)
 				Lcd_NumToStr_Convert(SubMenuInfo[sub_menu].obj, &value, SubMenuInfo[sub_menu].obj_num);
 			}
 			else{
-				p = (uint32_t*)SubMenuInfo[sub_menu].obj;
-				*p = value;
+				*SubMenuInfo[sub_menu].obj = value;
 			}
 		}
 	}
