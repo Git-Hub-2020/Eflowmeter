@@ -1,4 +1,5 @@
 #include "timer.h"
+#include "common.h"
 
 extern TimerTable_t timer_table[TIMER_ID_MAX];
 
@@ -13,12 +14,14 @@ void Timer_Setup(TimerID_t id)
 {
 	timer_table[id].status = TIMER_ON;
 	timer_table[id].counter = 0;
+	DebugLog("%s: TimerID:[%d]\n",__FUNCTION__, id);
 }
 
 void Timer_Clear(TimerID_t id)
 {
 	timer_table[id].status = TIMER_OFF;
 	timer_table[id].counter = 0;
+	DebugLog("%s: TimerID:[%d]\n",__FUNCTION__, id);
 }
 
 void Timer_Counter(void)
@@ -44,6 +47,7 @@ void Timer_TimeOut_Manager(void)
 		if((TIMER_ON == timer_table[id].status)
 		&&(timer_table[id].counter == timer_table[id].length))
 		{
+			DebugLog("TimeOut: TimerID:[%d]\n", id);
 			timer_table[id].func();
 			timer_table[id].counter = 0;
 		}

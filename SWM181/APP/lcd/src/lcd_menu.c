@@ -47,10 +47,13 @@ DisplayReq_t LCD_Menu_Key_Response(MenuKey_t key)
 		LCD_Menu_Key_L4
 	};
 
+	DebugLog("%s:key[%d],Level[%d]\n",__FUNCTION__, key, LCD_Menu_GetLevel());
+
 	if(LCD_Menu_GetLevel() < numof(Menu_Level)){
 		disp_req = Menu_Level[LCD_Menu_GetLevel()](key);
 	}
 
+	DebugLog("%s:disp_req[%d]\n",__FUNCTION__, disp_req);
 	return disp_req;
 }
 
@@ -255,12 +258,15 @@ void LCD_Screen_Draw(void)
 {
 	uint8_t i = 0;
 
+	DebugLog("%s:level[%d],menu[%d]\n",__FUNCTION__, LCD_Menu_GetLevel(), LCD_Menu_GetID());
+
 	clealddram(); //全画面清空
 
 	for(i = 0; i < Current_Menu_Info->menu_num; i++)
 	{
 		LCD_Str_Draw(&((Stringinfo_t*)Current_Menu_Info->p_menu)[i]);
 	}
+	DebugLog("%s:menu_num[%d]\n",__FUNCTION__, Current_Menu_Info->menu_num);
 }
 
 void LCD_Anime_Draw(void)
@@ -268,6 +274,8 @@ void LCD_Anime_Draw(void)
 	uint8_t level = LCD_Menu_GetLevel();
 	uint8_t menu = LCD_Menu_GetID();
 	Stringinfo_t str;
+
+	DebugLog("%s:level[%d],menu[%d]\n",__FUNCTION__, level, menu);
 
 	if (MENU_LEVEL_0 == level){
 		if (MENU_L0_INIT == menu){
@@ -293,6 +301,8 @@ void LCD_Cursor_Draw(void)
 {
 	static Stringinfo_t cursor_info;
 
+	DebugLog("%s:lcd_cursor_sts[%d]\n",__FUNCTION__,lcd_cursor_sts);
+
 	switch(lcd_cursor_sts)
 	{
 		case CURSOR_INVALID:	/* 无光标画面 */
@@ -317,6 +327,8 @@ void LCD_Cursor_Draw(void)
 		default:
 			break;
 	}
+
+	DebugLog("cursor_x[%d],cursor_y[%d]\n", cursor_info.str_x,cursor_info.str_y);
 }
 
 static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y)
@@ -362,6 +374,8 @@ void LCD_Menu_SetID(uint8_t menu_id)
 {
 	lcd_menu_id = menu_id;
 
+	DebugLog("%s:level[%d],menu[%d]\n",__FUNCTION__,LCD_Menu_GetLevel(),lcd_menu_id);
+
 	switch(LCD_Menu_GetLevel())
 	{
 		case MENU_LEVEL_0:
@@ -385,6 +399,8 @@ void LCD_Menu_SetID(uint8_t menu_id)
 
 	/* Menu迁移时设置全画面刷新请求 */
 	LCD_Screenreq_Set(REQ_ON);
+
+	DebugLog("%s:menu_num[%d]\n",__FUNCTION__, Current_Menu_Info->menu_num);
 }
 
 uint8_t LCD_Menu_GetID(void)

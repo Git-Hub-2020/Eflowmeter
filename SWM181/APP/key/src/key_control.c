@@ -1,3 +1,4 @@
+#include "common.h"
 #include "key_control.h"
 #include "lcd_control.h"
 
@@ -154,11 +155,11 @@ static void Key00(void)//键释放事件
 	  if (KeyDblCount[0] == 0x80)
 	  {
 		//在此添加双击键释放事件处理
-		printf("key1 double released \r\n");
+		DebugLog("key1 double released \r\n");
 	  }
 	  else
 	  {
-	  	printf("key1 released \r\n");
+		DebugLog("key1 released \r\n");
 		//在此添加单击键释放事件处理
 	  }
 }
@@ -167,11 +168,11 @@ static void Key01(void)
 	if (KeyDblCount[1] == 0x80)
 	{
 	  //在此添加双击键释放事件处理
-	  printf("key2 double released \r\n");
+	  DebugLog("key2 double released \r\n");
 	}
 	else
 	{
-	  printf("key2 released \r\n");
+	  DebugLog("key2 released \r\n");
 	  //在此添加单击键释放事件处理
 	}
 
@@ -181,11 +182,11 @@ static void Key02(void)
 	if (KeyDblCount[2] == 0x80)
 	{
 	  //在此添加双击键释放事件处理
-	  printf("key3 double releaseed \r\n");
+	  DebugLog("key3 double releaseed \r\n");
 	}
 	else
 	{
-	  printf("key3 released \r\n");
+	  DebugLog("key3 released \r\n");
 	  //在此添加单击键释放事件处理
 	}
 
@@ -195,11 +196,11 @@ static void Key03(void)
 	if (KeyDblCount[3] == 0x80)
 	{
 	  //在此添加双击键释放事件处理
-	  printf("key4 double released \r\n");
+	  DebugLog("key4 double released \r\n");
 	}
 	else
 	{
-	  printf("key4 released \r\n");
+	  DebugLog("key4 released \r\n");
 	  //在此添加单击键释放事件处理
 	}
 
@@ -219,7 +220,7 @@ static void Key10(void)//单击键事件
   {//在KEY3也压下时执行组合键事件
     Key3_0();return;
   }
-  printf("key1 pressed \r\n");
+  DebugLog("key1 pressed \r\n");
 }
 
 static void Key11(void)
@@ -233,7 +234,7 @@ static void Key11(void)
     Key1_2();return;
   }
   LCD_Key_StatusSet(MENU_KEY_DOWN);/* 下键 */
-  printf("key2 pressed \r\n");
+  DebugLog("key2 pressed \r\n");
 }
 
 static void Key12(void)
@@ -251,7 +252,7 @@ static void Key12(void)
     Key2_3();return;
   }
   LCD_Key_StatusSet(MENU_KEY_UP);/* 上键 */
-  printf("key3 pressed \r\n");
+  DebugLog("key3 pressed \r\n");
 }
 
 static void Key13(void)
@@ -265,79 +266,79 @@ static void Key13(void)
     Key3_0();return;
   }
   LCD_Key_StatusSet(MENU_KEY_CONFIRM);/* 确认键 */
-  printf("key4 pressed \r\n");
+  DebugLog("key4 pressed \r\n");
 }
 
 static void Key20(void)//双击键事件
 {
-	printf("key1 double pressed \r\n");
+	DebugLog("key1 double pressed \r\n");
 }
 
 static void Key21(void)
 {
-	printf("key2 double pressed \r\n");
+	DebugLog("key2 double pressed \r\n");
 }
 
 static void Key22(void)
 {
-	printf("key3 double pressed \r\n");
+	DebugLog("key3 double pressed \r\n");
 }
 static void Key23(void)
 {
-	printf("key4 double pressed \r\n");
+	DebugLog("key4 double pressed \r\n");
 }
 
 static void Key30(void)//长压键事件
 {
-	printf("key1 long pressed \r\n");
+	DebugLog("key1 long pressed \r\n");
 
 }
 
 static void Key31(void)
 {
-	printf("key2 long pressed \r\n");
+	DebugLog("key2 long pressed \r\n");
 
 }
 
 static void Key32(void)
 {
-	printf("key3 long pressed \r\n");
+	DebugLog("key3 long pressed \r\n");
 
 }
 
 static void Key33(void)
 {
-	printf("key4 long pressed \r\n");
+	DebugLog("key4 long pressed \r\n");
 	LCD_Key_StatusSet(MENU_KEY_LONGCONFIRM);/* 确认键长按 */
 }
 
 static void Key0_1(void)//组合键事件KEY0KEY1
 {
-	printf("key1 key2 pressed \r\n");
+	DebugLog("key1 key2 pressed \r\n");
 	LCD_Key_StatusSet(MENU_KEY_UNITDOWN);/* 复合+下键 */
 }
 
 static void Key0_2(void)//组合键事件KEY0KEY2
 {
-	printf("key1 key3 pressed \r\n");
+	DebugLog("key1 key3 pressed \r\n");
 	LCD_Key_StatusSet(MENU_KEY_UNITUP);/* 复合+上键 */
 }
 
 static void Key1_2(void)//KEY1KEY2
 {
-	printf("key2 key3 pressed \r\n");
+	DebugLog("key2 key3 pressed \r\n");
 
 }
 
 static void Key2_3(void)//KEY2KEY3
 {
-	printf("key3 key4 pressed \r\n");
+	DebugLog("key3 key4 pressed \r\n");
 
 }
 
 static void Key3_0(void)//KEY3KEY0
 {
-	printf("key1 key4 pressed \r\n");
+	DebugLog("key1 key4 pressed \r\n");
 	LCD_Key_StatusSet(MENU_KEY_UNITCONFIRM);/* 复合+确认键 */
 }
 
@@ -349,47 +350,47 @@ static void Key3_0(void)//KEY3KEY0
 //		switch(status_key)
 //		{
 //			case 0x01:
-//				printf("key1 pressed \r\n");break;
+//				DebugLog("key1 pressed \r\n");break;
 //			case 0x02:
-//				printf("key2 pressed \r\n");
+//				DebugLog("key2 pressed \r\n");
 //				LCD_Key_Down(); /* 下键 */
 //				break;
 //			case 0x03:
-//				printf("key1 key2 pressed \r\n");
+//				DebugLog("key1 key2 pressed \r\n");
 //				LCD_Key_UniteDown(); /* 复合+下键 */
 //				break;
 //			case 0x04:
-//				printf("key3 pressed \r\n");
+//				DebugLog("key3 pressed \r\n");
 //				LCD_Key_Up(); /* 上键 */
 //				break;
 //			case 0x05:
-//				printf("key1 key3 pressed \r\n");
+//				DebugLog("key1 key3 pressed \r\n");
 //				LCD_Key_UniteUp(); /* 复合+上键 */
 //				break;
 //			case 0x06:
-//				printf("key2 key3 pressed \r\n");break;
+//				DebugLog("key2 key3 pressed \r\n");break;
 //			case 0x07:
-//				printf("key1 key2 key3 pressed \r\n");break;
+//				DebugLog("key1 key2 key3 pressed \r\n");break;
 //			case 0x08:
-//				printf("key4 pressed \r\n");
+//				DebugLog("key4 pressed \r\n");
 //				LCD_Key_Confirm(); /* 确认键 */
 //				break;
 //			case 0x09:
-//				printf("key1 key4 pressed \r\n");
+//				DebugLog("key1 key4 pressed \r\n");
 //				LCD_Key_UniteConfirm(); /* 复合+确认键 */
 //				break;
 //			case 0x0a:
-//				printf("key2 key4 pressed \r\n");break;
+//				DebugLog("key2 key4 pressed \r\n");break;
 //			case 0x0b:
-//				printf("key1 key2 key4 pressed \r\n");break;
+//				DebugLog("key1 key2 key4 pressed \r\n");break;
 //			case 0x0c:
-//				printf("key3 key4 pressed \r\n");break;
+//				DebugLog("key3 key4 pressed \r\n");break;
 //			case 0x0d:
-//				printf("key1 key3 key4 pressed \r\n");break;
+//				DebugLog("key1 key3 key4 pressed \r\n");break;
 //			case 0x0e:
-//				printf("key2 key3 key4 pressed \r\n");break;
+//				DebugLog("key2 key3 key4 pressed \r\n");break;
 //			case 0x0f:
-//				printf("key1 key2 key3 key4 pressed \r\n");
+//				DebugLog("key1 key2 key3 key4 pressed \r\n");
 //				Eeprom_Read_Test(); /* Flash buffer输出  */
 //				break;
 //		}

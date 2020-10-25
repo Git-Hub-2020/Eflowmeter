@@ -74,13 +74,15 @@ void LCD_Sub_Menu_Init(void)
 			if((SubMenuInfo[sub_menu].obj_min > value)||(SubMenuInfo[sub_menu].obj_max < value)){
 				value = SubMenuInfo[sub_menu].obj_min;
 				Lcd_Setting_SetValue(MENU_LEVEL_3, sub_menu, &value);
-				printf("Error:SubMenu[%d] setting is reset to the default value\n", sub_menu+1);
+				DebugLog("Error:SubMenu[%d] setting is reset to the default value\n", sub_menu+1);
 			}
 			if(TYPE_SETNUM == SubMenuInfo[sub_menu].type){
 				Lcd_NumToStr_Convert(SubMenuInfo[sub_menu].obj, &value, SubMenuInfo[sub_menu].obj_num);
+				DebugLog("%s: SETNUM-SubMenu[%d]:value[%d]\n",__FUNCTION__, sub_menu, value);
 			}
 			else{
 				*SubMenuInfo[sub_menu].obj = value;
+				DebugLog("%s: SELECT-SubMenu[%d]:value[%d]\n",__FUNCTION__, sub_menu, value);
 			}
 		}
 	}
@@ -94,6 +96,8 @@ uint8_t LCD_SubMenu_IdxGet(void)
 DisplayReq_t LCD_Sub_Menu_L2(uint8_t menu, MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_OFF;
+
+	DebugLog("%s: Menu[%d]:key[%d]\n",__FUNCTION__, menu, key);
 
 	if (MENU_KEY_CONFIRM != key) return REQ_OFF;
 
@@ -114,6 +118,8 @@ DisplayReq_t LCD_Sub_Menu_L2(uint8_t menu, MenuKey_t key)
 DisplayReq_t LCD_Sub_Menu_L3(uint8_t menu, MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_OFF;
+
+	DebugLog("%s: Menu[%d]:key[%d]\n",__FUNCTION__, menu, key);
 
 	if (menu >= numof(SubMenuInfo)) return REQ_OFF;
 
