@@ -8,20 +8,42 @@
  ********************************************/
 
 /* 初始画面 */
-Stringinfo_t Menu_Init[] =
+Stringinfo_t Menu_Init_zh[] =
 {
+	{56, 0, STR_EN, str_en_0},
+	{72, 0, STR_EN, str_en_0},
+	{80, 0, STR_EN, str_en_0},
+	{64, 0, STR_EN, str_en_dot},
 	{24, 0, STR_EN, str_en_V},
 	{32, 0, STR_EN, str_en_e},
 	{40, 0, STR_EN, str_en_r},
-	{56, 0, STR_EN, str_en_0},
-	{64, 0, STR_EN, str_en_dot},
-	{72, 0, STR_EN, str_en_0},
-	{80, 0, STR_EN, str_en_0},
 	{24, 2, STR_ZH, str_zh_dian_1},
 	{40, 2, STR_ZH, str_zh_ci},
 	{56, 2, STR_ZH, str_zh_liu},
 	{72, 2, STR_ZH, str_zh_liang},
 	{88, 2, STR_ZH, str_zh_ji_1}
+};
+
+/* 初始画面Init */
+Stringinfo_t Menu_Init_en[] =
+{
+	{56, 0, STR_EN, str_en_0},
+	{72, 0, STR_EN, str_en_0},
+	{80, 0, STR_EN, str_en_0},
+	{64, 0, STR_EN, str_en_dot},
+	{24, 0, STR_EN, str_en_V},
+	{32, 0, STR_EN, str_en_e},
+	{40, 0, STR_EN, str_en_r},
+	{24, 2, STR_EN, str_en_S},
+	{32, 2, STR_EN, str_en_y},
+	{40, 2, STR_EN, str_en_s},
+	{48, 2, STR_EN, str_en_t},
+	{56, 2, STR_EN, str_en_e},
+	{64, 2, STR_EN, str_en_m},
+	{80, 2, STR_EN, str_en_I},
+	{88, 2, STR_EN, str_en_n},
+	{96, 2, STR_EN, str_en_i},
+	{104, 2, STR_EN, str_en_t}
 };
 
 /* 初始画面(....) */
@@ -69,6 +91,24 @@ Stringinfo_t Menu_Password_zh[] =
 	{64, 2, STR_ZH, str_zh_ma}
 };
 
+/* Password */
+Stringinfo_t Menu_Password_en[] =
+{
+	{44, 4, STR_EN, str_en_0},
+	{52, 4, STR_EN, str_en_0},
+	{60, 4, STR_EN, str_en_0},
+	{68, 4, STR_EN, str_en_0},
+	{76, 4, STR_EN, str_en_0},
+	{32, 2, STR_EN, str_en_P},
+	{40, 2, STR_EN, str_en_a},
+	{48, 2, STR_EN, str_en_s},
+	{56, 2, STR_EN, str_en_s},
+	{64, 2, STR_EN, str_en_w},
+	{72, 2, STR_EN, str_en_o},
+	{80, 2, STR_EN, str_en_r},
+	{88, 2, STR_EN, str_en_d}
+};
+
 /* 参数设置 */
 const Stringinfo_t Menu_ParamSet_zh[] =
 {
@@ -78,6 +118,22 @@ const Stringinfo_t Menu_ParamSet_zh[] =
 	{80, 2, STR_ZH, str_zh_zhi_1}
 };
 
+/* Parament Set */
+const Stringinfo_t Menu_ParamSet_en[] =
+{
+	{16, 2, STR_EN, str_en_P},
+	{24, 2, STR_EN, str_en_a},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_a},
+	{48, 2, STR_EN, str_en_m},
+	{56, 2, STR_EN, str_en_e},
+	{64, 2, STR_EN, str_en_n},
+	{72, 2, STR_EN, str_en_t},
+	{88, 2, STR_EN, str_en_S},
+	{96, 2, STR_EN, str_en_e},
+	{104, 2, STR_EN, str_en_t}
+};
+
 /* 总量清零 */
 const Stringinfo_t Menu_TotalClr_zh[] =
 {
@@ -85,6 +141,21 @@ const Stringinfo_t Menu_TotalClr_zh[] =
 	{48, 2, STR_ZH, str_zh_liang},
 	{64, 2, STR_ZH, str_zh_qing},
 	{80, 2, STR_ZH, str_zh_ling}
+};
+
+/* Total clear */
+const Stringinfo_t Menu_TotalClr_en[] =
+{
+	{24, 2, STR_EN, str_en_T},
+	{32, 2, STR_EN, str_en_o},
+	{40, 2, STR_EN, str_en_t},
+	{48, 2, STR_EN, str_en_a},
+	{56, 2, STR_EN, str_en_l},
+	{72, 2, STR_EN, str_en_c},
+	{80, 2, STR_EN, str_en_l},
+	{88, 2, STR_EN, str_en_e},
+	{96, 2, STR_EN, str_en_a},
+	{104, 2, STR_EN, str_en_r}
 };
 
 /* 01_语言 */
@@ -623,6 +694,21 @@ const Stringinfo_t Menu_ParamSet_20_zh[] =
 	{96, 2, STR_ZH, str_zh_xu}
 };
 
+/* 20_Alm Hi Ena */
+const Stringinfo_t Menu_ParamSet_20_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_0},
+	{24, 2, STR_EN, str_en_A},
+	{32, 2, STR_EN, str_en_l},
+	{40, 2, STR_EN, str_en_m},
+	{56, 2, STR_EN, str_en_H},
+	{64, 2, STR_EN, str_en_i},
+	{80, 2, STR_EN, str_en_E},
+	{88, 2, STR_EN, str_en_n},
+	{96, 2, STR_EN, str_en_a}
+};
+
 /* 21_上限报警数值 */
 const Stringinfo_t Menu_ParamSet_21_zh[] =
 {
@@ -664,6 +750,22 @@ const Stringinfo_t Menu_ParamSet_22_zh[] =
 	{96, 2, STR_ZH, str_zh_xu}
 };
 
+/* 22_Alm Low Ena */
+const Stringinfo_t Menu_ParamSet_22_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_2},
+	{24, 2, STR_EN, str_en_A},
+	{32, 2, STR_EN, str_en_l},
+	{40, 2, STR_EN, str_en_m},
+	{56, 2, STR_EN, str_en_L},
+	{64, 2, STR_EN, str_en_o},
+	{72, 2, STR_EN, str_en_w},
+	{88, 2, STR_EN, str_en_E},
+	{96, 2, STR_EN, str_en_n},
+	{104, 2, STR_EN, str_en_a}
+};
+
 /* 23_下限报警数值 */
 const Stringinfo_t Menu_ParamSet_23_zh[] =
 {
@@ -677,6 +779,22 @@ const Stringinfo_t Menu_ParamSet_23_zh[] =
 	{96, 2, STR_ZH, str_zh_zhi}
 };
 
+/* 23_Alm Low Val */
+const Stringinfo_t Menu_ParamSet_23_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_3},
+	{24, 2, STR_EN, str_en_A},
+	{32, 2, STR_EN, str_en_l},
+	{40, 2, STR_EN, str_en_m},
+	{56, 2, STR_EN, str_en_L},
+	{64, 2, STR_EN, str_en_o},
+	{72, 2, STR_EN, str_en_w},
+	{88, 2, STR_EN, str_en_V},
+	{96, 2, STR_EN, str_en_a},
+	{104, 2, STR_EN, str_en_l}
+};
+
 /* 24_励磁报警允许 */
 const Stringinfo_t Menu_ParamSet_24_zh[] =
 {
@@ -688,6 +806,23 @@ const Stringinfo_t Menu_ParamSet_24_zh[] =
 	{64, 2, STR_ZH, str_zh_jing_1},
 	{80, 2, STR_ZH, str_zh_yun},
 	{96, 2, STR_ZH, str_zh_xu}
+};
+
+/* 24_Coil Alm Ena */
+const Stringinfo_t Menu_ParamSet_24_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_4},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_i},
+	{40, 2, STR_EN, str_en_l},
+	{56, 2, STR_EN, str_en_A},
+	{64, 2, STR_EN, str_en_l},
+	{72, 2, STR_EN, str_en_m},
+	{88, 2, STR_EN, str_en_E},
+	{96, 2, STR_EN, str_en_n},
+	{104, 2, STR_EN, str_en_a}
 };
 
 /* 25_总量清零密码 */
@@ -732,6 +867,24 @@ const Stringinfo_t Menu_ParamSet_26_zh[] =
 	{96, 2, STR_EN, str_en_1}
 };
 
+/* 26_Sensor Code1 */
+const Stringinfo_t Menu_ParamSet_26_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_6},
+	{16, 2, STR_EN, str_en_S},
+	{24, 2, STR_EN, str_en_e},
+	{32, 2, STR_EN, str_en_n},
+	{40, 2, STR_EN, str_en_s},
+	{48, 2, STR_EN, str_en_o},
+	{56, 2, STR_EN, str_en_r},
+	{72, 2, STR_EN, str_en_C},
+	{80, 2, STR_EN, str_en_o},
+	{88, 2, STR_EN, str_en_d},
+	{96, 2, STR_EN, str_en_e},
+	{104, 2, STR_EN, str_en_1}
+};
+
 
 /* 27_传感器编码2 */
 const Stringinfo_t Menu_ParamSet_27_zh[] =
@@ -744,6 +897,24 @@ const Stringinfo_t Menu_ParamSet_27_zh[] =
 	{64, 2, STR_ZH, str_zh_bian},
 	{80, 2, STR_ZH, str_zh_ma},
 	{96, 2, STR_EN, str_en_2}
+};
+
+/* 27_Sensor Code2 */
+const Stringinfo_t Menu_ParamSet_27_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_7},
+	{16, 2, STR_EN, str_en_S},
+	{24, 2, STR_EN, str_en_e},
+	{32, 2, STR_EN, str_en_n},
+	{40, 2, STR_EN, str_en_s},
+	{48, 2, STR_EN, str_en_o},
+	{56, 2, STR_EN, str_en_r},
+	{72, 2, STR_EN, str_en_C},
+	{80, 2, STR_EN, str_en_o},
+	{88, 2, STR_EN, str_en_d},
+	{96, 2, STR_EN, str_en_e},
+	{104, 2, STR_EN, str_en_2}
 };
 
 /* 28_励磁方式选择 */
@@ -759,6 +930,22 @@ const Stringinfo_t Menu_ParamSet_28_zh[] =
 	{96, 2, STR_ZH, str_zh_ze}
 };
 
+/* 28_Field Type */
+const Stringinfo_t Menu_ParamSet_28_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_8},
+	{24, 2, STR_EN, str_en_F},
+	{32, 2, STR_EN, str_en_i},
+	{40, 2, STR_EN, str_en_e},
+	{48, 2, STR_EN, str_en_l},
+	{56, 2, STR_EN, str_en_d},
+	{72, 2, STR_EN, str_en_T},
+	{80, 2, STR_EN, str_en_y},
+	{88, 2, STR_EN, str_en_p},
+	{96, 2, STR_EN, str_en_e}
+};
+
 /* 29_传感器系数值 */
 const Stringinfo_t Menu_ParamSet_29_zh[] =
 {
@@ -772,6 +959,23 @@ const Stringinfo_t Menu_ParamSet_29_zh[] =
 	{96, 2, STR_ZH, str_zh_zhi}
 };
 
+/* 29_Sensor Fact */
+const Stringinfo_t Menu_ParamSet_29_en[] =
+{
+	{0, 0, STR_EN, str_en_2},
+	{8, 0, STR_EN, str_en_9},
+	{16, 2, STR_EN, str_en_S},
+	{24, 2, STR_EN, str_en_e},
+	{32, 2, STR_EN, str_en_n},
+	{40, 2, STR_EN, str_en_s},
+	{48, 2, STR_EN, str_en_o},
+	{56, 2, STR_EN, str_en_r},
+	{72, 2, STR_EN, str_en_F},
+	{80, 2, STR_EN, str_en_a},
+	{88, 2, STR_EN, str_en_c},
+	{96, 2, STR_EN, str_en_t}
+};
+
 /* 30_修正系数0 */
 const Stringinfo_t Menu_ParamSet_30_zh[] =
 {
@@ -782,6 +986,25 @@ const Stringinfo_t Menu_ParamSet_30_zh[] =
 	{64, 2, STR_ZH, str_zh_xi},
 	{80, 2, STR_ZH, str_zh_shu},
 	{96, 2, STR_EN, str_en_0}
+};
+
+/* 30_Correct Fact0 */
+const Stringinfo_t Menu_ParamSet_30_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_0},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_F},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_c},
+	{104, 2, STR_EN, str_en_t},
+	{112, 2, STR_EN, str_en_0}
 };
 
 /* 31_流量修正点0 */
@@ -797,6 +1020,26 @@ const Stringinfo_t Menu_ParamSet_31_zh[] =
 	{96, 2, STR_EN, str_en_0}
 };
 
+/* 31_Correct Valu0 */
+const Stringinfo_t Menu_ParamSet_31_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_1},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_V},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l},
+	{104, 2, STR_EN, str_en_u},
+	{112, 2, STR_EN, str_en_0}
+};
+
+
 /* 32_修正系数1 */
 const Stringinfo_t Menu_ParamSet_32_zh[] =
 {
@@ -807,6 +1050,25 @@ const Stringinfo_t Menu_ParamSet_32_zh[] =
 	{64, 2, STR_ZH, str_zh_xi},
 	{80, 2, STR_ZH, str_zh_shu},
 	{96, 2, STR_EN, str_en_1}
+};
+
+/* 32_Correct Fact1 */
+const Stringinfo_t Menu_ParamSet_32_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_2},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_F},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_c},
+	{104, 2, STR_EN, str_en_t},
+	{112, 2, STR_EN, str_en_1}
 };
 
 /* 33_流量修正点1 */
@@ -822,6 +1084,25 @@ const Stringinfo_t Menu_ParamSet_33_zh[] =
 	{96, 2, STR_EN, str_en_1}
 };
 
+/* 33_Correct Valu1 */
+const Stringinfo_t Menu_ParamSet_33_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_3},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_V},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l},
+	{104, 2, STR_EN, str_en_u},
+	{112, 2, STR_EN, str_en_1}
+};
+
 /* 34_修正系数2 */
 const Stringinfo_t Menu_ParamSet_34_zh[] =
 {
@@ -832,6 +1113,25 @@ const Stringinfo_t Menu_ParamSet_34_zh[] =
 	{64, 2, STR_ZH, str_zh_xi},
 	{80, 2, STR_ZH, str_zh_shu},
 	{96, 2, STR_EN, str_en_2}
+};
+
+/* 34_Correct Fact2 */
+const Stringinfo_t Menu_ParamSet_34_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_4},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_F},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_c},
+	{104, 2, STR_EN, str_en_t},
+	{112, 2, STR_EN, str_en_2}
 };
 
 /* 35_流量修正点2 */
@@ -847,6 +1147,25 @@ const Stringinfo_t Menu_ParamSet_35_zh[] =
 	{96, 2, STR_EN, str_en_2}
 };
 
+/* 35_Correct Valu2 */
+const Stringinfo_t Menu_ParamSet_35_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_5},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_V},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l},
+	{104, 2, STR_EN, str_en_u},
+	{112, 2, STR_EN, str_en_2}
+};
+
 /* 36_修正系数3 */
 const Stringinfo_t Menu_ParamSet_36_zh[] =
 {
@@ -857,6 +1176,25 @@ const Stringinfo_t Menu_ParamSet_36_zh[] =
 	{64, 2, STR_ZH, str_zh_xi},
 	{80, 2, STR_ZH, str_zh_shu},
 	{96, 2, STR_EN, str_en_3}
+};
+
+/* 36_Correct Fact3 */
+const Stringinfo_t Menu_ParamSet_36_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_6},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_F},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_c},
+	{104, 2, STR_EN, str_en_t},
+	{112, 2, STR_EN, str_en_3}
 };
 
 /* 37_流量修正点3 */
@@ -872,6 +1210,25 @@ const Stringinfo_t Menu_ParamSet_37_zh[] =
 	{96, 2, STR_EN, str_en_3}
 };
 
+/* 37_Correct Valu3 */
+const Stringinfo_t Menu_ParamSet_37_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_7},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_V},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l},
+	{104, 2, STR_EN, str_en_u},
+	{112, 2, STR_EN, str_en_3}
+};
+
 /* 38_修正系数4 */
 const Stringinfo_t Menu_ParamSet_38_zh[] =
 {
@@ -882,6 +1239,25 @@ const Stringinfo_t Menu_ParamSet_38_zh[] =
 	{64, 2, STR_ZH, str_zh_xi},
 	{80, 2, STR_ZH, str_zh_shu},
 	{96, 2, STR_EN, str_en_4}
+};
+
+/* 38_Correct Fact4 */
+const Stringinfo_t Menu_ParamSet_38_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_8},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_o},
+	{32, 2, STR_EN, str_en_r},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_c},
+	{64, 2, STR_EN, str_en_t},
+	{80, 2, STR_EN, str_en_F},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_c},
+	{104, 2, STR_EN, str_en_t},
+	{112, 2, STR_EN, str_en_4}
 };
 
 /* 39_正向累计设定 */
@@ -897,6 +1273,21 @@ const Stringinfo_t Menu_ParamSet_39_zh[] =
 	{96, 2, STR_ZH, str_zh_ding}
 };
 
+/* 39_Fwd Total */
+const Stringinfo_t Menu_ParamSet_39_en[] =
+{
+	{0, 0, STR_EN, str_en_3},
+	{8, 0, STR_EN, str_en_9},
+	{32, 2, STR_EN, str_en_F},
+	{40, 2, STR_EN, str_en_w},
+	{48, 2, STR_EN, str_en_d},
+	{64, 2, STR_EN, str_en_T},
+	{72, 2, STR_EN, str_en_o},
+	{80, 2, STR_EN, str_en_t},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l}
+};
+
 /* 40_反向累计设定 */
 const Stringinfo_t Menu_ParamSet_40_zh[] =
 {
@@ -908,6 +1299,21 @@ const Stringinfo_t Menu_ParamSet_40_zh[] =
 	{64, 2, STR_ZH, str_zh_ji_1},
 	{80, 2, STR_ZH, str_zh_she},
 	{96, 2, STR_ZH, str_zh_ding}
+};
+
+/* 40_Rev Total */
+const Stringinfo_t Menu_ParamSet_40_en[] =
+{
+	{0, 0, STR_EN, str_en_4},
+	{8, 0, STR_EN, str_en_0},
+	{32, 2, STR_EN, str_en_R},
+	{40, 2, STR_EN, str_en_e},
+	{48, 2, STR_EN, str_en_v},
+	{64, 2, STR_EN, str_en_T},
+	{72, 2, STR_EN, str_en_o},
+	{80, 2, STR_EN, str_en_t},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l}
 };
 
 /* 41_电流零点修正 */
@@ -923,6 +1329,23 @@ const Stringinfo_t Menu_ParamSet_41_zh[] =
 	{96, 2, STR_ZH, str_zh_zheng}
 };
 
+/* 41_Analog Zero */
+const Stringinfo_t Menu_ParamSet_41_en[] =
+{
+	{0, 0, STR_EN, str_en_4},
+	{8, 0, STR_EN, str_en_1},
+	{24, 2, STR_EN, str_en_A},
+	{32, 2, STR_EN, str_en_n},
+	{40, 2, STR_EN, str_en_a},
+	{48, 2, STR_EN, str_en_l},
+	{56, 2, STR_EN, str_en_o},
+	{64, 2, STR_EN, str_en_g},
+	{80, 2, STR_EN, str_en_Z},
+	{88, 2, STR_EN, str_en_e},
+	{96, 2, STR_EN, str_en_r},
+	{104, 2, STR_EN, str_en_o}
+};
+
 /* 42_电流满度修正 */
 const Stringinfo_t Menu_ParamSet_42_zh[] =
 {
@@ -934,6 +1357,24 @@ const Stringinfo_t Menu_ParamSet_42_zh[] =
 	{64, 2, STR_ZH, str_zh_du},
 	{80, 2, STR_ZH, str_zh_xiu},
 	{96, 2, STR_ZH, str_zh_zheng}
+};
+
+/* 42_Analog Range */
+const Stringinfo_t Menu_ParamSet_42_en[] =
+{
+	{0, 0, STR_EN, str_en_4},
+	{8, 0, STR_EN, str_en_2},
+	{16, 2, STR_EN, str_en_A},
+	{24, 2, STR_EN, str_en_n},
+	{32, 2, STR_EN, str_en_a},
+	{40, 2, STR_EN, str_en_l},
+	{48, 2, STR_EN, str_en_o},
+	{56, 2, STR_EN, str_en_g},
+	{72, 2, STR_EN, str_en_R},
+	{80, 2, STR_EN, str_en_a},
+	{88, 2, STR_EN, str_en_n},
+	{96, 2, STR_EN, str_en_g},
+	{104, 2, STR_EN, str_en_e}
 };
 
 /* 43_出厂标定系数 */
@@ -949,6 +1390,22 @@ const Stringinfo_t Menu_ParamSet_43_zh[] =
 	{96, 2, STR_ZH, str_zh_shu}
 };
 
+/* 43_Meter Fact */
+const Stringinfo_t Menu_ParamSet_43_en[] =
+{
+	{0, 0, STR_EN, str_en_4},
+	{8, 0, STR_EN, str_en_3},
+	{24, 2, STR_EN, str_en_M},
+	{32, 2, STR_EN, str_en_e},
+	{40, 2, STR_EN, str_en_t},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_r},
+	{72, 2, STR_EN, str_en_F},
+	{80, 2, STR_EN, str_en_a},
+	{88, 2, STR_EN, str_en_c},
+	{96, 2, STR_EN, str_en_t}
+};
+
 /* 44_设定密度 */
 const Stringinfo_t Menu_ParamSet_44_zh[] =
 {
@@ -958,6 +1415,23 @@ const Stringinfo_t Menu_ParamSet_44_zh[] =
 	{48, 2, STR_ZH, str_zh_ding},
 	{64, 2, STR_ZH, str_zh_mi},
 	{80, 2, STR_ZH, str_zh_du}
+};
+
+/* 44_Set Density */
+const Stringinfo_t Menu_ParamSet_44_en[] =
+{
+	{0, 0, STR_EN, str_en_4},
+	{8, 0, STR_EN, str_en_4},
+	{24, 2, STR_EN, str_en_S},
+	{32, 2, STR_EN, str_en_e},
+	{40, 2, STR_EN, str_en_t},
+	{56, 2, STR_EN, str_en_D},
+	{64, 2, STR_EN, str_en_e},
+	{72, 2, STR_EN, str_en_n},
+	{80, 2, STR_EN, str_en_s},
+	{88, 2, STR_EN, str_en_i},
+	{96, 2, STR_EN, str_en_t},
+	{104, 2, STR_EN, str_en_y},
 };
 
 /* 45_远传间隔时间 */
@@ -971,6 +1445,20 @@ const Stringinfo_t Menu_ParamSet_45_zh[] =
 	{64, 2, STR_ZH, str_zh_ge},
 	{80, 2, STR_ZH, str_zh_shi},
 	{96, 2, STR_ZH, str_zh_jian}
+};
+
+/* 45_Send Int */
+const Stringinfo_t Menu_ParamSet_45_en[] =
+{
+	{0, 0, STR_EN, str_en_4},
+	{8, 0, STR_EN, str_en_5},
+	{32, 2, STR_EN, str_en_S},
+	{40, 2, STR_EN, str_en_e},
+	{48, 2, STR_EN, str_en_n},
+	{56, 2, STR_EN, str_en_d},
+	{72, 2, STR_EN, str_en_I},
+	{80, 2, STR_EN, str_en_n},
+	{88, 2, STR_EN, str_en_t}
 };
 
 /* Number Table */
@@ -1094,11 +1582,35 @@ const Stringinfo_t Menu_L3_07_Forward_zh[] =
 	{64, 2, STR_ZH, str_zh_xiang},
 };
 
+/* 流量方向择项_Forward */
+const Stringinfo_t Menu_L3_07_Forward_en[] =
+{
+	{40, 2, STR_EN, str_en_F},
+	{48, 2, STR_EN, str_en_o},
+	{56, 2, STR_EN, str_en_r},
+	{64, 2, STR_EN, str_en_w},
+	{72, 2, STR_EN, str_en_a},
+	{80, 2, STR_EN, str_en_r},
+	{88, 2, STR_EN, str_en_d}
+};
+
 /* 流量方向择项_反向 */
-const Stringinfo_t Menu_L3_07_Backward_zh[] =
+const Stringinfo_t Menu_L3_07_Reverse_zh[] =
 {
 	{48, 2, STR_ZH, str_zh_fan},
 	{64, 2, STR_ZH, str_zh_xiang},
+};
+
+/* 流量方向择项_Reverse */
+const Stringinfo_t Menu_L3_07_Reverse_en[] =
+{
+	{40, 2, STR_EN, str_en_R},
+	{48, 2, STR_EN, str_en_e},
+	{56, 2, STR_EN, str_en_v},
+	{64, 2, STR_EN, str_en_e},
+	{72, 2, STR_EN, str_en_r},
+	{80, 2, STR_EN, str_en_s},
+	{88, 2, STR_EN, str_en_e}
 };
 
 /* 流量零点修正±0000 */
@@ -1124,17 +1636,40 @@ Stringinfo_t Menu_L3_NumPercent[] =
 };
 
 /* **_允许 */
-const Stringinfo_t Menu_L3_Allow_zh[] =
+const Stringinfo_t Menu_L3_Enable_zh[] =
 {
 	{48, 2, STR_ZH, str_zh_yun},
 	{64, 2, STR_ZH, str_zh_xu},
 };
 
+/* **_Enable */
+const Stringinfo_t Menu_L3_Enable_en[] =
+{
+	{40, 2, STR_EN, str_en_E},
+	{48, 2, STR_EN, str_en_n},
+	{56, 2, STR_EN, str_en_a},
+	{64, 2, STR_EN, str_en_b},
+	{72, 2, STR_EN, str_en_l},
+	{80, 2, STR_EN, str_en_e},
+};
+
 /* **_禁止 */
-const Stringinfo_t Menu_L3_Forbid_zh[] =
+const Stringinfo_t Menu_L3_Disable_zh[] =
 {
 	{48, 2, STR_ZH, str_zh_jin},
 	{64, 2, STR_ZH, str_zh_zhi_3},
+};
+
+/* **_Disable */
+const Stringinfo_t Menu_L3_Disable_en[] =
+{
+	{40, 2, STR_EN, str_en_D},
+	{48, 2, STR_EN, str_en_i},
+	{56, 2, STR_EN, str_en_s},
+	{64, 2, STR_EN, str_en_a},
+	{72, 2, STR_EN, str_en_b},
+	{80, 2, STR_EN, str_en_l},
+	{88, 2, STR_EN, str_en_e},
 };
 
 /* 流量_0.001L */
@@ -1254,11 +1789,35 @@ const Stringinfo_t Menu_L3_Frequency_zh[] =
 	{64, 2, STR_ZH, str_zh_lv},
 };
 
+/* 脉冲输出方式_Frequency */
+const Stringinfo_t Menu_L3_Frequency_en[] =
+{
+	{32, 2, STR_EN, str_en_F},
+	{40, 2, STR_ZH, str_en_r},
+	{48, 2, STR_ZH, str_en_e},
+	{56, 2, STR_EN, str_en_q},
+	{64, 2, STR_EN, str_en_u},
+	{72, 2, STR_EN, str_en_e},
+	{80, 2, STR_EN, str_en_n},
+	{88, 2, STR_EN, str_en_c},
+	{96, 2, STR_EN, str_en_y}
+};
+
 /* 脉冲输出方式_脉冲 */
 const Stringinfo_t Menu_L3_Pulse_zh[] =
 {
 	{48, 2, STR_ZH, str_zh_mai},
 	{64, 2, STR_ZH, str_zh_chong},
+};
+
+/* 脉冲输出方式_Pulse */
+const Stringinfo_t Menu_L3_Pulse_en[] =
+{
+	{48, 2, STR_ZH, str_en_P},
+	{56, 2, STR_EN, str_en_u},
+	{64, 2, STR_EN, str_en_l},
+	{72, 2, STR_EN, str_en_s},
+	{80, 2, STR_EN, str_en_e}
 };
 
 /* 频率输出范围0001Hz */
@@ -1280,6 +1839,16 @@ const Stringinfo_t Menu_L3_Fieldtype1_zh[] =
 	{80, 2, STR_EN, str_en_1}
 };
 
+/* 励磁方式选择_Type1 */
+const Stringinfo_t Menu_L3_Fieldtype1_en[] =
+{
+	{48, 2, STR_EN, str_en_T},
+	{56, 2, STR_EN, str_en_y},
+	{64, 2, STR_EN, str_en_p},
+	{72, 2, STR_EN, str_en_e},
+	{80, 2, STR_EN, str_en_1}
+};
+
 /* 励磁方式选择_方式2 */
 const Stringinfo_t Menu_L3_Fieldtype2_zh[] =
 {
@@ -1288,11 +1857,31 @@ const Stringinfo_t Menu_L3_Fieldtype2_zh[] =
 	{80, 2, STR_EN, str_en_2}
 };
 
+/* 励磁方式选择_Type2 */
+const Stringinfo_t Menu_L3_Fieldtype2_en[] =
+{
+	{48, 2, STR_EN, str_en_T},
+	{56, 2, STR_EN, str_en_y},
+	{64, 2, STR_EN, str_en_p},
+	{72, 2, STR_EN, str_en_e},
+	{80, 2, STR_EN, str_en_2}
+};
+
 /* 励磁方式选择_方式3 */
 const Stringinfo_t Menu_L3_Fieldtype3_zh[] =
 {
 	{48, 2, STR_ZH, str_zh_fang},
 	{64, 2, STR_ZH, str_zh_shi_2},
+	{80, 2, STR_EN, str_en_3}
+};
+
+/* 励磁方式选择_Type3 */
+const Stringinfo_t Menu_L3_Fieldtype3_en[] =
+{
+	{48, 2, STR_EN, str_en_T},
+	{56, 2, STR_EN, str_en_y},
+	{64, 2, STR_EN, str_en_p},
+	{72, 2, STR_EN, str_en_e},
 	{80, 2, STR_EN, str_en_3}
 };
 
@@ -1411,7 +2000,14 @@ MenuList_t Menu_level3_07_zh[] =
 MenuList_t Menu_level3_08_zh[] =
 {
 	{numof(Menu_L3_07_Forward_zh), (void*)Menu_L3_07_Forward_zh},		/* 正向 */
-	{numof(Menu_L3_07_Backward_zh), (void*)Menu_L3_07_Backward_zh},	/* 反向 */
+	{numof(Menu_L3_07_Reverse_zh), (void*)Menu_L3_07_Reverse_zh},		/* 反向 */
+};
+
+/* 8.Flow Direct */
+MenuList_t Menu_level3_08_en[] =
+{
+	{numof(Menu_L3_07_Forward_en), (void*)Menu_L3_07_Forward_en},		/* Forward */
+	{numof(Menu_L3_07_Reverse_en), (void*)Menu_L3_07_Reverse_en},		/* Reverse */
 };
 
 /* 9.流量零点修正 */
@@ -1429,8 +2025,15 @@ MenuList_t Menu_level3_10_zh[] =
 /* 11.允许切除显示 */
 MenuList_t Menu_level3_11_zh[] =
 {
-	{numof(Menu_L3_Allow_zh), (void*)Menu_L3_Allow_zh},		/* 允许 */
-	{numof(Menu_L3_Forbid_zh), (void*)Menu_L3_Forbid_zh},		/* 禁止 */
+	{numof(Menu_L3_Enable_zh), (void*)Menu_L3_Enable_zh},		/* 允许 */
+	{numof(Menu_L3_Disable_zh), (void*)Menu_L3_Disable_zh},		/* 禁止 */
+};
+
+/* 11.Cutoff Ena */
+MenuList_t Menu_level3_11_en[] =
+{
+	{numof(Menu_L3_Enable_en), (void*)Menu_L3_Enable_en},		/* Enable */
+	{numof(Menu_L3_Disable_en), (void*)Menu_L3_Disable_en},		/* Disable */
 };
 
 /* 12.流量积算单位 */
@@ -1449,8 +2052,15 @@ MenuList_t Menu_level3_12_zh[] =
 /* 13.反向输出允许 */
 MenuList_t Menu_level3_13_zh[] =
 {
-	{numof(Menu_L3_Allow_zh), (void*)Menu_L3_Allow_zh},		/* 允许 */
-	{numof(Menu_L3_Forbid_zh), (void*)Menu_L3_Forbid_zh},	/* 禁止 */
+	{numof(Menu_L3_Enable_zh), (void*)Menu_L3_Enable_zh},		/* 允许 */
+	{numof(Menu_L3_Disable_zh), (void*)Menu_L3_Disable_zh},		/* 禁止 */
+};
+
+/* 13.SegmaN Ena */
+MenuList_t Menu_level3_13_en[] =
+{
+	{numof(Menu_L3_Enable_en), (void*)Menu_L3_Enable_en},		/* Enable */
+	{numof(Menu_L3_Disable_en), (void*)Menu_L3_Disable_en},		/* Disable */
 };
 
 /* 14.电流输出类型 */
@@ -1465,6 +2075,13 @@ MenuList_t Menu_level3_15_zh[] =
 {
 	{numof(Menu_L3_Frequency_zh), (void*)Menu_L3_Frequency_zh},	/* 频率 */
 	{numof(Menu_L3_Pulse_zh), (void*)Menu_L3_Pulse_zh},			/* 脉冲 */
+};
+
+/* 15.Pulse Type */
+MenuList_t Menu_level3_15_en[] =
+{
+	{numof(Menu_L3_Frequency_en), (void*)Menu_L3_Frequency_en},	/* Frequency */
+	{numof(Menu_L3_Pulse_en), (void*)Menu_L3_Pulse_en},			/* Pulse */
 };
 
 /* 16.脉冲单位当量 */
@@ -1489,8 +2106,15 @@ MenuList_t Menu_level3_17_zh[] =
 /* 18.空管报警允许 */
 MenuList_t Menu_level3_18_zh[] =
 {
-	{numof(Menu_L3_Allow_zh), (void*)Menu_L3_Allow_zh},		/* 允许 */
-	{numof(Menu_L3_Forbid_zh), (void*)Menu_L3_Forbid_zh},	/* 禁止 */
+	{numof(Menu_L3_Enable_zh), (void*)Menu_L3_Enable_zh},		/* 允许 */
+	{numof(Menu_L3_Disable_zh), (void*)Menu_L3_Disable_zh},		/* 禁止 */
+};
+
+/* 18.Mtsnsr Ena */
+MenuList_t Menu_level3_18_en[] =
+{
+	{numof(Menu_L3_Enable_en), (void*)Menu_L3_Enable_en},		/* Enable */
+	{numof(Menu_L3_Disable_en), (void*)Menu_L3_Disable_en},		/* Disable */
 };
 
 /* 19.空管报警阈值 */
@@ -1502,8 +2126,15 @@ MenuList_t Menu_level3_19_zh[] =
 /* 20.上限报警允许 */
 MenuList_t Menu_level3_20_zh[] =
 {
-	{numof(Menu_L3_Allow_zh), (void*)Menu_L3_Allow_zh},		/* 允许 */
-	{numof(Menu_L3_Forbid_zh), (void*)Menu_L3_Forbid_zh},	/* 禁止 */
+	{numof(Menu_L3_Enable_zh), (void*)Menu_L3_Enable_zh},		/* 允许 */
+	{numof(Menu_L3_Disable_zh), (void*)Menu_L3_Disable_zh},		/* 禁止 */
+};
+
+/* 20.Alm Hi Ena */
+MenuList_t Menu_level3_20_en[] =
+{
+	{numof(Menu_L3_Enable_en), (void*)Menu_L3_Enable_en},		/* Enable */
+	{numof(Menu_L3_Disable_en), (void*)Menu_L3_Disable_en},		/* Disable */
 };
 
 /* 21.上限报警数值 */
@@ -1515,8 +2146,15 @@ MenuList_t Menu_level3_21_zh[] =
 /* 22.下限报警允许 */
 MenuList_t Menu_level3_22_zh[] =
 {
-	{numof(Menu_L3_Allow_zh), (void*)Menu_L3_Allow_zh},		/* 允许 */
-	{numof(Menu_L3_Forbid_zh), (void*)Menu_L3_Forbid_zh},	/* 禁止 */
+	{numof(Menu_L3_Enable_zh), (void*)Menu_L3_Enable_zh},		/* 允许 */
+	{numof(Menu_L3_Disable_zh), (void*)Menu_L3_Disable_zh},		/* 禁止 */
+};
+
+/* 22.Alm Low Ena */
+MenuList_t Menu_level3_22_en[] =
+{
+	{numof(Menu_L3_Enable_en), (void*)Menu_L3_Enable_en},		/* Enable */
+	{numof(Menu_L3_Disable_en), (void*)Menu_L3_Disable_en},		/* Disable */
 };
 
 /* 23.下限报警数值 */
@@ -1528,8 +2166,15 @@ MenuList_t Menu_level3_23_zh[] =
 /* 24.励磁报警允许 */
 MenuList_t Menu_level3_24_zh[] =
 {
-	{numof(Menu_L3_Allow_zh), (void*)Menu_L3_Allow_zh},		/* 允许 */
-	{numof(Menu_L3_Forbid_zh), (void*)Menu_L3_Forbid_zh},	/* 禁止 */
+	{numof(Menu_L3_Enable_zh), (void*)Menu_L3_Enable_zh},		/* 允许 */
+	{numof(Menu_L3_Disable_zh), (void*)Menu_L3_Disable_zh},		/* 禁止 */
+};
+
+/* 24.Coil Alm Ena */
+MenuList_t Menu_level3_24_en[] =
+{
+	{numof(Menu_L3_Enable_en), (void*)Menu_L3_Enable_en},		/* Enable */
+	{numof(Menu_L3_Disable_en), (void*)Menu_L3_Disable_en},		/* Disable */
 };
 
 /* 25.总量清零密码 */
@@ -1556,6 +2201,14 @@ MenuList_t Menu_level3_28_zh[] =
 	{numof(Menu_L3_Fieldtype1_zh), (void*)Menu_L3_Fieldtype1_zh},	/* 方式1 */
 	{numof(Menu_L3_Fieldtype2_zh), (void*)Menu_L3_Fieldtype2_zh},	/* 方式2 */
 	{numof(Menu_L3_Fieldtype3_zh), (void*)Menu_L3_Fieldtype3_zh},	/* 方式3 */
+};
+
+/* 28.Field Type */
+MenuList_t Menu_level3_28_en[] =
+{
+	{numof(Menu_L3_Fieldtype1_en), (void*)Menu_L3_Fieldtype1_en},	/* Type1 */
+	{numof(Menu_L3_Fieldtype2_en), (void*)Menu_L3_Fieldtype2_en},	/* Type2 */
+	{numof(Menu_L3_Fieldtype3_en), (void*)Menu_L3_Fieldtype3_en},	/* Type3 */
 };
 
 /* 29.传感器系数值 */
@@ -1666,7 +2319,13 @@ MenuList_t Menu_level3_45_zh[] =
 
 MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
 {
-	{numof(Menu_Init), Menu_Init},					/* 初始画面 */
+	{numof(Menu_Init_zh), Menu_Init_zh},			/* 初始画面 */
+	{numof(Menu_AutoMeasure), Menu_AutoMeasure},	/* 自动测量画面 */
+};
+
+MenuList_t Menu_level0_list_en[MENU_L0_MAX] =
+{
+	{numof(Menu_Init_en), Menu_Init_en},			/* 初始画面 */
 	{numof(Menu_AutoMeasure), Menu_AutoMeasure},	/* 自动测量画面 */
 };
 
@@ -1674,6 +2333,12 @@ MenuList_t Menu_level1_list_zh[MENU_L1_MAX] =
 {
 	{numof(Menu_ParamSet_zh), (void*)Menu_ParamSet_zh},	/* 参数设置 */
 	{numof(Menu_TotalClr_zh), (void*)Menu_TotalClr_zh},	/* 总量清零 */
+};
+
+MenuList_t Menu_level1_list_en[MENU_L1_MAX] =
+{
+	{numof(Menu_ParamSet_en), (void*)Menu_ParamSet_en},	/* Parament Set */
+	{numof(Menu_TotalClr_en), (void*)Menu_TotalClr_en},	/* Total clear */
 };
 
 MenuList_t Menu_level2_list_zh[MENU_L2_MAX] =
@@ -1746,32 +2411,32 @@ MenuList_t Menu_level2_list_en[MENU_L2_MAX] =
 	{numof(Menu_ParamSet_17_en), (void*)Menu_ParamSet_17_en},	/* Freque Max */
 	{numof(Menu_ParamSet_18_en), (void*)Menu_ParamSet_18_en},	/* Mtsnsr Ena */
 	{numof(Menu_ParamSet_19_en), (void*)Menu_ParamSet_19_en},	/* Mtsnsr Trip */
-	{numof(Menu_ParamSet_20_zh), (void*)Menu_ParamSet_20_zh},	/* 上限报警允许 */
+	{numof(Menu_ParamSet_20_zh), (void*)Menu_ParamSet_20_en},	/* Alm Hi Ena */
 	{numof(Menu_ParamSet_21_en), (void*)Menu_ParamSet_21_en},	/* Alm Hi Val */
-	{numof(Menu_ParamSet_22_zh), (void*)Menu_ParamSet_22_zh},	/* 下限报警允许 */
-	{numof(Menu_ParamSet_23_zh), (void*)Menu_ParamSet_23_zh},	/* 下限报警数值 */
-	{numof(Menu_ParamSet_24_zh), (void*)Menu_ParamSet_24_zh},	/* 励磁报警允许 */
+	{numof(Menu_ParamSet_22_zh), (void*)Menu_ParamSet_22_en},	/* Alm Low Ena */
+	{numof(Menu_ParamSet_23_zh), (void*)Menu_ParamSet_23_en},	/* Alm Low Val */
+	{numof(Menu_ParamSet_24_zh), (void*)Menu_ParamSet_24_en},	/* Coil Alm Ena */
 	{numof(Menu_ParamSet_25_en), (void*)Menu_ParamSet_25_en},	/* Clr Sum Key */
-	{numof(Menu_ParamSet_26_zh), (void*)Menu_ParamSet_26_zh},	/* 传感器编码1 */
-	{numof(Menu_ParamSet_27_zh), (void*)Menu_ParamSet_27_zh},	/* 传感器编码2 */
-	{numof(Menu_ParamSet_28_zh), (void*)Menu_ParamSet_28_zh},	/* 励磁方式选择 */
-	{numof(Menu_ParamSet_29_zh), (void*)Menu_ParamSet_29_zh},	/* 传感器系数值 */
-	{numof(Menu_ParamSet_30_zh), (void*)Menu_ParamSet_30_zh},	/* 修正系数0 */
-	{numof(Menu_ParamSet_31_zh), (void*)Menu_ParamSet_31_zh},	/* 流量修正点0 */
-	{numof(Menu_ParamSet_32_zh), (void*)Menu_ParamSet_32_zh},	/* 修正系数1 */
-	{numof(Menu_ParamSet_33_zh), (void*)Menu_ParamSet_33_zh},	/* 流量修正点1 */
-	{numof(Menu_ParamSet_34_zh), (void*)Menu_ParamSet_34_zh},	/* 修正系数2 */
-	{numof(Menu_ParamSet_35_zh), (void*)Menu_ParamSet_35_zh},	/* 流量修正点2 */
-	{numof(Menu_ParamSet_36_zh), (void*)Menu_ParamSet_36_zh},	/* 修正系数3 */
-	{numof(Menu_ParamSet_37_zh), (void*)Menu_ParamSet_37_zh},	/* 流量修正点3 */
-	{numof(Menu_ParamSet_38_zh), (void*)Menu_ParamSet_38_zh},	/* 修正系数4 */
-	{numof(Menu_ParamSet_39_zh), (void*)Menu_ParamSet_39_zh},	/* 正向累计设定 */
-	{numof(Menu_ParamSet_40_zh), (void*)Menu_ParamSet_40_zh},	/* 反向累计设定 */
-	{numof(Menu_ParamSet_41_zh), (void*)Menu_ParamSet_41_zh},	/* 电流零点修正 */
-	{numof(Menu_ParamSet_42_zh), (void*)Menu_ParamSet_42_zh},	/* 电流满度修正 */
-	{numof(Menu_ParamSet_43_zh), (void*)Menu_ParamSet_43_zh},	/* 出厂标定系数 */
-	{numof(Menu_ParamSet_44_zh), (void*)Menu_ParamSet_44_zh},	/* 设定密度 */
-	{numof(Menu_ParamSet_45_zh), (void*)Menu_ParamSet_45_zh},	/* 远传间隔时间 */
+	{numof(Menu_ParamSet_26_zh), (void*)Menu_ParamSet_26_en},	/* Sensor Code1 */
+	{numof(Menu_ParamSet_27_zh), (void*)Menu_ParamSet_27_en},	/* Sensor Code2 */
+	{numof(Menu_ParamSet_28_zh), (void*)Menu_ParamSet_28_en},	/* Field Type */
+	{numof(Menu_ParamSet_29_zh), (void*)Menu_ParamSet_29_en},	/* Sensor Fact */
+	{numof(Menu_ParamSet_30_zh), (void*)Menu_ParamSet_30_en},	/* Correct Fact0 */
+	{numof(Menu_ParamSet_31_zh), (void*)Menu_ParamSet_31_en},	/* Correct Valu0 */
+	{numof(Menu_ParamSet_32_zh), (void*)Menu_ParamSet_32_en},	/* Correct Fact1 */
+	{numof(Menu_ParamSet_33_zh), (void*)Menu_ParamSet_33_en},	/* Correct Valu1 */
+	{numof(Menu_ParamSet_34_zh), (void*)Menu_ParamSet_34_en},	/* Correct Fact2 */
+	{numof(Menu_ParamSet_35_zh), (void*)Menu_ParamSet_35_en},	/* Correct Valu2 */
+	{numof(Menu_ParamSet_36_zh), (void*)Menu_ParamSet_36_en},	/* Correct Fact3 */
+	{numof(Menu_ParamSet_37_zh), (void*)Menu_ParamSet_37_en},	/* Correct Valu3 */
+	{numof(Menu_ParamSet_38_zh), (void*)Menu_ParamSet_38_en},	/* Correct Fact4 */
+	{numof(Menu_ParamSet_39_zh), (void*)Menu_ParamSet_39_en},	/* Fwd Total */
+	{numof(Menu_ParamSet_40_zh), (void*)Menu_ParamSet_40_en},	/* Rev Total */
+	{numof(Menu_ParamSet_41_zh), (void*)Menu_ParamSet_41_en},	/* Analog Zero */
+	{numof(Menu_ParamSet_42_zh), (void*)Menu_ParamSet_42_en},	/* Analog Range */
+	{numof(Menu_ParamSet_43_zh), (void*)Menu_ParamSet_43_en},	/* Meter Fact */
+	{numof(Menu_ParamSet_44_zh), (void*)Menu_ParamSet_44_en},	/* Set Density */
+	{numof(Menu_ParamSet_45_zh), (void*)Menu_ParamSet_45_en},	/* Send Int */
 };
 
 MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
@@ -1823,10 +2488,65 @@ MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
 	{numof(Menu_level3_45_zh), Menu_level3_45_zh},	/* 远传间隔时间_5~1440 */
 };
 
+MenuList_t Menu_level3_list_en[MENU_L3_MAX] =
+{
+	{numof(Menu_level3_01_zh), Menu_level3_01_zh},	/* 语言_中文/English */
+	{numof(Menu_level3_02_zh), Menu_level3_02_zh},	/* 仪表通讯地址_0～99 */
+	{numof(Menu_level3_03_zh), Menu_level3_03_zh},	/* 仪表通讯速度_300～38400 */
+	{numof(Menu_level3_04_zh), Menu_level3_04_zh},	/* 测量管道口径_3～3000 */
+	{numof(Menu_level3_05_zh), Menu_level3_05_zh},	/* 流量单位 */
+	{numof(Menu_level3_06_zh), Menu_level3_06_zh},	/* 仪表量程设置_0～99999 */
+	{numof(Menu_level3_07_zh), Menu_level3_07_zh},	/* 测量阻尼时间_1～64 */
+	{numof(Menu_level3_08_en), Menu_level3_08_en},	/* 流量方向择项_Forward/Reverse */
+	{numof(Menu_level3_09_zh), Menu_level3_09_zh},	/* 流量零点修正_0～±9999 */
+	{numof(Menu_level3_10_zh), Menu_level3_10_zh},	/* 小信号切除点_0～599.99% */
+	{numof(Menu_level3_11_en), Menu_level3_11_en},	/* 允许切除显示_Enable/Disable */
+	{numof(Menu_level3_12_zh), Menu_level3_12_zh},	/* 流量积算单位_0.001m3～1m3/0.001L～1L */
+	{numof(Menu_level3_13_en), Menu_level3_13_en},	/* 反向输出允许_Enable/Disable */
+	{numof(Menu_level3_14_zh), Menu_level3_14_zh},	/* 电流输出类型_0～10mA/4～20mA */
+	{numof(Menu_level3_15_en), Menu_level3_15_en},	/* 脉冲输出方式_Frequency/Pulse */
+	{numof(Menu_level3_16_zh), Menu_level3_16_zh},	/* 脉冲单位当量_0.001m3～1m3/0.001L～1L */
+	{numof(Menu_level3_17_zh), Menu_level3_17_zh},	/* 频率输出范围_1～ 5999 Hz */
+	{numof(Menu_level3_18_en), Menu_level3_18_en},	/* 空管报警允许_Enable/Disable */
+	{numof(Menu_level3_19_zh), Menu_level3_19_zh},	/* 空管报警阈值_59999 */
+	{numof(Menu_level3_20_en), Menu_level3_20_en},	/* 上限报警允许_Enable/Disable */
+	{numof(Menu_level3_21_zh), Menu_level3_21_zh},	/* 上限报警数值_0～599.99% */
+	{numof(Menu_level3_22_en), Menu_level3_22_en},	/* 下限报警允许_Enable/Disable */
+	{numof(Menu_level3_23_zh), Menu_level3_23_zh},	/* 下限报警数值_0～599.99% */
+	{numof(Menu_level3_24_en), Menu_level3_24_en},	/* 励磁报警允许_Enable/Disable */
+	{numof(Menu_level3_25_zh), Menu_level3_25_zh},	/* 总量清零密码_0-99999 */
+	{numof(Menu_level3_26_zh), Menu_level3_26_zh},	/* 传感器编码1_0-99999 */
+	{numof(Menu_level3_27_zh), Menu_level3_27_zh},	/* 传感器编码2_0-99999 */
+	{numof(Menu_level3_28_en), Menu_level3_28_en},	/* 励磁方式选择_Type1、2、3 */
+	{numof(Menu_level3_29_zh), Menu_level3_29_zh},	/* 传感器系数值_0.0000～5.9999 */
+	{numof(Menu_level3_30_zh), Menu_level3_30_zh},	/* 修正系数0_0.0000～2.0000 */
+	{numof(Menu_level3_31_zh), Menu_level3_31_zh},	/* 流量修正点0_00.0~10.0 */
+	{numof(Menu_level3_32_zh), Menu_level3_32_zh},	/* 修正系数1_0.0000～2.0000 */
+	{numof(Menu_level3_33_zh), Menu_level3_33_zh},	/* 流量修正点1_00.0~10.0 */
+	{numof(Menu_level3_34_zh), Menu_level3_34_zh},	/* 修正系数2_0.0000～2.0000 */
+	{numof(Menu_level3_35_zh), Menu_level3_35_zh},	/* 流量修正点2_00.0~10.0 */
+	{numof(Menu_level3_36_zh), Menu_level3_36_zh},	/* 修正系数3_0.0000～2.0000 */
+	{numof(Menu_level3_37_zh), Menu_level3_37_zh},	/* 流量修正点3_00.0~10.0 */
+	{numof(Menu_level3_38_zh), Menu_level3_38_zh},	/* 修正系数4_0.0000～2.0000 */
+	{numof(Menu_level3_39_zh), Menu_level3_39_zh},	/* 正向累计设定_0～999999999 */
+	{numof(Menu_level3_40_zh), Menu_level3_40_zh},	/* 反向累计设定_0～999999999 */
+	{numof(Menu_level3_41_zh), Menu_level3_41_zh},	/* 电流零点修正_0.0000～1.9999 */
+	{numof(Menu_level3_42_zh), Menu_level3_42_zh},	/* 电流满度修正_0.0000～3.9999 */
+	{numof(Menu_level3_43_zh), Menu_level3_43_zh},	/* 出厂标定系数_0.0000～5.9999 */
+	{numof(Menu_level3_44_zh), Menu_level3_44_zh},	/* 设定密度_0～59999 */
+	{numof(Menu_level3_45_zh), Menu_level3_45_zh},	/* 远传间隔时间_5~1440 */
+};
+
 MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
 {
 	{numof(Menu_Password_zh), Menu_Password_zh},		/* 参数设置密码 */
 	{numof(Menu_Password_zh), Menu_Password_zh},		/* 总量清零密码 */
+};
+
+MenuList_t Menu_level4_list_en[MENU_L4_MAX] =
+{
+	{numof(Menu_Password_en), Menu_Password_en},		/* 参数设置密码 */
+	{numof(Menu_Password_en), Menu_Password_en},		/* 总量清零密码 */
 };
 
 /********************************************
@@ -1836,13 +2556,13 @@ MenuList_t Menu_level4_list_zh[MENU_L4_MAX] =
 MenuList_t* Menu_level0_list[] =
 {
 	Menu_level0_list_zh,
-	Menu_level0_list_zh
+	Menu_level0_list_en
 };
 
 MenuList_t* Menu_level1_list[] =
 {
 	Menu_level1_list_zh,
-	Menu_level1_list_zh
+	Menu_level1_list_en
 };
 
 MenuList_t* Menu_level2_list[] =
@@ -1854,12 +2574,12 @@ MenuList_t* Menu_level2_list[] =
 MenuList_t* Menu_level3_list[] =
 {
 	Menu_level3_list_zh,
-	Menu_level3_list_zh
+	Menu_level3_list_en
 };
 
 MenuList_t* Menu_level4_list[] =
 {
 	Menu_level4_list_zh,
-	Menu_level4_list_zh
+	Menu_level4_list_en
 };
 

@@ -355,9 +355,9 @@ static BOOL LCD_Password_Check(uint8_t *pw)
 
 void LCD_Menu_InitVersion(uint8_t *version)
 {
-	((Stringinfo_t*)Current_Menu_Info->p_menu)[3].pstr = Menu_Number_Tbl[version[0]];
-	((Stringinfo_t*)Current_Menu_Info->p_menu)[5].pstr = Menu_Number_Tbl[version[1]];
-	((Stringinfo_t*)Current_Menu_Info->p_menu)[6].pstr = Menu_Number_Tbl[version[2]];
+	((Stringinfo_t*)Current_Menu_Info->p_menu)[0].pstr = Menu_Number_Tbl[version[0]];
+	((Stringinfo_t*)Current_Menu_Info->p_menu)[1].pstr = Menu_Number_Tbl[version[1]];
+	((Stringinfo_t*)Current_Menu_Info->p_menu)[2].pstr = Menu_Number_Tbl[version[2]];
 }
 
 void LCD_Menu_AlertDisplay(void)
