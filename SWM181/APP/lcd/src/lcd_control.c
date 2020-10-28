@@ -65,7 +65,7 @@ void LCD_TimeOut_Init(void)
 		Init_Frame = 0;
 		Timer_Clear(TIMER_ID_INIT);
 		Lcd_key_Flag = TRUE; //KEYÆÁ±Î½â³ý
-		LCD_AutoMeasure_Transfer(REQ_ON);
+		LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
 	}
 
 	LCD_Drawreq_Set(REQ_ON);
@@ -77,18 +77,30 @@ void LCD_TimeOut_Alert(void)
 	LCD_Drawreq_Set(REQ_ON);
 }
 
-void LCD_AutoMeasure_Transfer(DisplayReq_t enter)
+void LCD_AutoMeasure_Transfer(uint8_t menu)
 {
-	if(REQ_ON == enter){
+	switch(menu)
+	{
+	case MENU_L0_AUTOMEASURE:
 		LCD_Menu_SetLevel(MENU_LEVEL_0);
 		LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
 		Timer_Setup(TIMER_ID_ALERT);
-	}
-	else{
+		LCD_Cursor_StatusSet(CURSOR_INVALID);
+		break;
+	case MENU_L0_CLEARTOTAL:
+		Timer_Clear(TIMER_ID_ALERT);
+		LCD_Menu_SetLevel(MENU_LEVEL_0);
+		LCD_Menu_SetID(MENU_L0_CLEARTOTAL);
+		LCD_Cursor_StatusSet(CURSOR_VALID);
+		break;
+	case MENU_L1_PARAMSET:
 		Timer_Clear(TIMER_ID_ALERT);
 		LCD_Menu_SetLevel(MENU_LEVEL_1);
 		LCD_Menu_SetID(MENU_L1_PARAMSET);
 		LCD_Cursor_StatusSet(CURSOR_INVALID);
+		break;
+	default:
+		break;
 	}
 }
 

@@ -31,6 +31,7 @@ extern const unsigned char str_zh_du[32];		/*"度"*/
 extern const unsigned char str_zh_fan[32];		/*"反"*/
 extern const unsigned char str_zh_fan_1[32];	/*"范"*/
 extern const unsigned char str_zh_fang[32];		/*"方"*/
+extern const unsigned char str_zh_fou[32];		/*"否"*/
 /* g */
 extern const unsigned char str_zh_gan[32];		/*"感"*/
 extern const unsigned char str_zh_ge[32];		/*"隔"*/
@@ -77,6 +78,7 @@ extern const unsigned char str_zh_she[32];		/*"设"*/
 extern const unsigned char str_zh_shi[32];		/*"时"*/
 extern const unsigned char str_zh_shi_1[32];	/*"示"*/
 extern const unsigned char str_zh_shi_2[32];	/*"式"*/
+extern const unsigned char str_zh_shi_3[32];	/*"是"*/
 extern const unsigned char str_zh_shu[32];		/*"数"*/
 extern const unsigned char str_zh_shu_1[32];	/*"输"*/
 extern const unsigned char str_zh_su[32];		/*"速"*/

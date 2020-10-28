@@ -18,6 +18,7 @@ typedef enum MenuKey
 	MENU_KEY_UNITUP,
 	MENU_KEY_UNITCONFIRM,
 	MENU_KEY_LONGCONFIRM,
+	MENU_KEY_LONGUNIT,
 	MENU_KEY_ALL
 } MenuKey_t;
 
@@ -29,7 +30,7 @@ void LCD_Draw(void);
 void LCD_Drawreq_Set(uint8_t req);
 void LCD_Screenreq_Set(uint8_t req);
 void LCD_Cursorreq_Set(uint8_t req);
-void LCD_AutoMeasure_Transfer(DisplayReq_t enter);
+void LCD_AutoMeasure_Transfer(uint8_t menu);
 void LCD_TimeOut_Init(void);
 void LCD_TimeOut_Alert(void);
 

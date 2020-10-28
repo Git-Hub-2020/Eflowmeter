@@ -61,14 +61,52 @@ static DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 
-	switch(key)
-	{
-	case MENU_KEY_UNITCONFIRM:
-		LCD_AutoMeasure_Transfer(REQ_OFF);
-		break;
-	default:
+	if(MENU_L0_AUTOMEASURE == LCD_Menu_GetID()){
+		switch(key)
+		{
+		case MENU_KEY_LONGUNIT:
+			LCD_AutoMeasure_Transfer(MENU_L0_CLEARTOTAL);
+			lcd_cursor_pos = 0;
+			break;
+		case MENU_KEY_UNITCONFIRM:
+			LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
+			break;
+		default:
+			disp_req = REQ_OFF;
+			break;
+		}
+	}
+	else if(MENU_L0_CLEARTOTAL == LCD_Menu_GetID()){
+		switch(key)
+		{
+		case MENU_KEY_UNITDOWN:
+			if(0 == lcd_cursor_pos){
+				lcd_cursor_pos = 2;
+			}
+			lcd_cursor_pos--;
+			LCD_Cursor_StatusSet(CURSOR_LEFT);
+			break;
+		case MENU_KEY_UNITUP:
+			lcd_cursor_pos++;
+			if(2 <= lcd_cursor_pos){
+				lcd_cursor_pos = 0;
+			}
+			LCD_Cursor_StatusSet(CURSOR_RIGHT);
+			break;
+		case MENU_KEY_CONFIRM:
+		case MENU_KEY_LONGCONFIRM:
+			LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
+			break;
+		case MENU_KEY_UNITCONFIRM:
+			LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
+			break;
+		default:
+			disp_req = REQ_OFF;
+			break;
+		}
+	}
+	else{
 		disp_req = REQ_OFF;
-		break;
 	}
 
 	return disp_req;
@@ -118,7 +156,7 @@ static DisplayReq_t LCD_Menu_Key_L1(MenuKey_t key)
 		LCD_Cursor_StatusSet(CURSOR_VALID);
 		break;
 	case MENU_KEY_LONGCONFIRM:
-		LCD_AutoMeasure_Transfer(REQ_ON);
+		LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
 		break;
 	default:
 		disp_req = REQ_OFF;
@@ -142,6 +180,7 @@ static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 		}
 		menu--;
 		LCD_Menu_SetID(menu);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
 	case MENU_KEY_UP:
 		menu++;
@@ -150,15 +189,16 @@ static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 			menu = MENU_L2_PARAMSET00;
 		}
 		LCD_Menu_SetID(menu);
+		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
 	case MENU_KEY_CONFIRM:
 		disp_req = LCD_Sub_Menu_L2(menu, key);
 		break;
 	case MENU_KEY_UNITCONFIRM:
-		LCD_AutoMeasure_Transfer(REQ_OFF);
+		LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
 		break;
 	case MENU_KEY_LONGCONFIRM:
-		LCD_AutoMeasure_Transfer(REQ_ON);
+		LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
 		break;
 	default:
 		disp_req = REQ_OFF;
@@ -173,11 +213,11 @@ static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 	DisplayReq_t disp_req = REQ_ON;
 
 	if(MENU_KEY_UNITCONFIRM == key){
-		LCD_AutoMeasure_Transfer(REQ_OFF);
+		LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
 		return REQ_ON;
 	}
 	else if(MENU_KEY_LONGCONFIRM == key){
-		LCD_AutoMeasure_Transfer(REQ_ON);
+		LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
 		return REQ_ON;
 	}
 
@@ -241,10 +281,10 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 			LCD_Cursor_StatusSet(CURSOR_RIGHT);
 			break;
 		case MENU_KEY_UNITCONFIRM:
-			LCD_AutoMeasure_Transfer(REQ_OFF);
+			LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
 			break;
 		case MENU_KEY_LONGCONFIRM:
-			LCD_AutoMeasure_Transfer(REQ_ON);
+			LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
 			break;
 		default:
 			disp_req = REQ_OFF;

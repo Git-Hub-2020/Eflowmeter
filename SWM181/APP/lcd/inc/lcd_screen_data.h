@@ -12,7 +12,8 @@
 /* MENU_LEVEL_0 */
 #define MENU_L0_INIT		0	/* 初始画面 */
 #define MENU_L0_AUTOMEASURE	1	/* 自动测量 */
-#define MENU_L0_MAX			2
+#define MENU_L0_CLEARTOTAL	2	/* 快捷清零功能 */
+#define MENU_L0_MAX			3
 
 /* MENU_LEVEL_1 */
 #define MENU_L1_PARAMSET	0	/* 参数设置 */

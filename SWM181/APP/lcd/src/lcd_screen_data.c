@@ -79,6 +79,37 @@ Stringinfo_t Menu_AutoMeasure[] =
 	{104, 6, STR_ZH, str_pic_unit}
 };
 
+/* 快捷清零功能画面 */
+Stringinfo_t Menu_ClearTotal_zh[] =
+{
+	{32, 4, STR_ZH, str_zh_shi_3},
+	{80, 4, STR_ZH, str_zh_fou},
+	{32, 2, STR_ZH, str_zh_zong},
+	{48, 2, STR_ZH, str_zh_liang},
+	{64, 2, STR_ZH, str_zh_qing},
+	{80, 2, STR_ZH, str_zh_ling}
+};
+
+/* ClearTotal功能画面 */
+Stringinfo_t Menu_ClearTotal_en[] =
+{
+	{32, 4, STR_EN, str_en_Y},
+	{88, 4, STR_EN, str_en_N},
+	{40, 4, STR_EN, str_en_e},
+	{48, 4, STR_EN, str_en_s},
+	{96, 4, STR_EN, str_en_o},
+	{16, 2, STR_EN, str_en_C},
+	{24, 2, STR_EN, str_en_l},
+	{32, 2, STR_EN, str_en_e},
+	{40, 2, STR_EN, str_en_a},
+	{48, 2, STR_EN, str_en_r},
+	{64, 2, STR_EN, str_en_T},
+	{72, 2, STR_EN, str_en_o},
+	{80, 2, STR_EN, str_en_t},
+	{88, 2, STR_EN, str_en_a},
+	{96, 2, STR_EN, str_en_l},
+};
+
 /* 密码 */
 Stringinfo_t Menu_Password_zh[] =
 {
@@ -1477,7 +1508,7 @@ const uint8_t* Menu_Number_Tbl[] =
 };
 
 /* 光标 */
-const Stringinfo_t Menu_Cursor_default = {72, 4, STR_EN, str_en_line};
+const Stringinfo_t Menu_Cursor_default = {64, 4, STR_EN, str_en_line};
 
 /* 语言_中文 */
 const Stringinfo_t Menu_L3_00_Chn_zh[] =
@@ -2319,14 +2350,16 @@ MenuList_t Menu_level3_45_zh[] =
 
 MenuList_t Menu_level0_list_zh[MENU_L0_MAX] =
 {
-	{numof(Menu_Init_zh), Menu_Init_zh},			/* 初始画面 */
-	{numof(Menu_AutoMeasure), Menu_AutoMeasure},	/* 自动测量画面 */
+	{numof(Menu_Init_zh), Menu_Init_zh},				/* 初始画面 */
+	{numof(Menu_AutoMeasure), Menu_AutoMeasure},		/* 自动测量画面 */
+	{numof(Menu_ClearTotal_zh), Menu_ClearTotal_zh},	/* 快捷清零功能 */
 };
 
 MenuList_t Menu_level0_list_en[MENU_L0_MAX] =
 {
-	{numof(Menu_Init_en), Menu_Init_en},			/* 初始画面 */
-	{numof(Menu_AutoMeasure), Menu_AutoMeasure},	/* 自动测量画面 */
+	{numof(Menu_Init_en), Menu_Init_en},				/* 初始画面 */
+	{numof(Menu_AutoMeasure), Menu_AutoMeasure},		/* 自动测量画面 */
+	{numof(Menu_ClearTotal_en), Menu_ClearTotal_en},	/* 快捷清零功能 */
 };
 
 MenuList_t Menu_level1_list_zh[MENU_L1_MAX] =

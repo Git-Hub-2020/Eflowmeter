@@ -291,7 +291,7 @@ static void Key23(void)
 static void Key30(void)//长压键事件
 {
 	DebugLog("key1 long pressed \r\n");
-
+	LCD_Key_StatusSet(MENU_KEY_LONGUNIT);/* 复合键长按 */
 }
 
 static void Key31(void)
@@ -342,57 +342,3 @@ static void Key3_0(void)//KEY3KEY0
 	LCD_Key_StatusSet(MENU_KEY_UNITCONFIRM);/* 复合+确认键 */
 }
 
-//void KeyControl(void)
-//{
-//	if((key_sign >= 2))
-//	{
-//		key_sign = 0;
-//		switch(status_key)
-//		{
-//			case 0x01:
-//				DebugLog("key1 pressed \r\n");break;
-//			case 0x02:
-//				DebugLog("key2 pressed \r\n");
-//				LCD_Key_Down(); /* 下键 */
-//				break;
-//			case 0x03:
-//				DebugLog("key1 key2 pressed \r\n");
-//				LCD_Key_UniteDown(); /* 复合+下键 */
-//				break;
-//			case 0x04:
-//				DebugLog("key3 pressed \r\n");
-//				LCD_Key_Up(); /* 上键 */
-//				break;
-//			case 0x05:
-//				DebugLog("key1 key3 pressed \r\n");
-//				LCD_Key_UniteUp(); /* 复合+上键 */
-//				break;
-//			case 0x06:
-//				DebugLog("key2 key3 pressed \r\n");break;
-//			case 0x07:
-//				DebugLog("key1 key2 key3 pressed \r\n");break;
-//			case 0x08:
-//				DebugLog("key4 pressed \r\n");
-//				LCD_Key_Confirm(); /* 确认键 */
-//				break;
-//			case 0x09:
-//				DebugLog("key1 key4 pressed \r\n");
-//				LCD_Key_UniteConfirm(); /* 复合+确认键 */
-//				break;
-//			case 0x0a:
-//				DebugLog("key2 key4 pressed \r\n");break;
-//			case 0x0b:
-//				DebugLog("key1 key2 key4 pressed \r\n");break;
-//			case 0x0c:
-//				DebugLog("key3 key4 pressed \r\n");break;
-//			case 0x0d:
-//				DebugLog("key1 key3 key4 pressed \r\n");break;
-//			case 0x0e:
-//				DebugLog("key2 key3 key4 pressed \r\n");break;
-//			case 0x0f:
-//				DebugLog("key1 key2 key3 key4 pressed \r\n");
-//				Eeprom_Read_Test(); /* Flash buffer输出  */
-//				break;
-//		}
-//	}
-//}
