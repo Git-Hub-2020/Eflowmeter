@@ -54,7 +54,7 @@ typedef enum EepromId
 } EepromId_t;
 
 extern void Eeprom_Init(void);
-extern void Eeprom_Write_Value(EepromId_t eep_id, uint32_t *value);
-extern void Eeprom_Read_Value(EepromId_t eep_id, uint32_t *value);
+extern void Eeprom_Write_Value(EepromId_t eep_id, int32_t *value);
+extern void Eeprom_Read_Value(EepromId_t eep_id, int32_t *value);
 
 #endif /* EEPROM_API_H_ */

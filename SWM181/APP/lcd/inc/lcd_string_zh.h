@@ -127,7 +127,6 @@ extern const unsigned char str_zh_zu[32];		/*"阻"*/
 extern const unsigned char str_pic_flowicon[32];	/*"流量标识"*/
 extern const unsigned char str_pic_alerticon[32];	/*"报警指示图标"*/
 extern const unsigned char str_pic_unit[32];		/*"单位图标m3"*/
-extern const unsigned char str_pic_plusminus[32];	/*"符号±"*/
 extern const unsigned char str_pic_curve[32];		/*"符号～"*/
 
 #endif /* LCD_STRING_ZH_H_ */

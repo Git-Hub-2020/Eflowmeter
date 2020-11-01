@@ -5,12 +5,12 @@
 Language_t lcd_Language;		/* 语言 */
 DataSize2_t lcd_Commaddr;		/* 仪表通讯地址 */
 BaudRate_t lcd_baudrate;		/* 仪表通讯速度 */
-DataSize4_t lcd_snsrsize;		/* 测量管道口径 */
+uint8_t lcd_snsrsize;			/* 测量管道口径 */
 FlowUnit_t lcd_flowunit;		/* 流量单位 */
 DataSize5_t lcd_flowrange;		/* 仪表量程设置 */
 DataSize2_t lcd_damp;			/* 测量阻尼时间 */
 FlowDirect_t lcd_flowdirect;	/* 流量方向择项 */
-DataSize4_t lcd_flowzero;		/* 流量零点修正 */
+SignedDataSize4_t lcd_flowzero;	/* 流量零点修正 */
 DataSize5_t lcd_flowcutoff;		/* 小信号切除点 */
 PermitOpt_t lcd_cutoffena;		/* 允许切除显示 */
 TotalUnit_t lcd_totalunit;		/* 流量积算单位 */

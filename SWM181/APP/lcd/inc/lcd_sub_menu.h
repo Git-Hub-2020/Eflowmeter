@@ -11,16 +11,15 @@ typedef enum SubMenuType
 
 typedef struct SubMenuInfo
 {
-	uint8_t				menu_id;
-	uint8_t				pre_menu;
-	uint8_t				obj_num;
-	uint8_t*			obj;
-	SubMenuType_t		type;
-	uint32_t			obj_min;
-	uint32_t			obj_max;
+	uint8_t			menu_id;
+	uint8_t			pre_menu;
+	uint8_t			obj_num;
+	uint8_t*		obj;
+	SubMenuType_t	type;
+	int32_t			obj_min;
+	int32_t			obj_max;
 } SubMenuInfo_t;
 
-void LCD_Sub_Menu_Init(void);
 uint8_t LCD_SubMenu_IdxGet(void);
 DisplayReq_t LCD_Sub_Menu_L2(uint8_t menu, MenuKey_t key);
 DisplayReq_t LCD_Sub_Menu_L3(uint8_t menu, MenuKey_t key);

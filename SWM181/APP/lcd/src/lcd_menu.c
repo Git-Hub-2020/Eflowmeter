@@ -27,7 +27,6 @@ static BOOL LCD_Password_Check(uint8_t *pw);
 void LCD_Menu_Init(void)
 {
 	LCD_Draw_Init();
-	LCD_Sub_Menu_Init();
 
 	LCD_Menu_SetLevel(MENU_LEVEL_0);
 	LCD_Menu_SetID(MENU_L0_INIT);
@@ -212,15 +211,6 @@ static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 
-	if(MENU_KEY_UNITCONFIRM == key){
-		LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
-		return REQ_ON;
-	}
-	else if(MENU_KEY_LONGCONFIRM == key){
-		LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
-		return REQ_ON;
-	}
-
 	disp_req = LCD_Sub_Menu_L3(LCD_Menu_GetID(), key);
 
 	return disp_req;
@@ -380,7 +370,7 @@ static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y)
 static BOOL LCD_Password_Check(uint8_t *pw)
 {
 	uint8_t dst_pw[5];
-	uint32_t pw_num = 0;
+	int32_t pw_num = 0;
 
 	Lcd_Setting_GetValue(MENU_LEVEL_3, MENU_L3_24, &pw_num);
 	Lcd_NumToStr_Convert(dst_pw, &pw_num, numof(dst_pw));

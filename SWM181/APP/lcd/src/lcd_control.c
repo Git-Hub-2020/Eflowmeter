@@ -45,6 +45,7 @@ void LCD_Draw(void)
 
 void LCD_Key_StatusSet(MenuKey_t key_status)
 {
+	if(FALSE == Lcd_key_Flag) return;
 	lcd_key_status = key_status;
 }
 

@@ -24,11 +24,12 @@ typedef enum BaudRate
 /* 流量单位 */
 typedef enum FlowUnit
 {
-	UNIT_LS = 0,
+	UNIT_LH = 0,
 	UNIT_LM,
-	UNIT_LH,
-	UNIT_M3S,
+	UNIT_LS,
+	UNIT_M3H,
 	UNIT_M3M,
+	UNIT_M3S,
 	UNIT_MAX
 } FlowUnit_t;
 
@@ -87,6 +88,13 @@ typedef enum FieldType
 	FTYPE_MAX
 } FieldType_t;
 
+/* 数字符号：0-正数，1-负数 */
+typedef enum NumType
+{
+	NUM_POSITIVE = 0,
+	NUM_NEGATIVE
+} NumType_t;
+
 typedef struct DataSize2
 {
 	uint8_t data[2];
@@ -112,15 +120,21 @@ typedef struct DataSize9
 	uint8_t data[9];
 } DataSize9_t;
 
+typedef struct SignedDataSize4
+{
+	NumType_t sign;
+	uint8_t data[4];
+} SignedDataSize4_t;
+
 extern Language_t lcd_Language;			/* 语言 */
 extern DataSize2_t lcd_Commaddr;		/* 仪表通讯地址 */
 extern BaudRate_t lcd_baudrate;			/* 仪表通讯速度 */
-extern DataSize4_t lcd_snsrsize;		/* 测量管道口径 */
+extern uint8_t lcd_snsrsize;			/* 测量管道口径 */
 extern FlowUnit_t lcd_flowunit;			/* 流量单位 */
 extern DataSize5_t lcd_flowrange;		/* 仪表量程设置 */
 extern DataSize2_t lcd_damp;			/* 测量阻尼时间 */
 extern FlowDirect_t lcd_flowdirect;		/* 流量方向择项 */
-extern DataSize4_t lcd_flowzero;		/* 流量零点修正 */
+extern SignedDataSize4_t lcd_flowzero;	/* 流量零点修正 */
 extern DataSize5_t lcd_flowcutoff;		/* 小信号切除点 */
 extern PermitOpt_t lcd_cutoffena;		/* 允许切除显示 */
 extern TotalUnit_t lcd_totalunit;		/* 流量积算单位 */

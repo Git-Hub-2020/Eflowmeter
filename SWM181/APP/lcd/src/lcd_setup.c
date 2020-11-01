@@ -50,21 +50,21 @@ static EepromId_t Lcd_Menu_L3_EEPID[MENU_L3_MAX] =
 	EEP_ID_sendint,			/* 远传间隔时间 */
 };
 
-void Lcd_Setting_GetValue(uint8_t level, uint8_t menu, uint32_t *value)
+void Lcd_Setting_GetValue(uint8_t level, uint8_t menu, int32_t *value)
 {
 	if (MENU_LEVEL_3 == level){
 		Eeprom_Read_Value(Lcd_Menu_L3_EEPID[menu], value);
 	}
 }
 
-void Lcd_Setting_SetValue(uint8_t level, uint8_t menu, uint32_t *value)
+void Lcd_Setting_SetValue(uint8_t level, uint8_t menu, int32_t *value)
 {
 	if (MENU_LEVEL_3 == level){
 		Eeprom_Write_Value(Lcd_Menu_L3_EEPID[menu], value);
 	}
 }
 
-void Lcd_StrToNum_Convert(uint8_t *str, uint32_t *num, uint8_t str_size)
+void Lcd_StrToNum_Convert(uint8_t *str, int32_t *num, uint8_t str_size)
 {
 	uint8_t i = 0;
 
@@ -74,14 +74,27 @@ void Lcd_StrToNum_Convert(uint8_t *str, uint32_t *num, uint8_t str_size)
 	}
 }
 
-void Lcd_NumToStr_Convert(uint8_t *str, uint32_t *num, uint8_t str_size)
+void Lcd_NumToStr_Convert(uint8_t *str, int32_t *num, uint8_t str_size)
 {
 	uint8_t i = 0;
-	uint32_t dst_num = *num;
+	int32_t dst_num = *num;
 
 	for(i = 0; i < str_size; i++){
 		str[str_size - i - 1] = dst_num % 10;
 		if(i < str_size - 1) dst_num /= 10;
 	}
+}
+
+uint8_t Lcd_HighestNum_Get(uint32_t num)
+{
+	uint8_t i = 9;
+
+	while(i){
+		if((0 == num/10)&&(0 < num%10)&&(10 > num%10)) return num%10;
+		num /= 10;
+		i--;
+	}
+
+	return 0;
 }
 

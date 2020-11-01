@@ -1566,12 +1566,12 @@ const Stringinfo_t Menu_L3_02_19200[] =
 	{80, 2, STR_EN, str_en_0},
 };
 
-/* 流量单位_L/s */
-const Stringinfo_t Menu_L3_04_Ls[] =
+/* 流量单位_L/h */
+const Stringinfo_t Menu_L3_04_Lh[] =
 {
 	{48, 2, STR_EN, str_en_L},
 	{56, 2, STR_EN, str_en_line_1},
-	{64, 2, STR_EN, str_en_s},
+	{64, 2, STR_EN, str_en_h},
 };
 
 /* 流量单位_L/m */
@@ -1582,12 +1582,28 @@ const Stringinfo_t Menu_L3_04_Lm[] =
 	{64, 2, STR_EN, str_en_m},
 };
 
-/* 流量单位_L/h */
-const Stringinfo_t Menu_L3_04_Lh[] =
+/* 流量单位_L/s */
+const Stringinfo_t Menu_L3_04_Ls[] =
 {
 	{48, 2, STR_EN, str_en_L},
 	{56, 2, STR_EN, str_en_line_1},
-	{64, 2, STR_EN, str_en_h},
+	{64, 2, STR_EN, str_en_s},
+};
+
+/* 流量单位_m3/h */
+const Stringinfo_t Menu_L3_04_m3h[] =
+{
+	{48, 2, STR_ZH, str_pic_unit},
+	{64, 2, STR_EN, str_en_line_1},
+	{72, 2, STR_EN, str_en_h},
+};
+
+/* 流量单位_m3/m */
+const Stringinfo_t Menu_L3_04_m3m[] =
+{
+	{48, 2, STR_ZH, str_pic_unit},
+	{64, 2, STR_EN, str_en_line_1},
+	{72, 2, STR_EN, str_en_m},
 };
 
 /* 流量单位_m3/s */
@@ -1598,12 +1614,17 @@ const Stringinfo_t Menu_L3_04_m3s[] =
 	{72, 2, STR_EN, str_en_s},
 };
 
-/* 流量单位_m3/m */
-const Stringinfo_t Menu_L3_04_m3m[] =
+/* 仪表量程设置_00000 L/h */
+Stringinfo_t Menu_L3_06_Range[] =
 {
-	{48, 2, STR_ZH, str_pic_unit},
-	{64, 2, STR_EN, str_en_line_1},
-	{72, 2, STR_EN, str_en_m},
+	{40, 2, STR_EN, str_en_0},
+	{48, 2, STR_EN, str_en_0},
+	{56, 2, STR_EN, str_en_0},
+	{64, 2, STR_EN, str_en_0},
+	{72, 2, STR_EN, str_en_0},
+	{96, 2, STR_EN, str_en_L},
+	{112, 2, STR_EN, str_en_h},
+	{104, 2, STR_EN, str_en_line_1},
 };
 
 /* 流量方向择项_正向 */
@@ -1644,14 +1665,23 @@ const Stringinfo_t Menu_L3_07_Reverse_en[] =
 	{88, 2, STR_EN, str_en_e}
 };
 
-/* 流量零点修正±0000 */
+/* 流量零点修正+0000 FS=+00000*/
 Stringinfo_t Menu_L3_08_Flowzero[] =
 {
 	{56, 2, STR_EN, str_en_0},
 	{64, 2, STR_EN, str_en_0},
 	{72, 2, STR_EN, str_en_0},
 	{80, 2, STR_EN, str_en_0},
-	{40, 2, STR_ZH, str_pic_plusminus},
+	{48, 2, STR_EN, str_en_plus},
+	{64, 0, STR_EN, str_en_0},
+	{72, 0, STR_EN, str_en_0},
+	{80, 0, STR_EN, str_en_0},
+	{88, 0, STR_EN, str_en_0},
+	{96, 0, STR_EN, str_en_0},
+	{56, 0, STR_EN, str_en_plus},
+	{32, 0, STR_EN, str_en_F},
+	{40, 0, STR_EN, str_en_S},
+	{48, 0, STR_EN, str_en_equal},
 };
 
 /* 置数000.00% */
@@ -2008,17 +2038,18 @@ MenuList_t Menu_level3_04_zh[] =
 /* 5.流量单位 */
 MenuList_t Menu_level3_05_zh[] =
 {
-	{numof(Menu_L3_04_Ls), (void*)Menu_L3_04_Ls},		/* L/s */
-	{numof(Menu_L3_04_Lm), (void*)Menu_L3_04_Lm},		/* L/m */
-	{numof(Menu_L3_04_Lh), (void*)Menu_L3_04_Lh},		/* L/h */
-	{numof(Menu_L3_04_m3s), (void*)Menu_L3_04_m3s},	/* m3/s */
+	{numof(Menu_L3_04_Lh), (void*)Menu_L3_04_Lh},	/* L/h */
+	{numof(Menu_L3_04_Lm), (void*)Menu_L3_04_Lm},	/* L/m */
+	{numof(Menu_L3_04_Ls), (void*)Menu_L3_04_Ls},	/* L/s */
+	{numof(Menu_L3_04_m3h), (void*)Menu_L3_04_m3h},	/* m3/h */
 	{numof(Menu_L3_04_m3m), (void*)Menu_L3_04_m3m},	/* m3/m */
+	{numof(Menu_L3_04_m3s), (void*)Menu_L3_04_m3s},	/* m3/s */
 };
 
 /* 6.仪表量程设置 */
 MenuList_t Menu_level3_06_zh[] =
 {
-	{numof(Menu_L3_Digit_XXXXX), Menu_L3_Digit_XXXXX},	/* 00000 */
+	{numof(Menu_L3_06_Range), Menu_L3_06_Range},	/* 00000 */
 };
 
 /* 7.测量阻尼时间 */
@@ -2444,32 +2475,32 @@ MenuList_t Menu_level2_list_en[MENU_L2_MAX] =
 	{numof(Menu_ParamSet_17_en), (void*)Menu_ParamSet_17_en},	/* Freque Max */
 	{numof(Menu_ParamSet_18_en), (void*)Menu_ParamSet_18_en},	/* Mtsnsr Ena */
 	{numof(Menu_ParamSet_19_en), (void*)Menu_ParamSet_19_en},	/* Mtsnsr Trip */
-	{numof(Menu_ParamSet_20_zh), (void*)Menu_ParamSet_20_en},	/* Alm Hi Ena */
+	{numof(Menu_ParamSet_20_en), (void*)Menu_ParamSet_20_en},	/* Alm Hi Ena */
 	{numof(Menu_ParamSet_21_en), (void*)Menu_ParamSet_21_en},	/* Alm Hi Val */
-	{numof(Menu_ParamSet_22_zh), (void*)Menu_ParamSet_22_en},	/* Alm Low Ena */
-	{numof(Menu_ParamSet_23_zh), (void*)Menu_ParamSet_23_en},	/* Alm Low Val */
-	{numof(Menu_ParamSet_24_zh), (void*)Menu_ParamSet_24_en},	/* Coil Alm Ena */
+	{numof(Menu_ParamSet_22_en), (void*)Menu_ParamSet_22_en},	/* Alm Low Ena */
+	{numof(Menu_ParamSet_23_en), (void*)Menu_ParamSet_23_en},	/* Alm Low Val */
+	{numof(Menu_ParamSet_24_en), (void*)Menu_ParamSet_24_en},	/* Coil Alm Ena */
 	{numof(Menu_ParamSet_25_en), (void*)Menu_ParamSet_25_en},	/* Clr Sum Key */
-	{numof(Menu_ParamSet_26_zh), (void*)Menu_ParamSet_26_en},	/* Sensor Code1 */
-	{numof(Menu_ParamSet_27_zh), (void*)Menu_ParamSet_27_en},	/* Sensor Code2 */
-	{numof(Menu_ParamSet_28_zh), (void*)Menu_ParamSet_28_en},	/* Field Type */
-	{numof(Menu_ParamSet_29_zh), (void*)Menu_ParamSet_29_en},	/* Sensor Fact */
-	{numof(Menu_ParamSet_30_zh), (void*)Menu_ParamSet_30_en},	/* Correct Fact0 */
-	{numof(Menu_ParamSet_31_zh), (void*)Menu_ParamSet_31_en},	/* Correct Valu0 */
-	{numof(Menu_ParamSet_32_zh), (void*)Menu_ParamSet_32_en},	/* Correct Fact1 */
-	{numof(Menu_ParamSet_33_zh), (void*)Menu_ParamSet_33_en},	/* Correct Valu1 */
-	{numof(Menu_ParamSet_34_zh), (void*)Menu_ParamSet_34_en},	/* Correct Fact2 */
-	{numof(Menu_ParamSet_35_zh), (void*)Menu_ParamSet_35_en},	/* Correct Valu2 */
-	{numof(Menu_ParamSet_36_zh), (void*)Menu_ParamSet_36_en},	/* Correct Fact3 */
-	{numof(Menu_ParamSet_37_zh), (void*)Menu_ParamSet_37_en},	/* Correct Valu3 */
-	{numof(Menu_ParamSet_38_zh), (void*)Menu_ParamSet_38_en},	/* Correct Fact4 */
-	{numof(Menu_ParamSet_39_zh), (void*)Menu_ParamSet_39_en},	/* Fwd Total */
-	{numof(Menu_ParamSet_40_zh), (void*)Menu_ParamSet_40_en},	/* Rev Total */
-	{numof(Menu_ParamSet_41_zh), (void*)Menu_ParamSet_41_en},	/* Analog Zero */
-	{numof(Menu_ParamSet_42_zh), (void*)Menu_ParamSet_42_en},	/* Analog Range */
-	{numof(Menu_ParamSet_43_zh), (void*)Menu_ParamSet_43_en},	/* Meter Fact */
-	{numof(Menu_ParamSet_44_zh), (void*)Menu_ParamSet_44_en},	/* Set Density */
-	{numof(Menu_ParamSet_45_zh), (void*)Menu_ParamSet_45_en},	/* Send Int */
+	{numof(Menu_ParamSet_26_en), (void*)Menu_ParamSet_26_en},	/* Sensor Code1 */
+	{numof(Menu_ParamSet_27_en), (void*)Menu_ParamSet_27_en},	/* Sensor Code2 */
+	{numof(Menu_ParamSet_28_en), (void*)Menu_ParamSet_28_en},	/* Field Type */
+	{numof(Menu_ParamSet_29_en), (void*)Menu_ParamSet_29_en},	/* Sensor Fact */
+	{numof(Menu_ParamSet_30_en), (void*)Menu_ParamSet_30_en},	/* Correct Fact0 */
+	{numof(Menu_ParamSet_31_en), (void*)Menu_ParamSet_31_en},	/* Correct Valu0 */
+	{numof(Menu_ParamSet_32_en), (void*)Menu_ParamSet_32_en},	/* Correct Fact1 */
+	{numof(Menu_ParamSet_33_en), (void*)Menu_ParamSet_33_en},	/* Correct Valu1 */
+	{numof(Menu_ParamSet_34_en), (void*)Menu_ParamSet_34_en},	/* Correct Fact2 */
+	{numof(Menu_ParamSet_35_en), (void*)Menu_ParamSet_35_en},	/* Correct Valu2 */
+	{numof(Menu_ParamSet_36_en), (void*)Menu_ParamSet_36_en},	/* Correct Fact3 */
+	{numof(Menu_ParamSet_37_en), (void*)Menu_ParamSet_37_en},	/* Correct Valu3 */
+	{numof(Menu_ParamSet_38_en), (void*)Menu_ParamSet_38_en},	/* Correct Fact4 */
+	{numof(Menu_ParamSet_39_en), (void*)Menu_ParamSet_39_en},	/* Fwd Total */
+	{numof(Menu_ParamSet_40_en), (void*)Menu_ParamSet_40_en},	/* Rev Total */
+	{numof(Menu_ParamSet_41_en), (void*)Menu_ParamSet_41_en},	/* Analog Zero */
+	{numof(Menu_ParamSet_42_en), (void*)Menu_ParamSet_42_en},	/* Analog Range */
+	{numof(Menu_ParamSet_43_en), (void*)Menu_ParamSet_43_en},	/* Meter Fact */
+	{numof(Menu_ParamSet_44_en), (void*)Menu_ParamSet_44_en},	/* Set Density */
+	{numof(Menu_ParamSet_45_en), (void*)Menu_ParamSet_45_en},	/* Send Int */
 };
 
 MenuList_t Menu_level3_list_zh[MENU_L3_MAX] =
