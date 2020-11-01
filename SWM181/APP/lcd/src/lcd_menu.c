@@ -27,6 +27,7 @@ static BOOL LCD_Password_Check(uint8_t *pw);
 void LCD_Menu_Init(void)
 {
 	LCD_Draw_Init();
+	LCD_SubMenu_Init();
 
 	LCD_Menu_SetLevel(MENU_LEVEL_0);
 	LCD_Menu_SetID(MENU_L0_INIT);
