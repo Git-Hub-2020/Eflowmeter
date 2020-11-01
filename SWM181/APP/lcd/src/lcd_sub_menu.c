@@ -230,6 +230,8 @@ static DisplayReq_t LCD_Menu_L2_Select(uint8_t menu_id, uint8_t* obj)
 
 	if(MENU_L3_03 == menu_id){
 		lcd_submenu_idx = 0;
+		LCD_Menu_SetLevel(MENU_LEVEL_3);
+		LCD_Menu_SetID(menu_id);
 		value = SnsrSize[*obj];
 		Lcd_NumToStr_Convert(str, &value, numof(str));
 		for(idx = 0; idx < numof(str); idx++){
@@ -238,9 +240,10 @@ static DisplayReq_t LCD_Menu_L2_Select(uint8_t menu_id, uint8_t* obj)
 	}
 	else{
 		lcd_submenu_idx = *obj;
+		LCD_Menu_SetLevel(MENU_LEVEL_3);
+		LCD_Menu_SetID(menu_id);
 	}
-	LCD_Menu_SetLevel(MENU_LEVEL_3);
-	LCD_Menu_SetID(menu_id);
+
 	LCD_Cursor_StatusSet(CURSOR_FREEZE);
 	return REQ_ON;
 }
