@@ -427,6 +427,7 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		if(check_num > obj_max){
 			check_num = obj_max;
 		}
+		Lcd_NumToStr_Convert(obj, &check_num, obj_num);
 		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &check_num);
 		LCD_Menu_SetLevel(MENU_LEVEL_2);
 		LCD_Menu_SetID(pre_menu);
@@ -454,6 +455,7 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		if(check_num > obj_max){
 			check_num = obj_max;
 		}
+		Lcd_NumToStr_Convert(obj, &check_num, obj_num);
 		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &check_num);
 		LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
 		break;
@@ -465,6 +467,7 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 		if(check_num > obj_max){
 			check_num = obj_max;
 		}
+		Lcd_NumToStr_Convert(obj, &check_num, obj_num);
 		Lcd_Setting_SetValue(MENU_LEVEL_3, menu_id, &check_num);
 		LCD_AutoMeasure_Transfer(MENU_L0_AUTOMEASURE);
 		break;
