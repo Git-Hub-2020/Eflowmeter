@@ -1,3 +1,4 @@
+#include "common.h"
 #include "eeprom_api.h"
 #include "lcd_screen_data.h"
 
@@ -52,6 +53,7 @@ static EepromId_t Lcd_Menu_L3_EEPID[MENU_L3_MAX] =
 
 void Lcd_Setting_GetValue(uint8_t level, uint8_t menu, int32_t *value)
 {
+	DebugLog("%s:level[%d],menu[%d],value[%d]\n",__FUNCTION__, level, menu, *value);
 	if (MENU_LEVEL_3 == level){
 		Eeprom_Read_Value(Lcd_Menu_L3_EEPID[menu], value);
 	}
@@ -59,6 +61,7 @@ void Lcd_Setting_GetValue(uint8_t level, uint8_t menu, int32_t *value)
 
 void Lcd_Setting_SetValue(uint8_t level, uint8_t menu, int32_t *value)
 {
+	DebugLog("%s:level[%d],menu[%d],value[%d]\n",__FUNCTION__, level, menu, *value);
 	if (MENU_LEVEL_3 == level){
 		Eeprom_Write_Value(Lcd_Menu_L3_EEPID[menu], value);
 	}

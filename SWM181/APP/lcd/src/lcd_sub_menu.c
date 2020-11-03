@@ -42,7 +42,7 @@ static SubMenuInfo_t SubMenuInfo[] =
 	{MENU_L3_13, MENU_L2_PARAMSET13, 1, (uint8_t*)&lcd_analogtype, TYPE_SELECT, ATYPE_0TO10MA, ATYPE_MAX},
 	{MENU_L3_14, MENU_L2_PARAMSET14, 1, (uint8_t*)&lcd_pulsetype, TYPE_SELECT, PTYPE_FREQUE, PTYPE_MAX},
 	{MENU_L3_15, MENU_L2_PARAMSET15, 1, (uint8_t*)&lcd_pulsefact, TYPE_SELECT, TUNIT_0001L, TUNIT_MAX},
-	{MENU_L3_16, MENU_L2_PARAMSET16, numof(lcd_frequemax.data), lcd_frequemax.data, TYPE_SETNUM, 0, 5999},
+	{MENU_L3_16, MENU_L2_PARAMSET16, numof(lcd_frequemax.data), lcd_frequemax.data, TYPE_SETNUM, 1, 5999},
 	{MENU_L3_17, MENU_L2_PARAMSET17, 1, (uint8_t*)&lcd_mtsnsrena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
 	{MENU_L3_18, MENU_L2_PARAMSET18, numof(lcd_mtsnsrtrip.data), lcd_mtsnsrtrip.data, TYPE_SETNUM, 0, 59999},
 	{MENU_L3_19, MENU_L2_PARAMSET19, 1, (uint8_t*)&lcd_almhiena, TYPE_SELECT, PERMIT_ALLOW, PERMIT_MAX},
@@ -142,7 +142,7 @@ DisplayReq_t LCD_Sub_Menu_L3(uint8_t menu, MenuKey_t key)
 
 	if((NULL != SubMenuInfo[menu].obj) && (menu == SubMenuInfo[menu].menu_id)){
 		if(TYPE_SELECT == SubMenuInfo[menu].type){
-			if(MENU_L3_04 == menu){
+			if(MENU_L3_03 == menu){
 				disp_req = LCD_Menu_L3_03(		key,
 												SubMenuInfo[menu].menu_id,
 												SubMenuInfo[menu].pre_menu,
@@ -324,6 +324,9 @@ static DisplayReq_t LCD_Menu_L3_Select(MenuKey_t key,
 	DisplayReq_t disp_req = REQ_ON;
 	int32_t value = 0;
 
+	DebugLog("%s:key[%d], menu_id[%d], obj_min[%d], obj_max[%d]\n",
+			__FUNCTION__, key, menu_id, obj_min, obj_max);
+
 	switch(key)
 	{
 	case MENU_KEY_DOWN:
@@ -379,6 +382,9 @@ static DisplayReq_t LCD_Menu_L3_SetNum(MenuKey_t key,
 {
 	DisplayReq_t disp_req = REQ_ON;
 	int32_t check_num = 0;
+
+	DebugLog("%s:key[%d], menu_id[%d], obj_min[%d], obj_max[%d]\n",
+			__FUNCTION__, key, menu_id, obj_min, obj_max);
 
 	switch(key)
 	{

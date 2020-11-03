@@ -1854,8 +1854,8 @@ const Stringinfo_t Menu_L3_Frequency_zh[] =
 const Stringinfo_t Menu_L3_Frequency_en[] =
 {
 	{32, 2, STR_EN, str_en_F},
-	{40, 2, STR_ZH, str_en_r},
-	{48, 2, STR_ZH, str_en_e},
+	{40, 2, STR_EN, str_en_r},
+	{48, 2, STR_EN, str_en_e},
 	{56, 2, STR_EN, str_en_q},
 	{64, 2, STR_EN, str_en_u},
 	{72, 2, STR_EN, str_en_e},
@@ -1874,7 +1874,7 @@ const Stringinfo_t Menu_L3_Pulse_zh[] =
 /* Âö³åÊä³ö·½Ê½_Pulse */
 const Stringinfo_t Menu_L3_Pulse_en[] =
 {
-	{48, 2, STR_ZH, str_en_P},
+	{48, 2, STR_EN, str_en_P},
 	{56, 2, STR_EN, str_en_u},
 	{64, 2, STR_EN, str_en_l},
 	{72, 2, STR_EN, str_en_s},
