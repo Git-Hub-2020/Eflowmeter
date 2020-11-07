@@ -87,6 +87,7 @@ void LCD_AutoMeasure_Transfer(uint8_t menu)
 		LCD_Menu_SetID(MENU_L0_AUTOMEASURE);
 		Timer_Setup(TIMER_ID_ALERT);
 		LCD_Cursor_StatusSet(CURSOR_INVALID);
+		LCD_AutoMeasure_DataRefresh();
 		break;
 	case MENU_L0_CLEARTOTAL:
 		Timer_Clear(TIMER_ID_ALERT);

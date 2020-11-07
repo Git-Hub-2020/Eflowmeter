@@ -5,12 +5,15 @@
 #include "lcd_menu_type.h"
 #include "lcd_draw.h"
 #include "lcd_setup.h"
+#include "lcd_string_en.h"
+#include "lcd_string_zh.h"
 
 extern uint8_t Init_Frame;
 extern BOOL Warning_Disp_Flag;
 
 MenuList_t *Current_Menu_Info;
 uint8_t lcd_cursor_pos;
+PasswordLevel_t Password_Level = PW_LEVEL1;
 
 static uint8_t lcd_menu_id = MENU_L0_INIT;
 static uint8_t lcd_menu_level = MENU_LEVEL_0;
@@ -22,7 +25,7 @@ static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key);
 static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key);
 static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key);
 static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y);
-static BOOL LCD_Password_Check(uint8_t *pw);
+static BOOL LCD_Password_Check(uint8_t menu, int32_t pw);
 
 void LCD_Menu_Init(void)
 {
@@ -192,7 +195,13 @@ static DisplayReq_t LCD_Menu_Key_L2(MenuKey_t key)
 		LCD_Cursor_StatusSet(CURSOR_FREEZE);
 		break;
 	case MENU_KEY_CONFIRM:
-		disp_req = LCD_Sub_Menu_L2(menu, key);
+		if(((PW_LEVEL1 == Password_Level) && (menu < MENU_L2_PARAMSET24))
+		|| (PW_LEVEL2 == Password_Level)){
+			disp_req = LCD_Sub_Menu_L2(menu, key);
+		}
+		else{
+			disp_req = REQ_OFF;
+		}
 		break;
 	case MENU_KEY_UNITCONFIRM:
 		LCD_AutoMeasure_Transfer(MENU_L1_PARAMSET);
@@ -221,6 +230,7 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 {
 	DisplayReq_t disp_req = REQ_ON;
 	uint8_t menu = LCD_Menu_GetID();
+	int32_t pw_num = 0;
 
 	switch(key)
 	{
@@ -238,14 +248,16 @@ static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key)
 			break;
 		case MENU_KEY_CONFIRM:
 			if(MENU_L4_00 == menu){
-				if(TRUE == LCD_Password_Check(PWInfo.data)){
+				Lcd_StrToNum_Convert(PWInfo.data, &pw_num, numof(PWInfo.data));
+				if(TRUE == LCD_Password_Check(MENU_L4_00, pw_num)){
 					LCD_Menu_SetLevel(MENU_LEVEL_2);
 					LCD_Menu_SetID(MENU_L2_PARAMSET00);
 					LCD_Cursor_StatusSet(CURSOR_FREEZE);
 				}
 			}
 			else if(MENU_L4_01 == menu){
-				if(TRUE == LCD_Password_Check(PWInfo.data)){
+				Lcd_StrToNum_Convert(PWInfo.data, &pw_num, numof(PWInfo.data));
+				if(TRUE == LCD_Password_Check(MENU_L4_01, pw_num)){
 					LCD_Menu_SetID(menu);
 					LCD_Cursor_StatusSet(CURSOR_VALID);
 					memset(&PWInfo, 0, sizeof(PWInfo));
@@ -368,20 +380,33 @@ static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y)
 	*y = ((Stringinfo_t*)Current_Menu_Info->p_menu)[lcd_cursor_pos].str_y + 2;
 }
 
-static BOOL LCD_Password_Check(uint8_t *pw)
+static BOOL LCD_Password_Check(uint8_t menu, int32_t pw)
 {
-	uint8_t dst_pw[5];
 	int32_t pw_num = 0;
+	BOOL check_result = FALSE;
 
-	Lcd_Setting_GetValue(MENU_LEVEL_3, MENU_L3_24, &pw_num);
-	Lcd_NumToStr_Convert(dst_pw, &pw_num, numof(dst_pw));
+	switch(menu){
+	case MENU_L4_00:
+		if(FACTORY_PW_L1 == pw){
+			check_result = TRUE;
+			Password_Level = PW_LEVEL1;
+		}
+		else if(FACTORY_PW_L2 == pw){
+			check_result = TRUE;
+			Password_Level = PW_LEVEL2;
+		}
+		break;
+	case MENU_L4_01:
+		Lcd_Setting_GetValue(MENU_LEVEL_3, MENU_L3_24, &pw_num);
+		if(pw_num == pw){
+			check_result = TRUE;
+		}
+		break;
+	default:
+		break;
+	}
 
-	if(0 == memcmp(dst_pw, pw, sizeof(dst_pw))){
-		return TRUE;
-	}
-	else{
-		return FALSE;
-	}
+	return check_result;
 }
 
 void LCD_Menu_InitVersion(uint8_t *version)
@@ -398,6 +423,51 @@ void LCD_Menu_AlertDisplay(void)
 	}
 	else{
 		LCD_Str_Clear(&((Stringinfo_t*)Current_Menu_Info->p_menu)[6]);
+	}
+}
+
+void LCD_AutoMeasure_DataRefresh(void)
+{
+	/* µ¥Î» */
+	switch(lcd_flowunit){
+	case UNIT_LH:
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_x = 104;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_type = STR_EN;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).pstr = str_en_L;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[12]).pstr = str_en_h;
+		break;
+	case UNIT_LM:
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_x = 104;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_type = STR_EN;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).pstr = str_en_L;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[12]).pstr = str_en_m;
+		break;
+	case UNIT_LS:
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_x = 104;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_type = STR_EN;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).pstr = str_en_L;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[12]).pstr = str_en_s;
+		break;
+	case UNIT_M3H:
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_x = 96;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_type = STR_ZH;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).pstr = str_pic_unit;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[12]).pstr = str_en_h;
+		break;
+	case UNIT_M3M:
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_x = 96;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_type = STR_ZH;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).pstr = str_pic_unit;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[12]).pstr = str_en_m;
+		break;
+	case UNIT_M3S:
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_x = 96;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).str_type = STR_ZH;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[10]).pstr = str_pic_unit;
+		(((Stringinfo_t*)Current_Menu_Info->p_menu)[12]).pstr = str_en_s;
+		break;
+	default:
+		break;
 	}
 }
 
