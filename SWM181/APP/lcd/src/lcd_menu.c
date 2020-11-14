@@ -456,6 +456,7 @@ void LCD_Menu_AlertDisplay(void)
 static void LCD_AutoMeasure_SubDraw(void)
 {
 	uint8_t i = 0;
+	Stringinfo_t str;
 	MenuList_t *Sub_Info = &(Menu_AutoMeasure_Sublist[lcd_Language])[lcd_automeasure_subid];
 
 	if(TRUE == AutoMeasure_Sub_Flag){
@@ -463,6 +464,15 @@ static void LCD_AutoMeasure_SubDraw(void)
 	}
 	else{
 		return;
+	}
+
+	/* 清除当前显示内容 */
+	str.str_y = 6;
+	str.str_type = STR_ZH;
+	for(i = 0; i < 8; i++)
+	{
+		str.str_x = 16 * i;
+		LCD_Str_Clear(&str);
 	}
 
 	for(i = 0; i < Sub_Info->menu_num; i++)
