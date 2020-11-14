@@ -121,6 +121,20 @@
 #define MENU_L4_01			1	/* 总量清零密码 */
 #define MENU_L4_MAX			2
 
+/* MENU_AUTOMEASURE_SUB */
+#define MENU_AUTOMEASURE_00		0	/* 自动测量警报画面Σ+ */
+#define MENU_AUTOMEASURE_01		1	/* 自动测量警报画面Σ- */
+#define MENU_AUTOMEASURE_02		2	/* 自动测量警报画面ΣD */
+#define MENU_AUTOMEASURE_03		3	/* 自动测量警报画面FlS+ */
+#define MENU_AUTOMEASURE_04		4	/* 自动测量警报画面FQP */
+#define MENU_AUTOMEASURE_05		5	/* 自动测量警报画面MTP */
+#define MENU_AUTOMEASURE_06		6	/* 自动测量警报画面 空管正常 */
+#define MENU_AUTOMEASURE_07		7	/* 自动测量警报画面Samp */
+#define MENU_AUTOMEASURE_08		8	/* 自动测量警报画面Coil */
+#define MENU_AUTOMEASURE_09		9	/* 自动测量警报画面 励磁报警 */
+#define MENU_AUTOMEASURE_10		10	/* 自动测量警报画面 上下限正常 */
+#define MENU_AUTOMEASURE_MAX	11
+
 typedef enum StringType
 {
 	STR_ZH = 0,
@@ -147,6 +161,7 @@ extern MenuList_t* Menu_level1_list[];
 extern MenuList_t* Menu_level2_list[];
 extern MenuList_t* Menu_level3_list[];
 extern MenuList_t* Menu_level4_list[];
+extern MenuList_t* Menu_AutoMeasure_Sublist[];
 extern const uint8_t* Menu_Number_Tbl[];
 extern const Stringinfo_t Menu_Init_Dot[];
 extern const Stringinfo_t Menu_Cursor_default;

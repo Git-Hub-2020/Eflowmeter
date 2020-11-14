@@ -17,6 +17,8 @@ PasswordLevel_t Password_Level = PW_LEVEL1;
 
 static uint8_t lcd_menu_id = MENU_L0_INIT;
 static uint8_t lcd_menu_level = MENU_LEVEL_0;
+static uint8_t lcd_automeasure_subid = MENU_AUTOMEASURE_00;
+static BOOL AutoMeasure_Sub_Flag = FALSE;
 static CursorSts_t lcd_cursor_sts = CURSOR_INVALID;
 
 static DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key);
@@ -26,6 +28,7 @@ static DisplayReq_t LCD_Menu_Key_L3(MenuKey_t key);
 static DisplayReq_t LCD_Menu_Key_L4(MenuKey_t key);
 static void LCD_Menu_CursorPosGet(uint8_t *x, uint8_t *y);
 static BOOL LCD_Password_Check(uint8_t menu, int32_t pw);
+static void LCD_AutoMeasure_SubDraw(void);
 
 void LCD_Menu_Init(void)
 {
@@ -67,6 +70,20 @@ static DisplayReq_t LCD_Menu_Key_L0(MenuKey_t key)
 	if(MENU_L0_AUTOMEASURE == LCD_Menu_GetID()){
 		switch(key)
 		{
+		case MENU_KEY_DOWN:
+			if(MENU_AUTOMEASURE_00 == lcd_automeasure_subid){
+				lcd_automeasure_subid = MENU_AUTOMEASURE_MAX;
+			}
+			lcd_automeasure_subid--;
+			AutoMeasure_Sub_Flag = TRUE;
+		break;
+		case MENU_KEY_UP:
+			lcd_automeasure_subid++;
+			if(MENU_AUTOMEASURE_MAX == lcd_automeasure_subid){
+				lcd_automeasure_subid = MENU_AUTOMEASURE_00;
+			}
+			AutoMeasure_Sub_Flag = TRUE;
+		break;
 		case MENU_KEY_LONGUNIT:
 			LCD_AutoMeasure_Transfer(MENU_L0_CLEARTOTAL);
 			lcd_cursor_pos = 0;
@@ -326,6 +343,7 @@ void LCD_Anime_Draw(void)
 		}
 		else if (MENU_L0_AUTOMEASURE == menu){
 			LCD_Menu_AlertDisplay();
+			LCD_AutoMeasure_SubDraw();
 		}
 	}
 	else if (MENU_LEVEL_3 == level){
@@ -418,6 +436,15 @@ void LCD_Menu_InitVersion(uint8_t *version)
 
 void LCD_Menu_AlertDisplay(void)
 {
+	static BOOL alert_flag = FALSE;
+
+	if(alert_flag == Warning_Disp_Flag){
+		return;
+	}
+	else{
+		alert_flag = Warning_Disp_Flag;
+	}
+
 	if(TRUE == Warning_Disp_Flag){
 		LCD_Str_Draw(&((Stringinfo_t*)Current_Menu_Info->p_menu)[6]);
 	}
@@ -426,8 +453,30 @@ void LCD_Menu_AlertDisplay(void)
 	}
 }
 
+static void LCD_AutoMeasure_SubDraw(void)
+{
+	uint8_t i = 0;
+	MenuList_t *Sub_Info = &(Menu_AutoMeasure_Sublist[lcd_Language])[lcd_automeasure_subid];
+
+	if(TRUE == AutoMeasure_Sub_Flag){
+		AutoMeasure_Sub_Flag = FALSE;
+	}
+	else{
+		return;
+	}
+
+	for(i = 0; i < Sub_Info->menu_num; i++)
+	{
+		LCD_Str_Draw(&((Stringinfo_t*)Sub_Info->p_menu)[i]);
+	}
+	DebugLog("%s:menu_num[%d]\n",__FUNCTION__, Sub_Info->menu_num);
+}
+
 void LCD_AutoMeasure_DataRefresh(void)
 {
+	/* 自动测量警报画面更新 */
+	AutoMeasure_Sub_Flag = TRUE;
+
 	/* 单位 */
 	switch(lcd_flowunit){
 	case UNIT_LH:

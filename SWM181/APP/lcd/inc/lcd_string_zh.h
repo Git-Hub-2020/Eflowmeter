@@ -11,6 +11,7 @@ extern const unsigned char str_zh_biao_1[32];	/*"标"*/
 extern const unsigned char str_zh_can[32];		/*"参"*/
 extern const unsigned char str_zh_ce[32];		/*"测"*/
 extern const unsigned char str_zh_chang[32];	/*"厂"*/
+extern const unsigned char str_zh_chang_1[32];	/*"常"*/
 extern const unsigned char str_zh_cheng[32];	/*"程"*/
 extern const unsigned char str_zh_chong[32];	/*"冲"*/
 extern const unsigned char str_zh_chu[32];		/*"除"*/
@@ -124,7 +125,9 @@ extern const unsigned char str_zh_zong[32];		/*"总"*/
 extern const unsigned char str_zh_zu[32];		/*"阻"*/
 
 /* 图标 */
-extern const unsigned char str_pic_flowicon[32];	/*"流量标识"*/
+extern const unsigned char str_pic_flowicon[32];	/*"流量标识Σ+"*/
+extern const unsigned char str_pic_flowicon_1[32];	/*"流量标识Σ-"*/
+extern const unsigned char str_pic_flowicon_2[32];	/*"流量标识ΣD"*/
 extern const unsigned char str_pic_alerticon[32];	/*"报警指示图标"*/
 extern const unsigned char str_pic_unit[32];		/*"单位图标m3"*/
 extern const unsigned char str_pic_curve[32];		/*"符号～"*/
