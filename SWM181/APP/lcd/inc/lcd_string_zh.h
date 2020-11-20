@@ -109,6 +109,7 @@ extern const unsigned char str_zh_xun[32];		/*"—∂"*/
 /* y */
 extern const unsigned char str_zh_yan[32];		/*"—‘"*/
 extern const unsigned char str_zh_yi[32];		/*"“«"*/
+extern const unsigned char str_zh_yi_1[32];		/*"“Ï"*/
 extern const unsigned char str_zh_yu[32];		/*"”Ô"*/
 extern const unsigned char str_zh_yu_1[32];		/*"„–"*/
 extern const unsigned char str_zh_yuan[32];		/*"‘∂"*/

@@ -153,7 +153,7 @@ Stringinfo_t Menu_AutoMeasure_Sub5[] =
 };
 
 /* 自动测量警报画面 空管正常 */
-const Stringinfo_t Menu_AutoMeasure_Sub6_zh[] =
+const Stringinfo_t Menu_AutoMeasure_Sub6_0_zh[] =
 {
 	{32, 6, STR_ZH, str_zh_kong},
 	{48, 6, STR_ZH, str_zh_guan},
@@ -161,8 +161,9 @@ const Stringinfo_t Menu_AutoMeasure_Sub6_zh[] =
 	{80, 6, STR_ZH, str_zh_chang_1}
 };
 
+
 /* 自动测量警报画面 Mtsnsr Norm */
-const Stringinfo_t Menu_AutoMeasure_Sub6_en[] =
+const Stringinfo_t Menu_AutoMeasure_Sub6_0_en[] =
 {
 	{24, 6, STR_EN, str_en_M},
 	{32, 6, STR_EN, str_en_t},
@@ -174,6 +175,46 @@ const Stringinfo_t Menu_AutoMeasure_Sub6_en[] =
 	{88, 6, STR_EN, str_en_o},
 	{96, 6, STR_EN, str_en_r},
 	{104, 6, STR_EN, str_en_m}
+};
+
+/* 自动测量警报画面 空管异常 */
+const Stringinfo_t Menu_AutoMeasure_Sub6_1_zh[] =
+{
+	{32, 6, STR_ZH, str_zh_kong},
+	{48, 6, STR_ZH, str_zh_guan},
+	{64, 6, STR_ZH, str_zh_yi_1},
+	{80, 6, STR_ZH, str_zh_chang_1}
+};
+
+/* 自动测量警报画面 Mtsnsr Abnorm */
+const Stringinfo_t Menu_AutoMeasure_Sub6_1_en[] =
+{
+	{16, 6, STR_EN, str_en_M},
+	{24, 6, STR_EN, str_en_t},
+	{32, 6, STR_EN, str_en_s},
+	{40, 6, STR_EN, str_en_n},
+	{48, 6, STR_EN, str_en_s},
+	{56, 6, STR_EN, str_en_r},
+	{72, 6, STR_EN, str_en_A},
+	{80, 6, STR_EN, str_en_b},
+	{88, 6, STR_EN, str_en_n},
+	{96, 6, STR_EN, str_en_o},
+	{104, 6, STR_EN, str_en_r},
+	{112, 6, STR_EN, str_en_m}
+};
+
+/* 自动测量警报画面6 */
+MenuList_t Menu_AutoMeasure_Sub6_zh[] =
+{
+	{numof(Menu_AutoMeasure_Sub6_0_zh), (void*)Menu_AutoMeasure_Sub6_0_zh},	/* 空管正常 */
+	{numof(Menu_AutoMeasure_Sub6_1_zh), (void*)Menu_AutoMeasure_Sub6_1_zh},	/* 空管异常 */
+};
+
+/* 自动测量警报画面6 */
+MenuList_t Menu_AutoMeasure_Sub6_en[] =
+{
+	{numof(Menu_AutoMeasure_Sub6_0_en), (void*)Menu_AutoMeasure_Sub6_0_en},	/* 空管正常 */
+	{numof(Menu_AutoMeasure_Sub6_1_en), (void*)Menu_AutoMeasure_Sub6_1_en},	/* 空管异常 */
 };
 
 /* 自动测量警报画面Samp */
@@ -201,8 +242,30 @@ Stringinfo_t Menu_AutoMeasure_Sub8[] =
 	{120, 6, STR_EN, str_en_0}
 };
 
+/* 自动测量警报画面 励磁正常 */
+const Stringinfo_t Menu_AutoMeasure_Sub9_0_zh[] =
+{
+	{32, 6, STR_ZH, str_zh_li},
+	{48, 6, STR_ZH, str_zh_ci},
+	{64, 6, STR_ZH, str_zh_zheng},
+	{80, 6, STR_ZH, str_zh_chang_1}
+};
+
+/* 自动测量警报画面 Coil Norm */
+const Stringinfo_t Menu_AutoMeasure_Sub9_0_en[] =
+{
+	{32, 6, STR_EN, str_en_C},
+	{40, 6, STR_EN, str_en_o},
+	{48, 6, STR_EN, str_en_i},
+	{56, 6, STR_EN, str_en_l},
+	{72, 6, STR_EN, str_en_N},
+	{80, 6, STR_EN, str_en_o},
+	{88, 6, STR_EN, str_en_r},
+	{96, 6, STR_EN, str_en_m}
+};
+
 /* 自动测量警报画面 励磁报警 */
-const Stringinfo_t Menu_AutoMeasure_Sub9_zh[] =
+const Stringinfo_t Menu_AutoMeasure_Sub9_1_zh[] =
 {
 	{32, 6, STR_ZH, str_zh_li},
 	{48, 6, STR_ZH, str_zh_ci},
@@ -211,7 +274,7 @@ const Stringinfo_t Menu_AutoMeasure_Sub9_zh[] =
 };
 
 /* 自动测量警报画面 Coil Alm */
-const Stringinfo_t Menu_AutoMeasure_Sub9_en[] =
+const Stringinfo_t Menu_AutoMeasure_Sub9_1_en[] =
 {
 	{32, 6, STR_EN, str_en_C},
 	{40, 6, STR_EN, str_en_o},
@@ -222,18 +285,32 @@ const Stringinfo_t Menu_AutoMeasure_Sub9_en[] =
 	{88, 6, STR_EN, str_en_m}
 };
 
+/* 自动测量警报画面9 */
+MenuList_t Menu_AutoMeasure_Sub9_zh[] =
+{
+	{numof(Menu_AutoMeasure_Sub9_0_zh), (void*)Menu_AutoMeasure_Sub9_0_zh},	/* 励磁正常 */
+	{numof(Menu_AutoMeasure_Sub9_1_zh), (void*)Menu_AutoMeasure_Sub9_1_zh},	/* 励磁报警 */
+};
+
+/* 自动测量警报画面9 */
+MenuList_t Menu_AutoMeasure_Sub9_en[] =
+{
+	{numof(Menu_AutoMeasure_Sub9_0_en), (void*)Menu_AutoMeasure_Sub9_0_en},	/* 励磁正常 */
+	{numof(Menu_AutoMeasure_Sub9_1_en), (void*)Menu_AutoMeasure_Sub9_1_en},	/* 励磁报警 */
+};
+
 /* 自动测量警报画面 上下限正常 */
-const Stringinfo_t Menu_AutoMeasure_Sub10_zh[] =
+const Stringinfo_t Menu_AutoMeasure_Sub10_0_zh[] =
 {
 	{32, 6, STR_ZH, str_zh_shang},
 	{48, 6, STR_ZH, str_zh_xia},
-	{64, 6, STR_ZH, str_zh_xian},
+	{64, 6, STR_ZH, str_zh_xian_1},
 	{80, 6, STR_ZH, str_zh_zheng},
 	{96, 6, STR_ZH, str_zh_chang_1}
 };
 
 /* 自动测量警报画面 Lim Norm */
-const Stringinfo_t Menu_AutoMeasure_Sub10_en[] =
+const Stringinfo_t Menu_AutoMeasure_Sub10_0_en[] =
 {
 	{32, 6, STR_EN, str_en_L},
 	{40, 6, STR_EN, str_en_i},
@@ -242,6 +319,61 @@ const Stringinfo_t Menu_AutoMeasure_Sub10_en[] =
 	{72, 6, STR_EN, str_en_o},
 	{80, 6, STR_EN, str_en_r},
 	{88, 6, STR_EN, str_en_m}
+};
+
+/* 自动测量警报画面 上限报警 */
+const Stringinfo_t Menu_AutoMeasure_Sub10_1_zh[] =
+{
+	{32, 6, STR_ZH, str_zh_shang},
+	{48, 6, STR_ZH, str_zh_xian_1},
+	{64, 6, STR_ZH, str_zh_bao},
+	{80, 6, STR_ZH, str_zh_jing_1},
+};
+
+/* 自动测量警报画面 Alm Hi */
+const Stringinfo_t Menu_AutoMeasure_Sub10_1_en[] =
+{
+	{40, 6, STR_EN, str_en_A},
+	{48, 6, STR_EN, str_en_l},
+	{56, 6, STR_EN, str_en_m},
+	{72, 6, STR_EN, str_en_H},
+	{80, 6, STR_EN, str_en_i}
+};
+
+/* 自动测量警报画面 下限报警 */
+const Stringinfo_t Menu_AutoMeasure_Sub10_2_zh[] =
+{
+	{32, 6, STR_ZH, str_zh_xia},
+	{48, 6, STR_ZH, str_zh_xian_1},
+	{64, 6, STR_ZH, str_zh_bao},
+	{80, 6, STR_ZH, str_zh_jing_1},
+};
+
+/* 自动测量警报画面 Alm Low */
+const Stringinfo_t Menu_AutoMeasure_Sub10_2_en[] =
+{
+	{40, 6, STR_EN, str_en_A},
+	{48, 6, STR_EN, str_en_l},
+	{56, 6, STR_EN, str_en_m},
+	{72, 6, STR_EN, str_en_L},
+	{80, 6, STR_EN, str_en_o},
+	{88, 6, STR_EN, str_en_w}
+};
+
+/* 自动测量警报画面10 */
+MenuList_t Menu_AutoMeasure_Sub10_zh[] =
+{
+	{numof(Menu_AutoMeasure_Sub10_0_zh), (void*)Menu_AutoMeasure_Sub10_0_zh},	/* 上下限正常 */
+	{numof(Menu_AutoMeasure_Sub10_1_zh), (void*)Menu_AutoMeasure_Sub10_1_zh},	/* 上限报警 */
+	{numof(Menu_AutoMeasure_Sub10_2_zh), (void*)Menu_AutoMeasure_Sub10_2_zh},	/* 下限报警 */
+};
+
+/* 自动测量警报画面10 */
+MenuList_t Menu_AutoMeasure_Sub10_en[] =
+{
+	{numof(Menu_AutoMeasure_Sub10_0_en), (void*)Menu_AutoMeasure_Sub10_0_en},	/* 上下限正常 */
+	{numof(Menu_AutoMeasure_Sub10_1_en), (void*)Menu_AutoMeasure_Sub10_1_en},	/* 上限报警 */
+	{numof(Menu_AutoMeasure_Sub10_2_en), (void*)Menu_AutoMeasure_Sub10_2_en},	/* 下限报警 */
 };
 
 /* 快捷清零功能画面 */

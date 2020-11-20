@@ -457,13 +457,25 @@ static void LCD_AutoMeasure_SubDraw(void)
 {
 	uint8_t i = 0;
 	Stringinfo_t str;
-	MenuList_t *Sub_Info = &(Menu_AutoMeasure_Sublist[lcd_Language])[lcd_automeasure_subid];
+	MenuList_t *Sub_Info;
 
 	if(TRUE == AutoMeasure_Sub_Flag){
 		AutoMeasure_Sub_Flag = FALSE;
 	}
 	else{
 		return;
+	}
+
+	switch(lcd_automeasure_subid)
+	{
+	case MENU_AUTOMEASURE_06:
+	case MENU_AUTOMEASURE_09:
+	case MENU_AUTOMEASURE_10:
+		Sub_Info = &(((MenuList_t*)(Menu_AutoMeasure_Sublist[lcd_Language])[lcd_automeasure_subid].p_menu)[0]);
+		break;
+	default:
+		Sub_Info = &(Menu_AutoMeasure_Sublist[lcd_Language])[lcd_automeasure_subid];
+		break;
 	}
 
 	/* 清除当前显示内容 */
